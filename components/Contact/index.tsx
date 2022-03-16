@@ -1,0 +1,124 @@
+import React from "react";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { faEnvelope, faGlobe, faGlobeAmericas, faMobileAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useStyles } from "./styles";
+import { useTheme } from "@mui/styles";
+import SocialButton from "../SocialButton";
+import { faInstagram, faLinkedinIn, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
+import InputField from "../InputField";
+
+interface ContactDetailItemProps {
+    icon: IconProp,
+    title: string; 
+}
+
+const ContactDetailItem : React.FC<ContactDetailItemProps> = ({ title, icon }) => {
+    const classes = useStyles();
+    // const { palette } = useTheme();
+
+    return (
+        <li className={classes.methodItem}>
+            <FontAwesomeIcon icon={icon} color={"rgba(255, 255, 255, 0.25)"} />
+            <span className={classes.methodTitle}>{ title }</span>
+        </li>
+    )
+}
+
+const Contact = () => {
+    const classes = useStyles();
+
+    return (
+        <section className={classes.container}>
+            <div className={classes.messageContainer}>
+                <h1 className={classes.messagingHeader}>Let's Connect.</h1>
+                <form className={classes.form}>
+                   <div className={classes.formFields}>
+                        <InputField 
+                                className={classes.input}
+                                id="client-full-name"
+                                label="Full Name"
+                                placeholder="Elon Musk"
+                            />
+                        <InputField 
+                            className={classes.input}
+                            label="Email"
+                            id="client-email"
+                            placeholder="elon.musk@tesla.com"
+                        />
+                        <InputField 
+                            className={classes.input}
+                            label="Message"
+                            id="client-message"
+                            style={{ minHeight: 100 }}
+                            placeholder="Message For Me..."
+                            as="textarea"
+                        />
+                   </div>
+                </form>
+            </div>
+            <div className={classes.detailsContainer}>
+                <div className={classes.detailsWrapper}>
+                    <div>
+                        <h2 className={classes.subHeader}>
+                            About
+                        </h2>
+                        <p style={{ color:  "rgba(255, 255, 255, 0.25)" }}>
+                            You've reached the end, but don't go yet. Whether you have a small 
+                            or large project, I would love to collaborate so don't be shy to reach 
+                            out!
+                        </p>
+                    </div>
+                    <div>
+                        <h2 className={classes.subHeader}>
+                            Contact Details
+                        </h2>
+                        <ul className={classes.methodsList}>
+                            <ContactDetailItem 
+                                icon={faMobileAlt} 
+                                title="+1 732 822 0795" 
+                            />
+                            <ContactDetailItem 
+                                icon={faGlobeAmericas} 
+                                title="mahitm.com" 
+                            />
+                            <ContactDetailItem 
+                                icon={faEnvelope} 
+                                title="mahit.py@gmail.com" 
+                            />
+                        </ul>
+                    </div>
+                    <div>
+                        <h2 className={classes.subHeader}>
+                            Social
+                        </h2>
+                        <ul className={classes.socialMediaContainer}>
+                            <SocialButton 
+                                className={classes.socialButton}
+                                link="/"
+                                icon={faLinkedinIn}
+                            />
+                            <SocialButton 
+                                className={classes.socialButton}
+                                link="/"
+                                icon={faInstagram}
+                            />
+                            <SocialButton 
+                                className={classes.socialButton}
+                                link="/"
+                                icon={faYoutube}
+                            />
+                            <SocialButton 
+                                className={classes.socialButton}
+                                link="/"
+                                icon={faTwitter}
+                            />
+                        </ul> 
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
+}
+
+export default Contact;

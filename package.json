@@ -1,0 +1,80 @@
+{
+  "name": "portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-brands-svg-icons": "^6.0.0",
+    "@fortawesome/free-regular-svg-icons": "^5.15.4",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.16",
+    "@mui/material": "^5.5.1",
+    "@mui/styles": "^5.5.1",
+    "@react-spring/three": "^9.3.1",
+    "@react-three/drei": "^7.27.1",
+    "@react-three/fiber": "^7.0.21",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^12.20.37",
+    "@types/react": "^17.0.37",
+    "@types/react-dom": "^17.0.11",
+    "@types/react-router-dom": "^5.3.2",
+    "babel-plugin-styled-components": "^2.0.3",
+    "babel-preset-next": "^1.4.0",
+    "clsx": "^1.1.1",
+    "dat.gui": "^0.7.7",
+    "drei": "^2.2.21",
+    "gsap": "^3.8.0",
+    "next": "^12.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "4.0.3",
+    "react-text-reveal": "^1.1.2",
+    "react-three-fiber": "^6.0.13",
+    "react-typist": "^2.0.5",
+    "redux": "^4.1.2",
+    "three": "^0.135.0",
+    "typescript": "^4.5.2",
+    "use-debounce": "^7.0.1",
+    "web-vitals": "^1.1.2"
+  },
+  "scripts": {
+    "lint": "eslint --fix",
+    "dev": "PORT=3002 next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^12.0.10",
+    "@types/dat.gui": "^0.7.7",
+    "@types/react-typist": "^2.0.3",
+    "@types/three": "^0.135.0",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
+    "eslint-plugin-react": "^7.27.1"
+  }
+}
