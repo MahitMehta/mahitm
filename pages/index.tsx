@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
-import { useStyles } from './styles';
+import { useStyles } from '../styles/styles';
 import ProjectsPreview from '../components/ProjectsPreview';
 import Skills from '../components/Skills';
 import Terminal from '../components/Terminal';
