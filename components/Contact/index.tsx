@@ -31,7 +31,7 @@ const Contact = () => {
     return (
         <section className={classes.container}>
             <div className={classes.messageContainer}>
-                <h1 className={classes.messagingHeader}>Let's Connect.</h1>
+                <h1 className={classes.messagingHeader}>Let&apos;s Connect.</h1>
                 <form className={classes.form}>
                    <div className={classes.formFields}>
                         <InputField 
@@ -64,8 +64,8 @@ const Contact = () => {
                             About
                         </h2>
                         <p style={{ color:  "rgba(255, 255, 255, 0.25)" }}>
-                            You've reached the end, but don't go yet. Whether you have a small 
-                            or large project, I would love to collaborate so don't be shy to reach 
+                            You&apos;ve reached the end, but don&apos;t go yet. Whether you have a small 
+                            or large project, I would love to collaborate so don&apos;t be shy to reach 
                             out!
                         </p>
                     </div>

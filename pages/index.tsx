@@ -68,7 +68,7 @@ const Home: NextPage = () => {
   return (
     <>
         <Head>
-            <title>About | Mahit's Portfolio</title>
+            <title>About | Mahit&apos;s Portfolio</title>
         </Head>
         <Cursor />
         <div className={classes.container}>

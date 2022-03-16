@@ -61,8 +61,9 @@ const ProjectSlide : React.FC<IProjectSlideProps> = ({ selected, index, setSlide
                     </span>
                     <h1 className={classes.projectTitle}>
                         {
-                            project.title.split("+").map((word:string) => (
+                            project.title.split("+").map((word:string, index:number) => (
                                 <CharacterReveal 
+                                    key={index}
                                     animateOpacity={true}
                                     canPlay={selected}
                                     copy={[ word ]}

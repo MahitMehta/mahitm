@@ -17,7 +17,7 @@ export default class PortfolioApp extends App {
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
           <meta name="theme-color" content="#000000" />
           <meta name="description" content="Explore Mahit Mehta's 2022 Portfolio." />
-          <title>Mahit Mehta's Portfolio</title>
+          <title>Mahit Mehta&apos;s Portfolio</title>
         </Head>
         <React.StrictMode>
           <ReduxProvider store={store}>
