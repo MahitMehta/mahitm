@@ -3,7 +3,6 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faEnvelope, faGlobe, faGlobeAmericas, faMobileAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useStyles } from "./styles";
-import { useTheme } from "@mui/styles";
 import SocialButton from "../SocialButton";
 import { faInstagram, faLinkedinIn, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
 import InputField from "../InputField";

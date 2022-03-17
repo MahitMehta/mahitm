@@ -22,7 +22,7 @@ export default class PortfolioApp extends App {
         <React.StrictMode>
           <ReduxProvider store={store}>
             <ThemeProvider>
-              <Component {...pageProps} />
+              { typeof window !== "undefined" ? <Component {...pageProps} /> : <></>}
             </ThemeProvider>
           </ReduxProvider>
         </React.StrictMode>

@@ -2,12 +2,15 @@ import clsx from 'clsx';
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useStyles } from './styles';
 import gsap from 'gsap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import Link from 'next/link';
 import SocialButton from '../SocialButton';
 
-const NavItem : React.FC<{ label: string, route:string }> = ({ label, route }) => {
+interface INavItem extends React.HTMLProps<HTMLAnchorElement> { 
+    label: string, route:string, href?:string 
+}
+
+const NavItem : React.FC<INavItem> = ({ label, route, href, ...props }) => {
     const classes = useStyles();
     const functionLeftRef = useRef<HTMLSpanElement | null>(null);
     const functionRightRef = useRef<HTMLSpanElement | null>(null);
@@ -35,18 +38,22 @@ const NavItem : React.FC<{ label: string, route:string }> = ({ label, route }) =
 
     return (
         <li className={classes.li}>
-            <span>.</span>{ label }
-            <span 
-                ref={functionLeftRef}
-                className={
-                    clsx(classes.function)}
-            >(</span>
-            <span 
-                style={{ display: "block" }}
-                ref={functionRightRef}
-                className={
-                    clsx(classes.function)}
-            >)</span>
+            <Link href={href || "/"} passHref>
+                <a style={{ color: "#fff" }} { ...props }>
+                    <span>.</span>{ label }
+                    {/* <span 
+                        ref={functionLeftRef}
+                        className={
+                            clsx(classes.function)}
+                    >(</span>
+                    <span 
+                        style={{ display: "block" }}
+                        ref={functionRightRef}
+                        className={
+                            clsx(classes.function)}
+                    >)</span> */}
+                </a>
+            </Link>
         </li>
     )
 }
@@ -67,7 +74,13 @@ const Navbar = () => {
                 <ul className={classes.ul}>
                     <NavItem route="about" label="about" />
                     {/* <NavItem route="projects" label="projects" /> */}
-                    <NavItem route="resume" label="resume" />
+                    <NavItem 
+                        route="resume" 
+                        label="resume" 
+                        target='_blank'
+                        rel="noreferrer noopener"
+                        href='https://res.cloudinary.com/mahitm-cdn/image/upload/mahitm/resume.pdf'
+                    />
                 </ul>
                 <SocialButton 
                     icon={faGithub}

@@ -2,9 +2,12 @@
  * @type {import('next').NextConfig} 
  * */
  const nextConfig = {
-    reactStrictMode: true,
+    reactStrictMode: true,   
     images: {
       minimumCacheTTL: 900,
+      domains: [
+        'res.cloudinary.com'
+      ],
     },
   }
   

@@ -8,6 +8,8 @@ import gsap from "gsap";
 import { useRouter } from "next/router";
 import { useTheme } from "@mui/styles";
 import Chest from "../Chest";
+import { getCloudinaryURL } from "../../utils/getCloudinaryURL";
+
 
 const SSR = typeof window === 'undefined'
 
@@ -16,19 +18,19 @@ gsap.registerPlugin(ScrollTrigger);
 const projects = [
     {
         id: "genesus",
-        url: "/assets/genesus-showcase.png",
+        url: getCloudinaryURL("genesus-showcase.png"),
         title: "Genesus",
         caption: "Founded Genesus which provides 270+ Students with Fast & Easy Access to Grades."
     },
     {
         id: "haul",
-        url: "/assets/haul-showcase.png",
+        url: getCloudinaryURL("haul-showcase.png"),
         title: "Haul",
         caption: "Worked as a Full Stack JavaScript Developer building an Electronic Logging Device Integration.",
     },
     {
         id: "staywise",
-        url: "/assets/staywise-showcase-2.png",
+        url: getCloudinaryURL("staywise-showcase.png"),
         title: "Stay Wise+Rentals",
         caption: "Built Marketing Page & Admin Portal to Display Properties of Stay Wise Rentals."
     },
