@@ -19,7 +19,7 @@ const Terminal = () => {
 
     const disappear = useCallback(() => {
         if (!loadingCommandComplete || modelLoadedPercentage != 100) return; 
-
+        
         gsap.timeline({
             repeat: 0,
         }).to(

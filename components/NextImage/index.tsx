@@ -6,9 +6,10 @@ interface NextImageProps extends ImageProps  {
     height?: number; 
     src: string; 
     layout?: "fill",
+    maxHeight?: number;
 }
 
-const NextImage : React.FC<NextImageProps> = ({ src, width, height, layout, ...props }) => {
+const NextImage : React.FC<NextImageProps> = ({ src, width, height, layout, maxHeight, ...props }) => {
     const [ ratio, setRatio ] = useState<number | undefined>(undefined);
 
     useEffect(() => {
@@ -29,7 +30,10 @@ const NextImage : React.FC<NextImageProps> = ({ src, width, height, layout, ...p
     }, [ ratio, width, height ]);  
 
     return (
-        <div style={{ width: widthProduct || 0, height: heightProduct || 0 }}>
+        <div style={{ 
+                width: widthProduct || 0, 
+                height: (heightProduct || 0)  < (maxHeight || 0) || !maxHeight ? heightProduct : maxHeight 
+            }}>
             <NextDefaultImage 
                 src={src}
                 layout={ layout || "fill" }

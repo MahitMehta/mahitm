@@ -23,6 +23,9 @@ export const useStyles = makeStyles(({ palette }) => ({
         "& img": {
             filter: "grayscale(0%)",
         },
+        "@media (max-width: 900px)": {
+            transform: "scale(1)",
+        }
     },
     pictureContainer: {
         transition: "transform 500ms ease",
@@ -36,7 +39,7 @@ export const useStyles = makeStyles(({ palette }) => ({
             clipPath: "circle(0%)",
         },
         "@media (max-width: 900px)": {
-            marginRight: 0,
+            marginRight: 0
         }
     },
     clippedPicture: {

@@ -10,7 +10,7 @@ export const useStyles = makeStyles(theme => ({
         alignItems: 'center',
     },
     terminal: {
-        minWidth: 405,
+        minWidth: 350,
         minHeight: 275,
         width: "45vw",
         height: "30vw",
@@ -18,6 +18,10 @@ export const useStyles = makeStyles(theme => ({
         border: "1px solid #333333",
         borderRadius: 5,
         overflow: 'hidden',
+        "@media (max-width: 900px)": {
+            width: "95vw",
+            height: "60vw",
+        }
     },
     navbar: {
         width: "100%",
@@ -49,7 +53,8 @@ export const useStyles = makeStyles(theme => ({
     userAgent: {
         color: "rgba(255, 255, 255, 0.35)",
         fontWeight: 500,
-        fontSize: 12
+        fontSize: 12,
+        whiteSpace: "nowrap"
     },
     terminalLine: {
         color: "rgba(255, 255, 255, 1)",

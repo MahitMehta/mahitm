@@ -8,7 +8,7 @@ export const useStyles = makeStyles(({ palette }) => ({
         flexDirection: "column",
         position: "relative",
         "@media (max-width: 900px)": {
-            padding: 5,
+            padding: 0,
         }
     },
     introduction: {
@@ -31,6 +31,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     headerContainer: {
         marginLeft: "auto",
         marginRight: "auto",
+        padding: 5,
     },
     divider: {
         height: 2,

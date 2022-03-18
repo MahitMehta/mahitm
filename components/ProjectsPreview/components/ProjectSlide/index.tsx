@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import useDimensions from "../../../../hooks/useDimensions";
 import useSizeClamp from "../../../../hooks/useSizeClamp";
 import { useStyles } from "./styles";
@@ -47,7 +47,11 @@ const ProjectSlide : React.FC<IProjectSlideProps> = ({ selected, index, setSlide
     }, [ slideRef ]);
 
     const { width } = useDimensions();
-    const pictureClampedWidth = useSizeClamp({ minSize: 350, size: width * 0.55, maxSize: width * 0.55 });
+    const pictureClampedWidth = useSizeClamp({ minSize: 300, size: width * 0.55, maxSize: width * 0.55 });
+
+    const isMobile = useMemo(() => {
+        return width < 900; 
+    }, [ width ]);
 
     return (
         <div id={project?.id} className={classes.container}>
@@ -103,6 +107,7 @@ const ProjectSlide : React.FC<IProjectSlideProps> = ({ selected, index, setSlide
                 <div className={clsx(classes.pictureContainer, selected && classes.featuredPictureSelected)}>
                     <NextImage   
                         quality={100}
+                        maxHeight={isMobile ? 400 : undefined}
                         className={classes.featuredPicture}
                         draggable={false}
                         objectFit="contain"

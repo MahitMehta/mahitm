@@ -30,12 +30,6 @@ const MeshWorld : React.FC<{ zoom: boolean }> = ({ zoom }) => {
     const { scale } = useSpring({ scale: zoom ? 4 : 3});
     const mesh = useRef<any>(null); 
 
-    const { width } = useDimensions();
-
-    const isMobile = useMemo(() => {
-        return width < 750; 
-    }, [ width ]);
-
     return (
             <Suspense fallback={null}>
             <animated.mesh 
@@ -58,6 +52,12 @@ const Chest = () => {
     const { progress, } = useProgress();
     const classes = useStyles();
     const [ zoom, setZoom ] = useState(false);
+
+    const { width } = useDimensions();
+
+    const isMobile = useMemo(() => {
+        return width < 750; 
+    }, [ width ]);
 
     useEffect(() => {
         gsap.timeline({
@@ -95,7 +95,7 @@ const Chest = () => {
                     enableZoom={false}
                     rotateSpeed={0.5}
                     autoRotate={true}
-                    enableRotate={true}
+                    enableRotate={!isMobile}
                     autoRotateSpeed={0.5}
                 />
                 <Lights />
