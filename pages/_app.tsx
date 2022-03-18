@@ -33,7 +33,7 @@ export default class PortfolioApp extends App {
             openGraph={{
               url: "https://www.mahitm.com/",
               title: "Mahit's Portfolio",
-              description: "Attempt Today's Boolean Statement Guessing Puzzle.",
+              description: "Explore Mahit Mehta's 2022 Portfolio",
               images: [
                 {
                   url: "./logo.png",
