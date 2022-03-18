@@ -7,6 +7,9 @@ export const useStyles = makeStyles(({ palette }) => ({
         display: 'flex',
         flexDirection: "column",
         position: "relative",
+        "@media (max-width: 900px)": {
+            padding: 5,
+        }
     },
     introduction: {
         minHeight: "100vh",
@@ -15,7 +18,7 @@ export const useStyles = makeStyles(({ palette }) => ({
         alignItems: 'center',
         "@media (max-width: 900px)": {
             flexDirection: "column",
-            padding: 10,
+            padding: 0,
         }
     },
     header: {
@@ -75,10 +78,8 @@ export const useStyles = makeStyles(({ palette }) => ({
     dotSelected: {
         backgroundColor: palette.secondary.main,
         "&::after": {
-            transform: "translate(-25%, -25%)",
-            width: 25,
-            height: 25,
-            boxShadow: "0px 0px 0px 1px #fff ",
+            transform: "scale(2)",
+            boxShadow: "0px 0px 0px 0.5px #fff ",
         }
     },
     showDots: {

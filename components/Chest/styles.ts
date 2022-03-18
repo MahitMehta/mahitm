@@ -5,8 +5,9 @@ export const useStyles = makeStyles(() => ({
         transition: "opacity 250ms ease",
         width: 625, 
         height: "100vh",
+        maxWidth: "50vw",
         "@media (max-width: 750px)": {
-            width: "100vw"
+            maxWidth: "100vw"
         }
     }
 }));

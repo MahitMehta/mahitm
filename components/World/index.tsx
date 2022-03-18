@@ -91,8 +91,9 @@ const World = () => {
                 camera={{ position: [0, 70, 150], fov: 20, zoom: 1 }}>
                 {/* Lights Component */}
                 <OrbitControls
-                    enableZoom={true}
+                    enableZoom={false}
                     rotateSpeed={0.5}
+                    enableRotate={false}
                     autoRotate={true}
                     autoRotateSpeed={0.5}
                 />

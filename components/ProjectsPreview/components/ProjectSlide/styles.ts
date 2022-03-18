@@ -8,6 +8,9 @@ export const useStyles = makeStyles(({ palette }) => ({
         display: "flex",
         justifyContent: "flex-end",
         alignItems: "center",
+        "@media (max-width: 900px)": {
+            justifyContent: "center",
+        }
     },
     featuredPicture: {
         transform: "scale(1)",
@@ -32,6 +35,9 @@ export const useStyles = makeStyles(({ palette }) => ({
         "&:hover $clippedPicture": {
             clipPath: "circle(0%)",
         },
+        "@media (max-width: 900px)": {
+            marginRight: 0,
+        }
     },
     clippedPicture: {
         position: "absolute",

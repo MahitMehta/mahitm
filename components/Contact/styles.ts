@@ -14,6 +14,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     },
     input: {
         width: "clamp(250px, 40vw, 40vw)",
+        "@media (max-width: 900px)": {
+            width: "clamp(250px, 100%, 100%)",
+        }
     },  
     messageContainer: {
         flex: 3,
@@ -30,6 +33,7 @@ export const useStyles = makeStyles(({ palette }) => ({
         fontSize: "clamp(45px, 5.5vw, 5.5vw)",
         fontWeight: "200",
         fontStyle: "italic",
+        
     },  
     detailsContainer: {
         flex: 2,
@@ -47,15 +51,24 @@ export const useStyles = makeStyles(({ palette }) => ({
         flexDirection:"column",
         height: "100%",
         justifyContent: "space-around",
+        "@media (max-width: 900px)": {
+            alignItems: 'center',
+        }
     },
     subHeader: {
         color: "#fff",
         marginBottom: 10,
+        "@media (max-width: 900px)": {
+           textAlign: "center"
+        }
     },
     methodsList: {
         display: 'flex',
         flexDirection: "column",
         padding: 2.5,
+        "@media (max-width: 900px)": {
+            alignItems: 'center',
+        }
     },
     methodItem: {
         listStyle: "none",
@@ -71,6 +84,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     socialButton: {
         marginLeft: 0,
         marginRight: 20,
+        "@media (max-width: 900px)": {
+           margin: "10px",
+         }
     },
     form: {
         display: 'flex',
@@ -83,7 +99,18 @@ export const useStyles = makeStyles(({ palette }) => ({
         display: 'flex',
         flexDirection: "column",
         width: 500,
+        "@media (max-width: 900px)": {
+            width: "100%",
+        }
     },
+    caption: { 
+        color:  "rgba(255, 255, 255, 0.25)", 
+        marginBottom: 15,
+        "@media (max-width: 900px)": {
+            textAlign: "center",
+            marginBottom: 25,
+         }
+    }
 }), {
     classNamePrefix: "contact",
 });

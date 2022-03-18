@@ -62,7 +62,7 @@ const Contact = () => {
                         <h2 className={classes.subHeader}>
                             About
                         </h2>
-                        <p style={{ color:  "rgba(255, 255, 255, 0.25)" }}>
+                        <p className={classes.caption}>
                             You&apos;ve reached the end, but don&apos;t go yet. Whether you have a small 
                             or large project, I would love to collaborate so don&apos;t be shy to reach 
                             out!
