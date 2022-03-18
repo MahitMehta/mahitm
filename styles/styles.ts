@@ -25,6 +25,9 @@ export const useStyles = makeStyles(theme => ({
         fontWeight: 500,
         color: "#fff",
         mixBlendMode: "multiply",
+        "@media(max-width:900px)": {
+            marginLeft: 10,
+        }
     },
     world: {
         position: 'absolute',
@@ -66,6 +69,9 @@ export const useStyles = makeStyles(theme => ({
         color: "#fff",
         marginLeft: "10vw",
         fontSize: "clamp(1.15rem, 1.5vw, 1.5vw)",
+        "@media(max-width:900px)": {
+            marginLeft: 10,
+        }
     },  
     headerCaption: {
         fontSize: "clamp(1.15rem, 1.25vw, 1.25vw)",
@@ -74,9 +80,9 @@ export const useStyles = makeStyles(theme => ({
         marginTop: "25px",
         fontWeight: 400,
         color: "#fff",
-        // "@media(max-width:750px)": {
-        //     textShadow: "1px 1px black",
-        // }
+        "@media(max-width:900px)": {
+            marginLeft: 10,
+        }
     },
     contentSection: {
         transition: '1150ms ease',
