@@ -5,6 +5,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import Head from 'next/head';
 import App from 'next/app';
 import ThemeProvider from "../providers/ThemeProvider";
+import { NextSeo } from 'next-seo';
 
 export default class PortfolioApp extends App {
   public render() {
@@ -14,11 +15,41 @@ export default class PortfolioApp extends App {
       <>
         <Head>
           <meta charSet="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-          <meta name="theme-color" content="#000000" />
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+          <meta name="theme-color" content="#0B0B0B" />
           <meta name="description" content="Explore Mahit Mehta's 2022 Portfolio." />
           <title>Mahit Mehta&apos;s Portfolio</title>
         </Head>
+        <NextSeo
+            key={"root"}
+            title="Mahit Mehta's Portfolio"
+            additionalMetaTags={[
+              {
+                name: "keywords",
+                content: "mahit, mehta, portfolio"
+              }
+            ]}
+            description="Explore Mahit Mehta's 2022 Portfolio."
+            openGraph={{
+              url: "https://www.mahitm.com/",
+              title: "Mahit's Portfolio",
+              description: "Attempt Today's Boolean Statement Guessing Puzzle.",
+              images: [
+                {
+                  url: "./logo.png",
+                  width: 512,
+                  height: 512,
+                  alt: "Mahit's Logo",
+                  type: 'image/jpeg',
+                }
+              ],
+              site_name: "Mahit's Portfolio",
+            }}
+            twitter={{
+              site: 'https://www.mahitm.com/',
+              cardType: 'summary_large_image',
+            }}
+        />
         <React.StrictMode>
           <ReduxProvider store={store}>
             <ThemeProvider>
