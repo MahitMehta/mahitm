@@ -16,8 +16,8 @@ export default class RootDocument extends Document {
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                 <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&display=swap" rel="stylesheet" />
                 <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:wght@400;700&display=swap" rel="stylesheet" />
-                {/* <link rel="icon" href="./assets/logo.svg" /> */}
-                {/* <link rel="apple-touch-icon" href="%PUBLIC_URL%/assets/logo.svg" /> */}
+                <link rel="icon" href="favicon.ico" /> 
+                <link rel="apple-touch-icon" href="logo.png" />
             </Head>
             <body>
               <Main />
