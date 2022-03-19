@@ -94,6 +94,9 @@ export const useStyles = makeStyles(({ palette }) => ({
         width: "100%",
         padding: 25,
         alignItems: 'center',
+        "@media (max-width: 900px)": {
+            padding: "25px 0px",
+        }
     },
     formFields: {
         display: 'flex',

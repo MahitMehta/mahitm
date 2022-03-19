@@ -8,6 +8,7 @@ export const useStyles = makeStyles(({ palette }) => ({
         fontWeight: 500,
     },
     input: {
+        outline: "none",
         fontFamily: "Readex Pro !important",
         marginBottom: 10,
         transition: "all 100ms ease",

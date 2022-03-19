@@ -26,8 +26,9 @@ const Lights = () => {
   };
 
 
-const MeshWorld : React.FC<{ zoom: boolean }> = ({ zoom }) => {
-    const { scale } = useSpring({ scale: zoom ? 4 : 3});
+const MeshWorld : React.FC<{ zoom: boolean, isMobile:boolean }> = ({ zoom, isMobile }) => {
+    const maxZoom = useMemo(() => isMobile ? 5 : 4, [ isMobile ]);
+    const { scale } = useSpring({ scale: zoom ? maxZoom : 3});
     const mesh = useRef<any>(null); 
 
     return (
@@ -76,14 +77,17 @@ const Chest = () => {
     }, [ viewRef ]);
 
     return (
-        <section style={{ opacity: progress === 100 ? 1 : 0, zIndex: 99 }} ref={viewRef} className={classes.container}>
+        <section style={{
+                opacity: progress === 100 ? 1 : 0, 
+                pointerEvents: isMobile ? "none" : "initial"  
+            }} ref={viewRef} className={classes.container}>
             <Canvas
                 gl={{ 
                     antialias: true,
                     autoClear: true,
                 }}
                 style={{ 
-                    width: "100%"
+                    width: "100%",
                 }}
                 onCreated={(ctx) => { 
                     ctx.gl.physicallyCorrectLights = true;
@@ -95,11 +99,13 @@ const Chest = () => {
                     enableZoom={false}
                     rotateSpeed={0.5}
                     autoRotate={true}
+                    enablePan={false}
+                    enableDamping={true}
                     enableRotate={!isMobile}
                     autoRotateSpeed={0.5}
                 />
                 <Lights />
-                <MeshWorld zoom={zoom} />
+                <MeshWorld zoom={zoom} isMobile={isMobile} />
             </Canvas>
         </section>
     )

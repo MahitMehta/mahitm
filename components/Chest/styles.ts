@@ -6,8 +6,10 @@ export const useStyles = makeStyles(() => ({
         width: 625, 
         height: "100vh",
         maxWidth: "50vw",
+        transform: "scale(1)",
         "@media (max-width: 750px)": {
-            maxWidth: "100vw"
+            maxWidth: "100vw",
+            height: 400,
         }
     }
 }));

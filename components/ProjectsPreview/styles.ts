@@ -56,6 +56,9 @@ export const useStyles = makeStyles(({ palette }) => ({
         transform: "translateY(-50%)",
         opacity: 0,
         pointerEvents: "none",
+        "@media (max-width: 900px)": {
+           right: 25,
+        }
     },
     dot: {
         transition: `background-color 250ms ease`,
