@@ -10,6 +10,7 @@ export const useStyles = makeStyles(({ palette }) => ({
         marginTop: 100,
         "@media (max-width: 900px)": {
             flexDirection: "column",
+            rowGap: 75,
         }
     },
     input: {
@@ -48,12 +49,29 @@ export const useStyles = makeStyles(({ palette }) => ({
     },
     detailsWrapper: {
         display: 'flex',
+        position: "relative",
+        borderRadius: 10,
+        backgroundColor: "rgba(255, 255, 255, 0.01)",
+        border: `2px solid rgba(39, 39, 42, 1)`,
+        boxShadow: "0px 0px 15px 0px rgba(0, 0, 0, 0.35)",
+        //boxShadow: `0px 0px 0px 5px ${palette.secondary.main}`,
+        padding: 25,
         flexDirection:"column",
         height: "100%",
-        justifyContent: "space-around",
-        "@media (max-width: 900px)": {
-            alignItems: 'center',
-        }
+        justifyContent: "center",
+        alignItems: 'center',
+    },
+    profilePicture: {
+        position: "absolute",
+        width: 150,
+        height: 150,
+        top: 0,
+        background: "black",
+        borderRadius: 10,
+        border: `2px solid rgba(39, 39, 42, 1)`,
+        left: "50%",
+        transform: 'translate(-50%,-50%)',
+
     },
     subHeader: {
         color: "#fff",
@@ -66,17 +84,21 @@ export const useStyles = makeStyles(({ palette }) => ({
         display: 'flex',
         flexDirection: "column",
         padding: 2.5,
-        "@media (max-width: 900px)": {
-            alignItems: 'center',
-        }
+        alignItems: 'center',
+        width: "100%",
     },
     methodItem: {
         listStyle: "none",
         color: "rgba(255, 255, 255, 0.25)",
         margin: "15px 0px",
+        display: 'flex',
+        flex: 1,
+        justifyContent: "space-between",
+        width: "100%",
     },
     methodTitle: {
         margin: "0px 15px",
+        marginLeft: 35,
     },
     socialMediaContainer: {
         display: 'flex',
@@ -109,8 +131,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     caption: { 
         color:  "rgba(255, 255, 255, 0.25)", 
         marginBottom: 15,
+        maxWidth: 300,
+        textAlign: "center",
         "@media (max-width: 900px)": {
-            textAlign: "center",
             marginBottom: 25,
          }
     }

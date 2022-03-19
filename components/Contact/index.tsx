@@ -6,6 +6,7 @@ import { useStyles } from "./styles";
 import SocialButton from "../SocialButton";
 import { faInstagram, faLinkedinIn, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
 import InputField from "../InputField";
+import Image from "next/image";
 
 interface ContactDetailItemProps {
     icon: IconProp,
@@ -58,39 +59,19 @@ const Contact = () => {
             </div>
             <div className={classes.detailsContainer}>
                 <div className={classes.detailsWrapper}>
-                    <div>
-                        <h2 className={classes.subHeader}>
-                            About
-                        </h2>
+                    <div className={classes.profilePicture}>
+                        <Image 
+                            layout="fill"
+                            src={"/svg/logo.svg"}
+                        />
+                    </div>
+                    <div style={{ marginTop: 75 }}>
                         <p className={classes.caption}>
-                            You&apos;ve reached the end, but don&apos;t go yet. Whether you have a small 
-                            or large project, I would love to collaborate so don&apos;t be shy to reach 
+                            You&apos;ve reached the end, but I would love to collaborate so don&apos;t be shy to reach 
                             out!
                         </p>
                     </div>
                     <div>
-                        <h2 className={classes.subHeader}>
-                            Contact Details
-                        </h2>
-                        <ul className={classes.methodsList}>
-                            <ContactDetailItem 
-                                icon={faMobileAlt} 
-                                title="+1 732 822 0795" 
-                            />
-                            <ContactDetailItem 
-                                icon={faGlobeAmericas} 
-                                title="mahitm.com" 
-                            />
-                            <ContactDetailItem 
-                                icon={faEnvelope} 
-                                title="mahit.py@gmail.com" 
-                            />
-                        </ul>
-                    </div>
-                    <div>
-                        <h2 className={classes.subHeader}>
-                            Social
-                        </h2>
                         <ul className={classes.socialMediaContainer}>
                             <SocialButton 
                                 className={classes.socialButton}
@@ -113,6 +94,22 @@ const Contact = () => {
                                 icon={faTwitter}
                             />
                         </ul> 
+                    </div>
+                    <div style={{ marginTop: "auto" }}>
+                        <ul className={classes.methodsList}>
+                            <ContactDetailItem 
+                                icon={faMobileAlt} 
+                                title="+1 732 822 0795" 
+                            />
+                            <ContactDetailItem 
+                                icon={faGlobeAmericas} 
+                                title="mahitm.com" 
+                            />
+                            <ContactDetailItem 
+                                icon={faEnvelope} 
+                                title="mahit.py@gmail.com" 
+                            />
+                        </ul>
                     </div>
                 </div>
             </div>
