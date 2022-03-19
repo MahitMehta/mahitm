@@ -169,6 +169,7 @@ const Skills = () => {
                             <FontAwesomeIcon className={classes.buttonIcon} icon={faAngleRight} />
                         </ButtonBase>
                     </div>   */}
+                    <div className={classes.skillShadow}></div>
                 </div>
             </div>
         </section>

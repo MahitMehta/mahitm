@@ -123,5 +123,15 @@ export const useStyles = makeStyles(({ palette }) => ({
         alignItems: "center",
         margin: 10, 
         gap: 10,
+    },
+    skillShadow: {
+        width: "100vw",
+       // height: 400,
+        left: 0,
+        bottom: 0,
+        position: "relative",
+        //background: 'linear-gradient(0deg,black, transparent)',
+        pointerEvents: "none",
+
     }
 }));

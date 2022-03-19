@@ -27,7 +27,6 @@ export const useStyles = makeStyles(({ palette }) => ({
             color: palette.grey?.[700],
         },
         "&:focus": {
-            outline: `3px solid ${palette.secondary.main}`,
             border: `2px solid rgba(39, 39, 42, 1)`,
             boxShadow: `0px 0px 0px 3px ${palette.secondary.main}, 
                         0px 0px 15px 0px rgba(0, 0, 0, 0.35)`,

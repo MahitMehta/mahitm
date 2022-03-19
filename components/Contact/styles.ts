@@ -6,7 +6,7 @@ export const useStyles = makeStyles(({ palette }) => ({
         padding: 25,
         width: "100%",
         height: "auto",
-        maxWidth: 1600,
+        maxWidth: "100vw",
         marginTop: 100,
         "@media (max-width: 900px)": {
             flexDirection: "column",
@@ -68,7 +68,6 @@ export const useStyles = makeStyles(({ palette }) => ({
         top: 0,
         background: "black",
         borderRadius: 10,
-        border: `2px solid rgba(39, 39, 42, 1)`,
         left: "50%",
         transform: 'translate(-50%,-50%)',
 
