@@ -1,11 +1,7 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { useStyles } from "./styles";
 import { gsap } from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
-import { ButtonBase } from "@mui/material";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import ToolsSVG from "../../assets/svg/tools.svg"; 
 import { useTheme } from "@mui/styles";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -121,38 +117,16 @@ const MAX_CARDS = 8;
 const Skills = () => {
     const classes = useStyles();
 
-    const [ skillStartIndex, setSkillStartIndex ] = useState(0);
-
-    const selectedSkills = useMemo(() => { 
-        const selectedSkillsInitial =  skills.slice(skillStartIndex, skillStartIndex + MAX_CARDS);
-        if (selectedSkillsInitial.length >= MAX_CARDS) return selectedSkillsInitial;
-        return selectedSkillsInitial.concat(Array.from({ length: MAX_CARDS - selectedSkillsInitial.length }));
-    }, [ skillStartIndex ]);
-
-    const handleNext = () => {
-        if (skillStartIndex + MAX_CARDS > skills.length + MAX_CARDS - 2) return; 
-        setSkillStartIndex(skillStartIndex + MAX_CARDS);
-    }
-
-    const handlePrevious = () => {
-        if (skillStartIndex - MAX_CARDS < 0) return; 
-        setSkillStartIndex(skillStartIndex - MAX_CARDS);
-    }
-
     const { palette } = useTheme();
 
     return (
         <section style={{ minHeight: "100vh" }} className={classes.skills}>
-            {/* <div>
-                <img width={"50%"} src={ToolsSVG} alt="tools" />
-            </div> */}
             <h1 className={classes.skillsHeader}>
                 <span style={{ color: palette.secondary.main }}>Skill</span>&nbsp;Toolkit
             </h1>
             <span className={classes.headerDivider}></span>
             <p className={classes.skillsCaption}>Explore My Expanding Group of Skills.</p>
             <div className={classes.skillsComponents}>
-                
                 <div>
                     <div className={classes.skillsContainer}>
                         {
@@ -161,14 +135,6 @@ const Skills = () => {
                             })
                         }
                     </div>
-                    {/* <div className={classes.buttonGroup}>
-                        <ButtonBase onClick={handlePrevious} sx={{ borderRadius: "50%" }} className={classes.buttonContainer}>
-                            <FontAwesomeIcon className={classes.buttonIcon} icon={faAngleLeft} />
-                        </ButtonBase>
-                        <ButtonBase onClick={handleNext} sx={{ borderRadius: "50%" }} className={classes.buttonContainer}>
-                            <FontAwesomeIcon className={classes.buttonIcon} icon={faAngleRight} />
-                        </ButtonBase>
-                    </div>   */}
                     <div className={classes.skillShadow}></div>
                 </div>
             </div>

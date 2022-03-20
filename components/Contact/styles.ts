@@ -135,6 +135,29 @@ export const useStyles = makeStyles(({ palette }) => ({
         "@media (max-width: 900px)": {
             marginBottom: 25,
          }
+    },
+    label: {
+        color: "#fff",
+        fontSize: "1rem",
+        marginLeft: 10,
+    },
+    icon: {
+        fontSize: 17.5,
+    },
+    fileInputCover: {
+        marginTop: 10,
+        width: "min-content",
+        height: "min-content",
+        display: "flex",
+        position: "relative",
+    },
+    fileInput: {
+        position: "absolute",
+        left: 0,
+        right: 0,
+        bottom: 0,
+        top: 0,
+        opacity: 0,
     }
 }), {
     classNamePrefix: "contact",

@@ -1,10 +1,10 @@
 import React from "react";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faEnvelope, faGlobe, faGlobeAmericas, faMobileAlt } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faGlobe, faGlobeAmericas, faMobileAlt, faPaperclip } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useStyles } from "./styles";
 import SocialButton from "../SocialButton";
-import { faInstagram, faLinkedinIn, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
+import { faGithub, faInstagram, faLinkedinIn, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
 import InputField from "../InputField";
 import Image from "next/image";
 
@@ -54,10 +54,21 @@ const Contact = () => {
                             placeholder="Message For Me..."
                             as="textarea"
                         />
+                         <div className={classes.fileInputCover}>
+                            <FontAwesomeIcon className={classes.icon} icon={faPaperclip} color="#fff" />
+                            <label className={classes.label} htmlFor="attach-files">attach</label>
+                            <input 
+                                className={classes.fileInput}
+                                name="attach-files" 
+                                id="attach-files"
+                                multiple 
+                                type="file"
+                            />
+                        </div>
                    </div>
                 </form>
             </div>
-            <div className={classes.detailsContainer}>
+            {/* <div className={classes.detailsContainer}>
                 <div className={classes.detailsWrapper}>
                     <div className={classes.profilePicture}>
                         <Image 
@@ -75,23 +86,23 @@ const Contact = () => {
                         <ul className={classes.socialMediaContainer}>
                             <SocialButton 
                                 className={classes.socialButton}
-                                link="/"
+                                link="https://www.linkedin.com/in/mahit-mehta-068603203/"
                                 icon={faLinkedinIn}
                             />
                             <SocialButton 
                                 className={classes.socialButton}
-                                link="/"
+                                link="https://www.instagram.com/mahit_mehta/"
                                 icon={faInstagram}
                             />
                             <SocialButton 
                                 className={classes.socialButton}
-                                link="/"
+                                link="https://www.youtube.com/channel/UC_OXbojolphpidcIr4GRD4w"
                                 icon={faYoutube}
                             />
                             <SocialButton 
                                 className={classes.socialButton}
-                                link="/"
-                                icon={faTwitter}
+                                link="https://github.com/MahitMehta"
+                                icon={faGithub}
                             />
                         </ul> 
                     </div>
@@ -112,7 +123,7 @@ const Contact = () => {
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </section>
     )
 }

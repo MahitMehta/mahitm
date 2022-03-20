@@ -1,4 +1,3 @@
-import { useTheme } from "@mui/styles";
 import React, { useEffect, useMemo, useRef } from "react";
 import useDimensions from "../../hooks/useDimensions";
 import { useStyles } from "./styles";
@@ -16,10 +15,7 @@ const Cursor = () => {
         const cursorX = clientX - (width / 2); 
         const cursorY = clientY - (height / 2);
         
-        setTimeout(() =>{
-            if (!cursorRef.current) return; 
-            cursorRef.current.style.transform = `translate(${cursorX}px, ${cursorY}px)`; 
-        }, 0);
+        cursorRef.current.style.transform = `translate(${cursorX}px, ${cursorY}px)`; 
     };  
 
     const isMobile = useMemo(() => {
@@ -37,27 +33,8 @@ const Cursor = () => {
         };
     }, [ cursorRef ]);
 
-    const { palette } = useTheme();
-
     return (
-        <div 
-            style={{ 
-                display: isMobile ? "none" : "initial",
-                transition: "200ms ease",
-                width: 20,
-                height: 20,
-                position: "fixed",
-                backgroundColor: "transparent",
-                top: 0,
-                left: 0,
-                borderRadius: "50%",
-                border: `2px solid ${palette.secondary.main}`,
-                zIndex: 999,
-                pointerEvents: "none",
-                mixBlendMode: "difference",
-            }}
-            ref={cursorRef} className={classes.cursor}>    
-        </div>
+        <div ref={cursorRef} className={classes.cursor} />
     )
 }
 
