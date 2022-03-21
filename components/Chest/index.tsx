@@ -1,6 +1,6 @@
 import React, { useRef, Suspense, useState, useEffect, useMemo } from 'react';
 import { useProgress, useGLTF } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber"
+import { Canvas, useThree } from "@react-three/fiber"
 import { OrbitControls } from "@react-three/drei";
 import gsap from "gsap";
 import { useStyles } from './styles';
@@ -26,40 +26,18 @@ const Lights = () => {
   };
 
 
-const MeshWorld : React.FC<{ viewRef: any, isMobile:boolean }> = ({ viewRef, isMobile }) => {
-    const [ zoom, setZoom ] = useState(false);
+const MeshWorld : React.FC<{ zoom: any, isMobile:boolean }> = ({ zoom, isMobile }) => {
+   
     const maxZoom = useMemo(() => isMobile ? 5 : 4, [ isMobile ]);
     const { scale } = useSpring({ scale: zoom ? maxZoom : 3});
     const mesh = useRef<any>(null); 
 
-    // useEffect(() => {
-    //     setInterval(() => {
-    //         if (!mesh.current) return; 
-    //         mesh.current.rotation.y = 2; 
-    //     }, 1500 );
-    // }, [ mesh ]);
-
-    useEffect(() => {
-        gsap.timeline({
-            repeat: 0,
-            scrollTrigger: {
-                start: "center 70%",
-                trigger: viewRef.current,
-                onEnter: () => {
-                   // mesh.current.rotation.y = 2; 
-                    setZoom(true);
-                },
-                onLeaveBack: () => {
-                    setZoom(false);
-                }
-            }
-        })
-    }, [ viewRef ]);
+   // const camera = useThree((state) => state.camera)
 
     return (
             <Suspense fallback={null}>
             <animated.mesh 
-                rotation={[0,  -150 * (Math.PI / 180), 0]} 
+                rotation={[0,  -250 * (Math.PI / 180), 0]} 
                 scale={scale} ref= {mesh} 
                 position={[0, -7.5, 0]}
             >
@@ -72,6 +50,7 @@ const MeshWorld : React.FC<{ viewRef: any, isMobile:boolean }> = ({ viewRef, isM
 
 const Chest = () => {
     gsap.registerPlugin(ScrollTrigger);
+    const [ zoom, setZoom ] = useState(false);
    
     const viewRef = useRef<HTMLElement | null>(null);
     const { progress, } = useProgress();
@@ -83,7 +62,35 @@ const Chest = () => {
         return width < 750; 
     }, [ width ]);
 
-    
+    const controlRef = useRef<null | any>(null);
+
+    useEffect(() => {
+        gsap.timeline({
+            repeat: 0,
+            scrollTrigger: {
+                start: "center 70%",
+                trigger: viewRef.current,
+                onEnter: () => {
+                    if (controlRef.current) {
+                        // controlRef.current.object.rotation.x = 0;
+                        // controlRef.current.object.rotation.y = 60;
+                        // controlRef.current.object.rotation.z = 150;
+                        // controlRef.current.update();
+                       
+                    }
+                    setZoom(true);
+                },
+                onLeave: () => {
+                    if (controlRef.current) {
+                        controlRef.current.reset();
+                    }
+                },
+                onLeaveBack: () => {
+                    setZoom(false);
+                }
+            }
+        })
+    }, [ viewRef, controlRef ]);
 
     return (
         <section style={{
@@ -102,19 +109,25 @@ const Chest = () => {
                     ctx.gl.physicallyCorrectLights = true;
                 }}
                 dpr={(Math.min(window.devicePixelRatio), 2)}
-                camera={{ position: [0, 60, 150], fov: 20 }}>
+                camera={{ 
+                    position: [
+                        10, 60, 150
+                    ], fov: 20
+                }}>
                 {/* Lights Component */}
                 <OrbitControls
+                    ref={controlRef}
                     enableZoom={false}
                     rotateSpeed={0.5}
                     autoRotate={true}
                     enablePan={false}
+                    panSpeed={2}
                     enableDamping={true}
                     enableRotate={!isMobile}
                     autoRotateSpeed={0.5}
                 />
                 <Lights />
-                <MeshWorld viewRef={viewRef} isMobile={isMobile} />
+                <MeshWorld zoom={zoom} isMobile={isMobile} />
             </Canvas>
         </section>
     )

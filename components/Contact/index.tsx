@@ -78,7 +78,9 @@ const Contact = () => {
                             />
                         </div>
                    </div>
-                   <Button onClick={handleSubmit} as="input" title="Send Note." />
+                   <Button onClick={handleSubmit}>
+                       Send Note.
+                   </Button>
                 </form>
             </div>
             {/* <div className={classes.detailsContainer}>
