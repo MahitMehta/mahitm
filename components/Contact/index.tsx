@@ -43,7 +43,7 @@ const Contact = () => {
                     <span style={{ color: palette.secondary.main }}>Connect.</span>
                 </h1>
                 <span className={classes.headerDivider}></span>
-                <p className={classes.skillsCaption}>Leave me a note and let's callabortate.</p>
+                <p className={classes.skillsCaption}>Leave me a note and let&apos;s callabortate.</p>
                 <form className={classes.form}>
                    <div className={classes.formFields}>
                         <InputField 
