@@ -7,6 +7,8 @@ import SocialButton from "../SocialButton";
 import { faGithub, faInstagram, faLinkedinIn, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
 import InputField from "../InputField";
 import Image from "next/image";
+import { useTheme } from "@mui/styles";
+import Button from "../Button";
 
 interface ContactDetailItemProps {
     icon: IconProp,
@@ -15,7 +17,6 @@ interface ContactDetailItemProps {
 
 const ContactDetailItem : React.FC<ContactDetailItemProps> = ({ title, icon }) => {
     const classes = useStyles();
-    // const { palette } = useTheme();
 
     return (
         <li className={classes.methodItem}>
@@ -27,11 +28,22 @@ const ContactDetailItem : React.FC<ContactDetailItemProps> = ({ title, icon }) =
 
 const Contact = () => {
     const classes = useStyles();
+    const { palette } = useTheme();
+
+    const handleSubmit = (e:any) => {
+        e.stopPropagation();
+        e.preventDefault();
+    };
 
     return (
         <section className={classes.container}>
             <div className={classes.messageContainer}>
-                <h1 className={classes.messagingHeader}>Let&apos;s Connect.</h1>
+                <h1 className={classes.messagingHeader}>
+                    Let&apos;s&nbsp;
+                    <span style={{ color: palette.secondary.main }}>Connect.</span>
+                </h1>
+                <span className={classes.headerDivider}></span>
+                <p className={classes.skillsCaption}>Leave me a note and let's callabortate.</p>
                 <form className={classes.form}>
                    <div className={classes.formFields}>
                         <InputField 
@@ -66,6 +78,7 @@ const Contact = () => {
                             />
                         </div>
                    </div>
+                   <Button onClick={handleSubmit} as="input" title="Send Note." />
                 </form>
             </div>
             {/* <div className={classes.detailsContainer}>

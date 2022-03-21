@@ -6,6 +6,7 @@ export interface ITheme {
 export interface IGeneralTheme {
     purple: string;
     beige: string;  
+    grey: string; 
 }
 
 export const darkTheme:ITheme = {
@@ -21,4 +22,5 @@ export const lightTheme:ITheme = {
 export const generalTheme:IGeneralTheme = {
     purple: "#242538",
     beige: "#F5F5DC",
+    grey: "rgba(39, 39, 42, 1)"
 }

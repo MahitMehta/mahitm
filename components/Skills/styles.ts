@@ -7,6 +7,15 @@ export const useStyles = makeStyles(({ palette }) => ({
         alignItems: 'center',
         flexDirection: "column",
     },
+    skillsContentWrapper: {
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: "column",
+        WebkitMaskImage: `-webkit-gradient(linear, left 50%, left 100%, 
+            from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))`,
+    },
     skillsHeader: {
         fontFamily: "Old Standard TT",
         color: "#fff",
@@ -49,6 +58,9 @@ export const useStyles = makeStyles(({ palette }) => ({
             gridTemplateColumns: "repeat(auto-fit, minmax(250px, 250px))",
         }
     },
+    skillsExpanded: {
+        WebkitMaskImage: "none",
+    },
     skillContainer: {
         transition: "150ms ease",
         borderRadius: 5,
@@ -56,7 +68,7 @@ export const useStyles = makeStyles(({ palette }) => ({
         height: 125,
         display: "flex",
         position: 'relative',
-        background: "rgba(39, 39, 42, 1)",
+        background: palette.general.grey,
         boxShadow:  `0px 0px 15px 0px rgba(0, 0, 0, 0.5)`,
         "&:hover": {
             transform: "rotateZ(10deg) scale(1.1)",
@@ -68,10 +80,10 @@ export const useStyles = makeStyles(({ palette }) => ({
         }
     },
     picture: {
+        position: "relative",
         backgroundColor: "rgba(0, 0, 0, 0.15)",
         flex: 2,
         padding: 10,
-        borderRadius: 5,
         overflow: "hidden",
     },
     skillDetails: {
@@ -97,11 +109,8 @@ export const useStyles = makeStyles(({ palette }) => ({
     },
     image: {
         transition: "250ms ease",
-        width: "100%",
-        height: "100%",
-        objectFit: 'contain',
-        borderRadius: 5,
-        zIndex: -1,
+        minWidth: "calc(100% - 15px) !important",
+        minHeight: "calc(100% - 15px) !important",
         filter: "grayscale(100%)",
     },
     buttonContainer: {
@@ -123,15 +132,5 @@ export const useStyles = makeStyles(({ palette }) => ({
         alignItems: "center",
         margin: 10, 
         gap: 10,
-    },
-    skillShadow: {
-        width: "100vw",
-       // height: 400,
-        left: 0,
-        bottom: 0,
-        position: "relative",
-        //background: 'linear-gradient(0deg,black, transparent)',
-        pointerEvents: "none",
-
     }
 }));

@@ -24,7 +24,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     header: {
         fontFamily: "Old Standard TT",
         color: "#fff",
-        fontSize: "clamp(5rem, 10.5vw, 10.5vw)",
+        fontSize: "clamp(65px, 10.5vw, 10.5vw)",
         fontWeight: "200",
         fontStyle: "italic",
     },

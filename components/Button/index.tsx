@@ -1,0 +1,30 @@
+import React, { ButtonHTMLAttributes, ComponentPropsWithoutRef, CSSProperties, DetailedHTMLProps, ElementType } from "react";
+import { useStyles } from "./styles";
+import clsx from "clsx";
+
+interface IButtonProps<T extends ElementType = "button" | "input"> extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+    as?: T,
+    title?: string; 
+    className?: string; 
+    style?: CSSProperties; 
+}
+
+const Button = <T extends ElementType = "button" | "input">({ title, children, as:elementAs, className, style, ...props }: IButtonProps<T> & ComponentPropsWithoutRef<T>) => {
+    const classes = useStyles();
+
+    const Component = elementAs || "button";
+
+    return (
+        <Component 
+            type={elementAs === "input" ? "submit" : undefined}
+            style={style}
+            value={title}
+            className={clsx(classes.container, className && className)}
+            { ...props }
+        >
+            { children }
+        </Component>
+    )
+}
+
+export default Button; 

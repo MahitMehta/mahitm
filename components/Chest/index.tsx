@@ -26,10 +26,35 @@ const Lights = () => {
   };
 
 
-const MeshWorld : React.FC<{ zoom: boolean, isMobile:boolean }> = ({ zoom, isMobile }) => {
+const MeshWorld : React.FC<{ viewRef: any, isMobile:boolean }> = ({ viewRef, isMobile }) => {
+    const [ zoom, setZoom ] = useState(false);
     const maxZoom = useMemo(() => isMobile ? 5 : 4, [ isMobile ]);
     const { scale } = useSpring({ scale: zoom ? maxZoom : 3});
     const mesh = useRef<any>(null); 
+
+    // useEffect(() => {
+    //     setInterval(() => {
+    //         if (!mesh.current) return; 
+    //         mesh.current.rotation.y = 2; 
+    //     }, 1500 );
+    // }, [ mesh ]);
+
+    useEffect(() => {
+        gsap.timeline({
+            repeat: 0,
+            scrollTrigger: {
+                start: "center 70%",
+                trigger: viewRef.current,
+                onEnter: () => {
+                   // mesh.current.rotation.y = 2; 
+                    setZoom(true);
+                },
+                onLeaveBack: () => {
+                    setZoom(false);
+                }
+            }
+        })
+    }, [ viewRef ]);
 
     return (
             <Suspense fallback={null}>
@@ -37,7 +62,6 @@ const MeshWorld : React.FC<{ zoom: boolean, isMobile:boolean }> = ({ zoom, isMob
                 rotation={[0,  -150 * (Math.PI / 180), 0]} 
                 scale={scale} ref= {mesh} 
                 position={[0, -7.5, 0]}
-            
             >
                 <Model url={"./assets/chest.glb"} />
             </animated.mesh>
@@ -52,7 +76,6 @@ const Chest = () => {
     const viewRef = useRef<HTMLElement | null>(null);
     const { progress, } = useProgress();
     const classes = useStyles();
-    const [ zoom, setZoom ] = useState(false);
 
     const { width } = useDimensions();
 
@@ -60,21 +83,7 @@ const Chest = () => {
         return width < 750; 
     }, [ width ]);
 
-    useEffect(() => {
-        gsap.timeline({
-            repeat: 0,
-            scrollTrigger: {
-                start: "center 70%",
-                trigger: viewRef.current,
-                onEnter: () => {
-                    setZoom(true);
-                },
-                onLeaveBack: () => {
-                    setZoom(false);
-                }
-            }
-        })
-    }, [ viewRef ]);
+    
 
     return (
         <section style={{
@@ -105,7 +114,7 @@ const Chest = () => {
                     autoRotateSpeed={0.5}
                 />
                 <Lights />
-                <MeshWorld zoom={zoom} isMobile={isMobile} />
+                <MeshWorld viewRef={viewRef} isMobile={isMobile} />
             </Canvas>
         </section>
     )

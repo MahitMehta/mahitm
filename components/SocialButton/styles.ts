@@ -5,7 +5,7 @@ export const useStyles = makeStyles(({ palette }) => ({
         width: 45,
         height: 45,
         transition: "150ms ease",
-        backgroundColor: "rgba(39, 39, 42, 1)",
+        backgroundColor: palette.general.grey,
         padding: 5,
         borderRadius: 5,
         border: "none",

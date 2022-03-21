@@ -13,6 +13,20 @@ export const useStyles = makeStyles(({ palette }) => ({
             rowGap: 75,
         }
     },
+    headerDivider: {
+        height: 2,
+        width: 45,
+        background: "#fff",
+        display: "block",
+        marginLeft: "2vw",
+    },
+    skillsCaption: {
+        margin: "25px 0px",
+        marginLeft: "2vw",
+        color: "rgba(255, 255, 255, 0.25)",
+        textAlign: "center",
+        fontSize: "clamp(17.5px, 1.5vw, 1.5vw)",
+    },
     input: {
         width: "clamp(250px, 40vw, 40vw)",
         "@media (max-width: 900px)": {
@@ -31,9 +45,13 @@ export const useStyles = makeStyles(({ palette }) => ({
     messagingHeader: {
         color: "#fff",
         fontFamily: "Old Standard TT",
-        fontSize: "clamp(45px, 5.5vw, 5.5vw)",
+        fontSize: "clamp(65px, 10.5vw, 10.5vw)",
+        //fontSize: "clamp(45px, 5.5vw, 5.5vw)",
         fontWeight: "200",
         fontStyle: "italic",
+        display: 'flex',
+        flexWrap: "wrap",
+        justifyContent: 'center',
         
     },  
     detailsContainer: {
@@ -52,7 +70,7 @@ export const useStyles = makeStyles(({ palette }) => ({
         position: "relative",
         borderRadius: 10,
         backgroundColor: "rgba(255, 255, 255, 0.01)",
-        border: `2px solid rgba(39, 39, 42, 1)`,
+        border: `2px solid ${palette.general.grey}`,
         boxShadow: "0px 0px 15px 0px rgba(0, 0, 0, 0.35)",
         //boxShadow: `0px 0px 0px 5px ${palette.secondary.main}`,
         padding: 25,

@@ -34,7 +34,10 @@ const Cursor = () => {
     }, [ cursorRef ]);
 
     return (
-        <div ref={cursorRef} className={classes.cursor} />
+        <div 
+            style={{ display: isMobile ? "none" : "initial" }}
+            ref={cursorRef} className={classes.cursor}>    
+        </div>
     )
 }
 
