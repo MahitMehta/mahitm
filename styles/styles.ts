@@ -16,6 +16,9 @@ export const useStyles = makeStyles(theme => ({
         zIndex: 1,
         height: '100vh',
         justifyContent: 'center',
+        "& > *": {
+            pointerEvents: "initial"
+        }
     },
     text: {
         fontSize: "clamp(4rem, 6.5vw, 6.5vw)",
@@ -87,10 +90,8 @@ export const useStyles = makeStyles(theme => ({
     contentSection: {
         transition: '1150ms ease',
         opacity: 0,
-        pointerEvents: 'none',
     },
     contentSectionDisplay: {
         opacity: 1,
-        pointerEvents: 'initial',
     }
 }));

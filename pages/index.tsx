@@ -73,12 +73,12 @@ const Home: NextPage = () => {
         <Cursor />
         <div className={classes.container}>
             <div className={classes.bg}></div>
-            <div ref={worldRef} className={classes.world}>
-                <World />
-            </div>
             <Terminal />
             <main className={clsx(classes.contentSection, terminalAnimationComplete && classes.contentSectionDisplay)}>
-                <div className={classes.content} style={{ zIndex: 1, }}>
+                <div ref={worldRef} className={classes.world}>
+                    <World />
+                </div>
+                <div className={classes.content} style={{ zIndex: 1, pointerEvents: 'none' }}>
                     <header className={classes.header}>
                         <p className={classes.greeting}>👋 Hello, I&apos;m Mahit.</p>
                         <h1 className={classes.text}>Developer</h1>

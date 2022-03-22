@@ -66,7 +66,7 @@ const MeshWorld : React.FC<{ terminalAnimationComplete : boolean }> = ({ termina
                 <mesh geometry={nodes?.Cube010?.geometry} material-color="#f0bf94" position={[0.89, 1.07, -0.14]} scale={[0.07, 0.11, 0.07]}></mesh>
             </group> */}
             <animated.mesh 
-                rotation={[0, -140 * (Math.PI / 180), 0]} 
+                rotation={[0, -100 * (Math.PI / 180), 0]} 
                 scale={scale} ref= {mesh} 
                 position={[0, -5, 0]}
                 castShadow 
@@ -113,9 +113,12 @@ const World = () => {
                 {/* Lights Component */}
                 <OrbitControls
                     enableZoom={false}
+                    minPolarAngle={Math.PI / 2.75}
+                    maxPolarAngle={Math.PI / 2.75}
                     rotateSpeed={0.5}
-                    enableRotate={false}
-                    autoRotate={true}
+                    enableRotate={true}
+                    autoRotate={false}
+                    enablePan={false}
                     autoRotateSpeed={0.5}
                 />
                 <Lights />
