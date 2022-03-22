@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import useDimensions from "../../hooks/useDimensions";
 import { useStyles } from "./styles";
@@ -24,6 +25,30 @@ const Cursor = () => {
         coordX.current = cursorX;
         coordY.current = cursorY;
     };  
+
+    const [ mouseActive, setMouseActive ] = useState(false);
+
+    const handleMouseOver = () => {
+        setMouseActive(true);
+    };
+
+    const handleMouseLeave = () => {
+        setMouseActive(false);
+    };
+
+    useEffect(() => {
+        const elements = document.querySelectorAll("a, button"); 
+        elements.forEach((ele) => {
+            ele.addEventListener("mouseover", handleMouseOver);
+            ele.addEventListener("mouseleave", handleMouseLeave)
+        });
+        return () => {
+            elements.forEach((ele) => {
+                ele.removeEventListener("mouseover", handleMouseOver);
+                ele.removeEventListener("mouseleave", handleMouseLeave);
+            });
+        };
+    }, []);
 
     const requestRef = useRef<number | undefined>();
 
@@ -56,8 +81,10 @@ const Cursor = () => {
 
     return (
         <div 
-            style={{ display: isMobile ? "none" : "initial" }}
-            ref={cursorRef} className={classes.cursor}>    
+            style={{ 
+                display: isMobile ? "none" : "initial",
+            }}
+            ref={cursorRef} className={clsx(classes.cursor, mouseActive && classes.active)}>    
         </div>
     )
 }

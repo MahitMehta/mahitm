@@ -43,45 +43,57 @@ const Contact = () => {
                     <span style={{ color: palette.secondary.main }}>Connect.</span>
                 </h1>
                 <span className={classes.headerDivider}></span>
-                <p className={classes.skillsCaption}>Leave me a note and let&apos;s callabortate.</p>
-                <form className={classes.form}>
-                   <div className={classes.formFields}>
-                        <InputField 
+                <p className={classes.headerCaption}>Leave me a note and let&apos;s callabortate.</p>
+                <div className={classes.contentSections}>
+                <div style={{ width: "min-content", height: "100%" }}>
+                    <div style={{
+                            //backgroundImage: "linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%)",
+                            height: "100%",
+                            width: "min-content",
+                            borderRadius: 5,
+                        }}>
+                           
+                        </div>
+                    </div>
+                    <form className={classes.form}>
+                        <div className={classes.formFields}>
+                            <InputField 
                                 className={classes.input}
                                 id="client-full-name"
                                 label="Full Name"
                                 placeholder="Elon Musk"
                             />
-                        <InputField 
-                            className={classes.input}
-                            label="Email"
-                            id="client-email"
-                            placeholder="elon.musk@tesla.com"
-                        />
-                        <InputField 
-                            className={classes.input}
-                            label="Message"
-                            id="client-message"
-                            style={{ minHeight: 100 }}
-                            placeholder="Message For Me..."
-                            as="textarea"
-                        />
-                         <div className={classes.fileInputCover}>
-                            <FontAwesomeIcon className={classes.icon} icon={faPaperclip} color="#fff" />
-                            <label className={classes.label} htmlFor="attach-files">attach</label>
-                            <input 
-                                className={classes.fileInput}
-                                name="attach-files" 
-                                id="attach-files"
-                                multiple 
-                                type="file"
+                            <InputField 
+                                className={classes.input}
+                                label="Email"
+                                id="client-email"
+                                placeholder="elon.musk@tesla.com"
                             />
-                        </div>
-                   </div>
-                   <Button onClick={handleSubmit}>
-                       Send Note.
-                   </Button>
-                </form>
+                            <InputField 
+                                className={classes.input}
+                                label="Message"
+                                id="client-message"
+                                style={{ minHeight: 100 }}
+                                placeholder="Message For Me..."
+                                as="textarea"
+                            />
+                            <div className={classes.fileInputCover}>
+                                <FontAwesomeIcon className={classes.icon} icon={faPaperclip} color="#fff" />
+                                <label className={classes.label} htmlFor="attach-files">attach</label>
+                                <input 
+                                    className={classes.fileInput}
+                                    name="attach-files" 
+                                    id="attach-files"
+                                    multiple 
+                                    type="file"
+                                />
+                            </div>
+                    </div>
+                    <Button onClick={handleSubmit}>
+                        Send Note.
+                    </Button>
+                    </form>
+                </div>
             </div>
             {/* <div className={classes.detailsContainer}>
                 <div className={classes.detailsWrapper}>

@@ -20,7 +20,7 @@ export const useStyles = makeStyles(({ palette }) => ({
         display: "block",
         marginLeft: "2vw",
     },
-    skillsCaption: {
+    headerCaption: {
         margin: "25px 0px",
         marginLeft: "2vw",
         color: "rgba(255, 255, 255, 0.25)",
@@ -176,6 +176,14 @@ export const useStyles = makeStyles(({ palette }) => ({
         bottom: 0,
         top: 0,
         opacity: 0,
+    },
+    contentSections: {
+        display: "flex",
+        justifyContent: "center",
+        width: "100%",
+        "& > *": {
+            width: "min-content",
+        }
     }
 }), {
     classNamePrefix: "contact",

@@ -2,6 +2,7 @@ import { makeStyles } from "@mui/styles";
 
 export const useStyles = makeStyles((theme) => ({
     cursor: {
+        transition: `background 200ms ease, box-shadow 250ms ease`,
         width: 20,
         height: 20,
         position: "fixed",
@@ -13,6 +14,13 @@ export const useStyles = makeStyles((theme) => ({
         zIndex: 999,
         pointerEvents: "none",
         mixBlendMode: "difference",
-       // boxShadow: `0px 0px 0px 2px ${theme.palette.primary.main}`,
-    }
+        boxShadow: `0px 0px 0px 0px ${theme.palette.secondary.main}`
+    },
+    active: {
+        background: theme.palette.secondary.main,
+        boxShadow: `0px 0px 0px 10px ${theme.palette.secondary.main}`,
+    },
+    // mouseDown: {
+    //     boxShadow: `0px 0px 0px 6px ${theme.palette.secondary.main}`,
+    // }
 }));

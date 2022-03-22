@@ -23,7 +23,7 @@ export const useStyles = makeStyles(theme => ({
     text: {
         fontSize: "clamp(4rem, 6.5vw, 6.5vw)",
         // color: 'transparent',
-        fontFamily: 'Helvetica Neue',
+        fontFamily: 'Helvetica Neue !important',
         marginLeft: "10vw",
         fontWeight: 500,
         color: "#fff",
