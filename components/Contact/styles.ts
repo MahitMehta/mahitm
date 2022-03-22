@@ -164,7 +164,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     },
     fileInputCover: {
         marginTop: 10,
-        width: "min-content",
+        width: "100%",
         height: "min-content",
         display: "flex",
         position: "relative",
@@ -182,7 +182,7 @@ export const useStyles = makeStyles(({ palette }) => ({
         justifyContent: "center",
         width: "100%",
         "& > *": {
-            width: "min-content",
+            //width: "min-content",
         }
     }
 }), {

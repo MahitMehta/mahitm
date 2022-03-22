@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faEnvelope, faGlobe, faGlobeAmericas, faMobileAlt, faPaperclip } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -26,14 +26,52 @@ const ContactDetailItem : React.FC<ContactDetailItemProps> = ({ title, icon }) =
     )
 }
 
+interface IFormData {
+    fullName?: string; 
+    email?: string; 
+    message?: string; 
+    files: File[];
+}
+
 const Contact = () => {
     const classes = useStyles();
     const { palette } = useTheme();
+
+    const [ formData, setFormData ] = useState<IFormData>({
+        files: [],
+    });
+
+    const updateFormData = (key:keyof IFormData) => (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormData({ ...formData, [ key ]: e.target.value });
+    };
 
     const handleSubmit = (e:any) => {
         e.stopPropagation();
         e.preventDefault();
     };
+    
+    const handleFileChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+        const newFiles = e.target.files; 
+        if (!newFiles) return; 
+        const newFileArray = [];
+        for (let i = 0; i < newFiles.length; i++) {
+            let file = newFiles.item(i); 
+            if (file && file instanceof File) {
+                newFileArray.push(file);
+            }
+        }
+        setFormData({ ...formData, files: newFileArray });
+    }
+
+    const inputLabel = useMemo(() => {
+        if (formData.files.length > 1) {
+            return formData.files.map(file => file.name).join(", ")
+        } else if (formData.files.length === 1) {
+            return  formData.files.map(file => file.name).join("");
+        } else {
+            return "attach"; 
+        }
+    }, [ formData.files ]);
 
     return (
         <section className={classes.container}>
@@ -47,7 +85,6 @@ const Contact = () => {
                 <div className={classes.contentSections}>
                 <div style={{ width: "min-content", height: "100%" }}>
                     <div style={{
-                            //backgroundImage: "linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%)",
                             height: "100%",
                             width: "min-content",
                             borderRadius: 5,
@@ -62,12 +99,14 @@ const Contact = () => {
                                 id="client-full-name"
                                 label="Full Name"
                                 placeholder="Elon Musk"
+                                onChange={updateFormData("fullName")}
                             />
                             <InputField 
                                 className={classes.input}
                                 label="Email"
                                 id="client-email"
                                 placeholder="elon.musk@tesla.com"
+                                onChange={updateFormData("email")}
                             />
                             <InputField 
                                 className={classes.input}
@@ -75,21 +114,27 @@ const Contact = () => {
                                 id="client-message"
                                 style={{ minHeight: 100 }}
                                 placeholder="Message For Me..."
+                                onChange={updateFormData("message")}
                                 as="textarea"
                             />
                             <div className={classes.fileInputCover}>
                                 <FontAwesomeIcon className={classes.icon} icon={faPaperclip} color="#fff" />
-                                <label className={classes.label} htmlFor="attach-files">attach</label>
+                                <label className={classes.label} htmlFor="attach-files">
+                                    {
+                                       inputLabel
+                                    }
+                                </label>
                                 <input 
                                     className={classes.fileInput}
                                     name="attach-files" 
                                     id="attach-files"
                                     multiple 
                                     type="file"
+                                    onChange={handleFileChange} 
                                 />
                             </div>
                     </div>
-                    <Button onClick={handleSubmit}>
+                    <Button style={{ marginTop: 10 }} onClick={handleSubmit}>
                         Send Note.
                     </Button>
                     </form>
