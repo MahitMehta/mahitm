@@ -1,10 +1,14 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import useDimensions from "../../hooks/useDimensions";
 import { useStyles } from "./styles";
 
 const Cursor = () => {
     const classes = useStyles();
     const cursorRef = useRef<HTMLDivElement | null>(null);
+    const [ coords, setCoords ] = useState({ x: 0, y: 0 });
+
+    const coordX = useRef(0);
+    const coordY = useRef(0);
 
     const { width } = useDimensions();
 
@@ -14,9 +18,26 @@ const Cursor = () => {
         const { width, height } = cursorRef?.current?.getBoundingClientRect(); 
         const cursorX = clientX - (width / 2); 
         const cursorY = clientY - (height / 2);
-        
-        cursorRef.current.style.transform = `translate(${cursorX}px, ${cursorY}px)`; 
+
+        setCoords({ x: cursorX, y: cursorY });
+
+        coordX.current = cursorX;
+        coordY.current = cursorY;
     };  
+
+    const requestRef = useRef<number | undefined>();
+
+    const updateMousePosition = useCallback(() => {
+        if (!cursorRef.current) return; 
+
+        coords.x += (coordX.current - coords.x) / 8;
+        coords.y += (coordY.current - coords.y) / 8;
+
+        cursorRef.current.style.transform = `translate(${coords.x}px, ${coords.y}px)`; 
+        requestAnimationFrame(updateMousePosition);
+    }, [ requestRef ]); // eslint-disable-line
+
+    useEffect(() => { requestRef.current = requestAnimationFrame(updateMousePosition) }, [ updateMousePosition ]);
 
     const isMobile = useMemo(() => {
         return width < 750; 

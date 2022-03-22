@@ -2,7 +2,6 @@ import { makeStyles } from "@mui/styles";
 
 export const useStyles = makeStyles((theme) => ({
     cursor: {
-        transition: "200ms ease",
         width: 20,
         height: 20,
         position: "fixed",
