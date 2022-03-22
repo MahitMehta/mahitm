@@ -13,6 +13,7 @@ import { IRootReducer } from '../../redux/reducers';
 import { getTerminalAnimationComplete } from '../../redux/selectors/bootstrap.selectors';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+import useDimensions from '../../hooks/useDimensions';
 //import Model from "./Model";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -95,8 +96,17 @@ const World = () => {
         handleModelLoad();
     }, [ handleModelLoad]);
 
+    const { width } = useDimensions();
+
+    const isMobile = useMemo(() => {
+        return width < 750; 
+    }, [ width ]);
+
     return (
-        <section style={{ opacity: 1  }} ref={viewRef} className={classes.container}>
+        <section style={{ 
+            opacity: 1,
+            pointerEvents: isMobile ? "none" : "initial"  
+        }} ref={viewRef} className={classes.container}>
             <Canvas
                 frameloop='demand'
                 gl={{ 
