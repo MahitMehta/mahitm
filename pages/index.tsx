@@ -16,6 +16,10 @@ import Image from "next/image";
 import gsap from "gsap";
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import dynamic from 'next/dynamic';
+import Button from '../components/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
+import { useRouter } from 'next/router';
 
 const Cursor = dynamic(() => import("../components/Cursor"), { ssr: false });
 const World = dynamic(() => import("../components/World"), { ssr: false });
@@ -65,6 +69,15 @@ const Home: NextPage = () => {
      pointerAnimation();
   }, [ pointerAnimation ]);
   
+  const router = useRouter();
+
+  const handleContact = () => {
+    router.push({
+        path: "/",
+        hash: "#contact"
+    });
+  };
+
   return (
     <>
         <Head>
@@ -86,10 +99,19 @@ const Home: NextPage = () => {
                         <h1 className={classes.headerCaption}>
                             Upcoming Web Architect.
                         </h1>
+                        <Button onClick={handleContact} style={{ marginTop: 25 }}>
+                            <FontAwesomeIcon icon={faPhoneAlt}/>
+                            <span style={{ marginLeft: 10 }}>Contact</span>
+                        </Button>
                     </header>
                     <div className={classes.footer}>
                         <span ref={pointerRef} >
-                            <Image width={30} height={30} src="/svg/scroll-down.svg" />
+                            <Image 
+                                width={30} 
+                                height={30}
+                                src="/svg/scroll-down.svg"
+                                alt='mouse-icon'
+                            />
                         </span>
                     </div>
                     

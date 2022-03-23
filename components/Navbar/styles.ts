@@ -18,6 +18,7 @@ export const useStyles = makeStyles(({ palette }) => ({
     logo: {
         minWidth: 55,
         width: "5vw",
+        maxWidth: 75,
     },
     ul: {
         display: 'flex',

@@ -65,9 +65,11 @@ const Navbar = () => {
         <nav className={classes.nav}>
             <Link href={"/"} passHref>
                 <a>
-                    <picture>
-                        <img className={classes.logo} src={"./svg/logo.svg"} alt="Logo"/>
-                    </picture>
+                    <img 
+                        className={classes.logo} 
+                        src={"./svg/logo.svg"} 
+                        alt="Logo"
+                    />
                 </a>
             </Link>
             <div className={classes.itemContainer}>

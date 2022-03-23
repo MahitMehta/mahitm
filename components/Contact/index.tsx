@@ -74,7 +74,7 @@ const Contact = () => {
     }, [ formData.files ]);
 
     return (
-        <section className={classes.container}>
+        <section id="contact" className={classes.container}>
             <div className={classes.messageContainer}>
                 <h1 className={classes.messagingHeader}>
                     Let&apos;s&nbsp;
