@@ -20,6 +20,7 @@ import Button from '../components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/router';
+import { useTheme } from '@mui/styles';
 
 const Cursor = dynamic(() => import("../components/Cursor"), { ssr: false });
 const World = dynamic(() => import("../components/World"), { ssr: false });
@@ -99,7 +100,10 @@ const Home: NextPage = () => {
                         <h1 className={classes.headerCaption}>
                             Upcoming Web Architect.
                         </h1>
-                        <Button onClick={handleContact} style={{ marginTop: 25 }}>
+                        <Button onClick={handleContact} style={{ 
+                            marginTop: 25,
+                            backgroundColor: "rgba(0, 0, 0, 0.5)",
+                        }}>
                             <FontAwesomeIcon icon={faPhoneAlt}/>
                             <span style={{ marginLeft: 10 }}>Contact</span>
                         </Button>
