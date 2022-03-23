@@ -88,10 +88,12 @@ export const useStyles = makeStyles(theme => ({
         }
     },
     contentSection: {
+        pointerEvents: "none",
         transition: '1150ms ease',
         opacity: 0,
     },
     contentSectionDisplay: {
+        pointerEvents: "initial",
         opacity: 1,
     }
 }));

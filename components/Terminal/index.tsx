@@ -73,7 +73,7 @@ const Terminal = () => {
                         <Typist
                             onTypingDone={() => setBootstrapCommandComplete(true)}
                             startDelay={250}
-                            avgTypingDelay={60}
+                            avgTypingDelay={10}
                             cursor={{ hideWhenDone: true, hideWhenDoneDelay: 0, blink: true }} 
                             className={classes.dockerCommand}> 
                                 &nbsp;docker-compose up
@@ -101,7 +101,7 @@ const Terminal = () => {
                                 <Typist
                                     onTypingDone={() => setLoadingCommandComplete(true)}
                                     startDelay={0}
-                                    avgTypingDelay={60}
+                                    avgTypingDelay={10}
                                     cursor={{ hideWhenDone: true, hideWhenDoneDelay: 0, blink: true }} 
                                     className={classes.dockerCommand}> 
                                         &nbsp;curl GET / HTTP/1.1 Host: mahitm.com

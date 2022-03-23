@@ -6,6 +6,7 @@ import Head from 'next/head';
 import App from 'next/app';
 import ThemeProvider from "../providers/ThemeProvider";
 import { NextSeo } from 'next-seo';
+import ApolloClientProvider from '../providers/ApolloClientProvider';
 
 export default class PortfolioApp extends App {
   public render() {
@@ -52,9 +53,11 @@ export default class PortfolioApp extends App {
         />
         <React.StrictMode>
           <ReduxProvider store={store}>
-            <ThemeProvider>
-              { typeof window !== "undefined" ? <Component {...pageProps} /> : <></>}
-            </ThemeProvider>
+            <ApolloClientProvider>
+              <ThemeProvider>
+                { typeof window !== "undefined" ? <Component {...pageProps} /> : <></>}
+              </ThemeProvider>
+            </ApolloClientProvider>
           </ReduxProvider>
         </React.StrictMode>
       </>

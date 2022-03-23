@@ -28,7 +28,7 @@ export const useStyles = makeStyles(({ palette }) => ({
         fontSize: "clamp(17.5px, 1.5vw, 1.5vw)",
     },
     input: {
-        width: "clamp(250px, 40vw, 40vw)",
+        width: "100%",
         "@media (max-width: 900px)": {
             width: "clamp(250px, 100%, 100%)",
         }
@@ -41,6 +41,7 @@ export const useStyles = makeStyles(({ palette }) => ({
         fontFamily: 'Helvetica Neue',
         fontSize: "clamp(2.5rem, 4vw, 4vw)",
         flexDirection: "column",
+
     },
     messagingHeader: {
         color: "#fff",
@@ -79,16 +80,30 @@ export const useStyles = makeStyles(({ palette }) => ({
         justifyContent: "center",
         alignItems: 'center',
     },
-    profilePicture: {
-        position: "absolute",
-        width: 150,
-        height: 150,
-        top: 0,
-        background: "black",
-        borderRadius: 10,
-        left: "50%",
-        transform: 'translate(-50%,-50%)',
-
+    profilePictureContainer: {
+        width: "100%",
+        height: '100%',
+        display: 'flex',
+        justifyContent:'center',
+        alignItems: 'center',
+        padding: 45,
+        overflow: "hidden",
+        "@media (max-width: 900px)": {
+            padding: 5,
+         }
+    },
+    profilePictureWrapper: {
+        width: "100%",
+        height: '100%',
+        display: 'flex',
+        justifyContent:'center',
+        alignItems: 'center',
+        backgroundColor: "#000",
+        borderRadius: 5,
+        border: `1px solid ${palette.general.grey}`,
+        overflow: "hidden",
+        boxShadow: `0px 0px 15px 0px rgba(0, 0, 0, 0.35)`,
+        maxWidth: 500,
     },
     subHeader: {
         color: "#fff",
@@ -119,6 +134,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     },
     socialMediaContainer: {
         display: 'flex',
+        "@media (max-width: 900px)": {
+            marginTop: "45px",
+        }
     },
     socialButton: {
         marginLeft: 0,
@@ -139,11 +157,9 @@ export const useStyles = makeStyles(({ palette }) => ({
     },
     formFields: {
         display: 'flex',
+        maxWidth: 500,
+        width: "100%",
         flexDirection: "column",
-        width: 500,
-        "@media (max-width: 900px)": {
-            width: "100%",
-        }
     },
     caption: { 
         color:  "rgba(255, 255, 255, 0.25)", 
@@ -181,8 +197,12 @@ export const useStyles = makeStyles(({ palette }) => ({
         display: "flex",
         justifyContent: "center",
         width: "100%",
+        alignItems: 'center',
         "& > *": {
             //width: "min-content",
+        },
+        "@media (max-width: 900px)": {
+            flexDirection: "column-reverse",
         }
     }
 }), {

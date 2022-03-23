@@ -9,22 +9,9 @@ import InputField from "../InputField";
 import Image from "next/image";
 import { useTheme } from "@mui/styles";
 import Button from "../Button";
-
-interface ContactDetailItemProps {
-    icon: IconProp,
-    title: string; 
-}
-
-const ContactDetailItem : React.FC<ContactDetailItemProps> = ({ title, icon }) => {
-    const classes = useStyles();
-
-    return (
-        <li className={classes.methodItem}>
-            <FontAwesomeIcon icon={icon} color={"rgba(255, 255, 255, 0.25)"} />
-            <span className={classes.methodTitle}>{ title }</span>
-        </li>
-    )
-}
+import { useMutation } from "@apollo/client";
+import { IContactFormArguments, sendContactFormMutation } from "./mutations/sendContactForm";
+import Portrait from "../Portrait";
 
 interface IFormData {
     fullName?: string; 
@@ -41,6 +28,17 @@ const Contact = () => {
         files: [],
     });
 
+    const [ sendContactForm ] = useMutation<boolean, IContactFormArguments>(sendContactFormMutation, {
+        variables: { 
+            files: formData.files,
+            input: {
+                email: formData.email || "",
+                fullName: formData.fullName || "",
+                message: formData.message || ""
+            }
+        }
+    });
+
     const updateFormData = (key:keyof IFormData) => (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [ key ]: e.target.value });
     };
@@ -48,6 +46,8 @@ const Contact = () => {
     const handleSubmit = (e:any) => {
         e.stopPropagation();
         e.preventDefault();
+
+        sendContactForm();
     };
     
     const handleFileChange = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -84,12 +84,10 @@ const Contact = () => {
                 <p className={classes.headerCaption}>Leave me a note and let&apos;s callabortate.</p>
                 <div className={classes.contentSections}>
                 <div style={{ width: "min-content", height: "100%" }}>
-                    <div style={{
-                            height: "100%",
-                            width: "min-content",
-                            borderRadius: 5,
-                        }}>
-                           
+                </div>
+                    <div className={classes.profilePictureContainer}>
+                        <div className={classes.profilePictureWrapper}>
+                            <Portrait />
                         </div>
                     </div>
                     <form className={classes.form}>
@@ -139,63 +137,29 @@ const Contact = () => {
                     </Button>
                     </form>
                 </div>
+                <ul className={classes.socialMediaContainer}>
+                    <SocialButton 
+                        className={classes.socialButton}
+                        link="https://www.linkedin.com/in/mahit-mehta-068603203/"
+                        icon={faLinkedinIn}
+                    />
+                    <SocialButton 
+                        className={classes.socialButton}
+                        link="https://www.instagram.com/mahit_mehta/"
+                        icon={faInstagram}
+                    />
+                    <SocialButton 
+                        className={classes.socialButton}
+                        link="https://www.youtube.com/channel/UC_OXbojolphpidcIr4GRD4w"
+                        icon={faYoutube}
+                    />
+                    <SocialButton 
+                        className={classes.socialButton}
+                        link="https://github.com/MahitMehta"
+                        icon={faGithub}
+                    />
+                </ul> 
             </div>
-            {/* <div className={classes.detailsContainer}>
-                <div className={classes.detailsWrapper}>
-                    <div className={classes.profilePicture}>
-                        <Image 
-                            layout="fill"
-                            src={"/svg/logo.svg"}
-                        />
-                    </div>
-                    <div style={{ marginTop: 75 }}>
-                        <p className={classes.caption}>
-                            You&apos;ve reached the end, but I would love to collaborate so don&apos;t be shy to reach 
-                            out!
-                        </p>
-                    </div>
-                    <div>
-                        <ul className={classes.socialMediaContainer}>
-                            <SocialButton 
-                                className={classes.socialButton}
-                                link="https://www.linkedin.com/in/mahit-mehta-068603203/"
-                                icon={faLinkedinIn}
-                            />
-                            <SocialButton 
-                                className={classes.socialButton}
-                                link="https://www.instagram.com/mahit_mehta/"
-                                icon={faInstagram}
-                            />
-                            <SocialButton 
-                                className={classes.socialButton}
-                                link="https://www.youtube.com/channel/UC_OXbojolphpidcIr4GRD4w"
-                                icon={faYoutube}
-                            />
-                            <SocialButton 
-                                className={classes.socialButton}
-                                link="https://github.com/MahitMehta"
-                                icon={faGithub}
-                            />
-                        </ul> 
-                    </div>
-                    <div style={{ marginTop: "auto" }}>
-                        <ul className={classes.methodsList}>
-                            <ContactDetailItem 
-                                icon={faMobileAlt} 
-                                title="+1 732 822 0795" 
-                            />
-                            <ContactDetailItem 
-                                icon={faGlobeAmericas} 
-                                title="mahitm.com" 
-                            />
-                            <ContactDetailItem 
-                                icon={faEnvelope} 
-                                title="mahit.py@gmail.com" 
-                            />
-                        </ul>
-                    </div>
-                </div>
-            </div> */}
         </section>
     )
 }
