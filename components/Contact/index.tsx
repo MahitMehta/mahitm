@@ -68,7 +68,7 @@ const Contact = () => {
                 "Content-Type": "multipart/form-data" 
             },
         }).then((res) => {
-            console.log(res);
+   
         }).catch(() => {
             console.log("Failed to Send Message");
         }).finally(() => {
@@ -112,7 +112,6 @@ const Contact = () => {
     }
 
     const handleDrop = (e:React.DragEvent<HTMLFormElement>) => {
-        console.log('hello');
         e.preventDefault();
         e.stopPropagation();
 
@@ -196,7 +195,7 @@ const Contact = () => {
                     </div>
                     <Button 
                         disabled={sendingNote} 
-                        loading={false} 
+                        loading={sendingNote} 
                         style={{ 
                             marginTop: 10, 
                             columnGap: 10,
