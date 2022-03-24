@@ -118,7 +118,6 @@ const Home: NextPage = () => {
                             />
                         </span>
                     </div>
-                    
                 </div> 
         
                 <span ref={introRef}></span>

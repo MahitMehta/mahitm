@@ -20,7 +20,7 @@ const Loader : React.FC<LoaderProps> = ({ className, style }) => {
         <div style={style} className={ clsx(classes.container, !!className && className) }> 
             {
                 Array.from({ length: BAR_COUNT }).map((_, idx) => (
-                    <span style={{ "--i": idx } as IBarStyles}></span>
+                    <span key={idx} style={{ "--i": idx } as IBarStyles}></span>
                 ))
             }
         </div>
