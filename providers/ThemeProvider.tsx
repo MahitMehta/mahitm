@@ -13,7 +13,7 @@ interface ThemeProviderProps {
     children: ReactChild;
 }
 
-interface AggumentedPaletteOptions {
+export interface AggumentedPaletteOptions {
     general: IGeneralTheme;
     primary: { main: string; } & PaletteColorOptions;
     secondary: { main: string } & PaletteColorOptions;
@@ -36,19 +36,22 @@ declare module "@mui/styles" {
 const ThemeProvider : React.FC<ThemeProviderProps> = ({ children }) => {
     const theme = React.useMemo(() => (
         createTheme({
-        palette: {
-            primary: {
-                main: "#242538",
+            palette: {
+                primary: {
+                    main: "#242538",
+                },
+                secondary: {
+                    main: "#F5F5DC"
+                },
+                grey: {
+                    "700": "rgba(39, 39, 42, 1)",
+                },
+                common: {
+                    
+                },
+                theme: darkTheme,
+                general: generalTheme
             },
-            secondary: {
-                main: "#F5F5DC"
-            },
-            common: {
-                
-            },
-            theme: darkTheme,
-            general: generalTheme
-        },
         })
     ), [])
 

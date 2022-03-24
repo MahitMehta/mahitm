@@ -68,7 +68,7 @@ export const useStyles = makeStyles()(({ palette }) => ({
         height: 125,
         display: "flex",
         position: 'relative',
-        background: palette.general.grey,
+        background: palette.grey[700],
         boxShadow:  `0px 0px 15px 0px rgba(0, 0, 0, 0.5)`,
         "&:hover": {
             transform: "rotateZ(10deg) scale(1.1)",

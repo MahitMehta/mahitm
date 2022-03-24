@@ -6,7 +6,7 @@ export const useStyles = makeStyles()(({ palette }) => ({
         borderRadius: 5,
         color: "#fff",
         fontWeight: 500,
-        border: `2px solid ${palette.general.grey}`, 
+        border: `2px solid ${palette.grey[700]}`, 
         backgroundColor: "rgba(255, 255, 255, 0.01)",
         boxShadow: `0px 0px 0px 0px ${palette.secondary.main}, 
                      0px 0px 15px 0px rgba(0, 0, 0, 0.35)`,
