@@ -1,10 +1,14 @@
 import { makeStyles } from 'tss-react/mui';
 
-export const useStyles = makeStyles()(({ palette }) => ({
+export const useStyles = makeStyles({ name: "button" })(({ palette }) => ({
     container: {
         padding: 15,
         borderRadius: 5,
         color: "#fff",
+        display: 'flex',
+        alignItems: "center",
+        justifyContent: "center",
+        columnGap: 5,
         fontWeight: 500,
         border: `2px solid ${palette.grey[700]}`, 
         backgroundColor: "rgba(255, 255, 255, 0.01)",

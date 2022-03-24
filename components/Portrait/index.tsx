@@ -98,6 +98,7 @@ const Portrait : React.FC<{}> = () => {
         const img = new Image();
         img.crossOrigin = "Anonymous";
         img.src = src; 
+        img.loading = "eager";
         return img; 
     }, []);
 

@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { ApolloServer, gql } from "apollo-server-micro";
+import { gql, ApolloServer } from "apollo-server-micro";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
-import { GraphQLUpload, graphqlUploadExpress, processRequest } from "graphql-upload"
+import { GraphQLUpload, processRequest } from "graphql-upload"
 
 const DEBUG = process.env.NODE_ENV === "development"; 
 
@@ -23,8 +23,15 @@ const typeDefs = gql`
     }
 `;
 
+interface IFile {
+  filename?: string; 
+  mimetype?: string; 
+  encoding?: string; 
+  createReadStream: () => ReadableStream; 
+}
+
 interface IContactFormDTO {
-  files: File[],
+  files: Array<Promise<IFile>>,
   input: {
     fullName: string; 
     email: string; 
@@ -41,7 +48,9 @@ const resolvers = {
   },
   Mutation: {
     sendContactForm: async (_:any, data:IContactFormDTO) => {
-        console.log(data.files, data.input);
+        await Promise.all(data.files.map(async (file) => {
+          return await file; 
+        })) 
         return true; 
     },
   },
@@ -55,6 +64,10 @@ if (DEBUG) {
     plugins.push(ApolloServerPluginLandingPageGraphQLPlayground());
 }
 
+interface NextApiRequestExtended extends NextApiRequest {
+  filePayload?: any
+}
+
 const apolloServer = new ApolloServer({ 
     typeDefs, 
     resolvers,
@@ -65,16 +78,14 @@ const startServer = apolloServer.start();
 const graphqlPath = '/api/graphql';
 
 export default async function handler(
-  req: NextApiRequest,
+  req: NextApiRequestExtended,
   res: NextApiResponse<Data>
 ) {
     await startServer
 
     const contentType = req.headers["content-type"]
     if (contentType && contentType.startsWith("multipart/form-data")) {
-      //  console.log("requested with file", req.body, (req as any).raw);
-      // (req as any).filePayload = await processRequest(req, res)
-     // console.log((req as any).filePayload, 'hello');
+      (req as any).filePayload = await processRequest(req, res)
     }
 
     return await apolloServer.createHandler({ path: graphqlPath })(req, res)

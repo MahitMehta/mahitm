@@ -1,6 +1,6 @@
 import { makeStyles } from 'tss-react/mui';
 
-export const useStyles = makeStyles()(() => ({
+export const useStyles = makeStyles({ name: "chest" })(() => ({
     container: {
         transition: "opacity 250ms ease",
         width: 625, 

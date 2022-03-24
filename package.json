@@ -31,6 +31,7 @@
     "apollo-server-micro": "^3.6.5",
     "apollo-server-nextjs": "^3.0.0",
     "apollo-upload-client": "^17.0.0",
+    "axios": "^0.26.1",
     "babel-plugin-styled-components": "^2.0.3",
     "babel-preset-next": "^1.4.0",
     "cloudinary-build-url": "^0.2.4",

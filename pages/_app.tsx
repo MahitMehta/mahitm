@@ -14,7 +14,7 @@ let muiCache: EmotionCache | undefined = undefined;
 
 export const createMuiCache = () =>
     muiCache = createCache({
-        "key": "mui",
+        "key": "mahitm",
         "prepend": true
     });
      

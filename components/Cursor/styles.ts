@@ -1,6 +1,6 @@
 import { makeStyles } from 'tss-react/mui';
 
-export const useStyles = makeStyles()((theme) => ({
+export const useStyles = makeStyles({ name: "cursor" })((theme) => ({
     cursor: {
         transition: `background 200ms ease, box-shadow 250ms ease`,
         width: 20,
@@ -19,8 +19,5 @@ export const useStyles = makeStyles()((theme) => ({
     active: {
         background: theme.palette.secondary.main,
         boxShadow: `0px 0px 0px 10px ${theme.palette.secondary.main}`,
-    },
-    // mouseDown: {
-    //     boxShadow: `0px 0px 0px 6px ${theme.palette.secondary.main}`,
-    // }
+    }
 }));

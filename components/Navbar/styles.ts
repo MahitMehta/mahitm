@@ -1,6 +1,6 @@
 import { makeStyles } from 'tss-react/mui';
 
-export const useStyles = makeStyles()(({ palette }) => ({
+export const useStyles = makeStyles({ name: "navbar" })(() => ({
     nav: {
         width: "100vw",
         height: 60,

@@ -14,7 +14,7 @@ import { getTerminalAnimationComplete } from '../../redux/selectors/bootstrap.se
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import useDimensions from '../../hooks/useDimensions';
-//import Model from "./Model";
+
 gsap.registerPlugin(ScrollTrigger);
 
 function Model({ url } : { url: string }) {
@@ -43,7 +43,7 @@ const Lights = () => {
   };
 
 
-const MeshWorld : React.FC<{ terminalAnimationComplete : boolean }> = ({ terminalAnimationComplete }) => {
+const MeshDesk : React.FC<{ terminalAnimationComplete : boolean }> = ({ terminalAnimationComplete }) => {
     const [ zoom, setZoom ] = useState(false);
     const { scale } = useSpring({ scale: zoom ? 3: 0 })
     const mesh = useRef<any>(null);
@@ -58,14 +58,8 @@ const MeshWorld : React.FC<{ terminalAnimationComplete : boolean }> = ({ termina
         handleModelLoad();
     }, [ handleModelLoad]);
 
-   // const { scene, nodes }:any = useGLTF("./assets/desk.glb", true);
-  //  console.log(nodes, nodes?.Cube010?.geometry);
-
     return (
         <Suspense fallback={null}>
-            {/* <group dispose={null}>
-                <mesh geometry={nodes?.Cube010?.geometry} material-color="#f0bf94" position={[0.89, 1.07, -0.14]} scale={[0.07, 0.11, 0.07]}></mesh>
-            </group> */}
             <animated.mesh 
                 rotation={[0, -100 * (Math.PI / 180), 0]} 
                 scale={scale} ref= {mesh} 
@@ -75,12 +69,11 @@ const MeshWorld : React.FC<{ terminalAnimationComplete : boolean }> = ({ termina
             >
                 <Model url={"./assets/desk.glb"} />
             </animated.mesh>
-            {/* <Model /> */}
         </Suspense>
     )
 }
 
-const World = () => {
+const Desk = () => {
     const viewRef = useRef<HTMLElement | null>(null);
     const { progress, } = useProgress();
     const { classes } = useStyles();
@@ -132,12 +125,12 @@ const World = () => {
                     autoRotateSpeed={0.5}
                 />
                 <Lights />
-                <MeshWorld terminalAnimationComplete={terminalAnimationComplete}/>
+                <MeshDesk terminalAnimationComplete={terminalAnimationComplete}/>
             </Canvas>
         </section>
     )
 }
 
-export default World; 
+export default Desk; 
 
 useGLTF.preload('./assets/desk.glb')

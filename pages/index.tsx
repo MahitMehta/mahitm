@@ -23,7 +23,7 @@ import { useRouter } from 'next/router';
 import { useTheme } from '@mui/styles';
 
 const Cursor = dynamic(() => import("../components/Cursor"), { ssr: false });
-const World = dynamic(() => import("../components/World"), { ssr: false });
+const World = dynamic(() => import("../components/Desk"), { ssr: false });
 
 gsap.registerPlugin(ScrollTrigger);
 

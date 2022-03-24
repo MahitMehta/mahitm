@@ -7,11 +7,12 @@ import { faGithub, faInstagram, faLinkedinIn, faYoutube } from "@fortawesome/fre
 import InputField from "../InputField";
 import { useTheme } from "@mui/styles";
 import Button from "../Button";
-import { useMutation } from "@apollo/client";
-import { IContactFormArguments, sendContactFormMutation } from "./mutations/sendContactForm";
 import dynamic from "next/dynamic";
+import axios from "axios";
 
 const Portrait = dynamic(() => import("../Portrait"), { ssr: false });
+
+const FORM_ID = "ccf9a9b8-558c-4c05-abb8-1206f9418c03";
 
 interface IFormData {
     fullName?: string; 
@@ -28,27 +29,45 @@ const Contact = () => {
         files: [],
     });
 
-    const [ sendContactForm ] = useMutation<boolean, IContactFormArguments>(sendContactFormMutation, {
-        variables: { 
-            files: formData.files,
-            input: {
-                email: formData.email || "",
-                fullName: formData.fullName || "",
-                message: formData.message || ""
-            }
-        }
-    });
-
     const updateFormData = (key:keyof IFormData) => (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [ key ]: e.target.value });
     };
 
+    const [ sendingNote, setSendingNote ] = useState(false);
+
     const handleSubmit = (e:any) => {
         e.stopPropagation();
         e.preventDefault();
+        
+        if (!formData.fullName || !formData.message || !formData.email) return; 
 
-        sendContactForm();
-    };
+        const body = new FormData();
+
+        body.append("name", formData.fullName);
+        body.append("email", formData.email);
+        body.append("message", formData.message);
+
+        formData.files.forEach((file, index) => {
+            body.append(`File ${index + 1}`, file);
+        });
+
+        setSendingNote(true);
+
+        axios({
+            method: "POST",
+            url: `https://getform.io/f/${FORM_ID}`,
+            data: body,
+            headers: { 
+                "Content-Type": "multipart/form-data" 
+            },
+        }).then((res) => {
+            console.log(res);
+        }).catch(() => {
+            console.log("Failed to Send Message");
+        }).finally(() => {
+            setSendingNote(false);
+        });
+    };  
     
     const handleFileChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         const newFiles = e.target.files; 
@@ -96,12 +115,14 @@ const Contact = () => {
                                 className={classes.input}
                                 id="client-full-name"
                                 label="Full Name"
+                                value={formData.fullName}
                                 placeholder="Elon Musk"
                                 onChange={updateFormData("fullName")}
                             />
                             <InputField 
                                 className={classes.input}
                                 label="Email"
+                                value={formData.email}
                                 id="client-email"
                                 placeholder="elon.musk@tesla.com"
                                 onChange={updateFormData("email")}
@@ -110,6 +131,7 @@ const Contact = () => {
                                 className={classes.input}
                                 label="Message"
                                 id="client-message"
+                                value={formData.message}
                                 style={{ minHeight: 100 }}
                                 placeholder="Message For Me..."
                                 onChange={updateFormData("message")}
@@ -128,11 +150,25 @@ const Contact = () => {
                                     id="attach-files"
                                     multiple 
                                     type="file"
+                                    accept=".pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx,
+                                            .key, .pages, .numbers, .psd, .ai, .eps, .epub, 
+                                            .mobi, .azw, .tar, .zip, .rar, .7z, .png, .jpg, .jpeg, 
+                                            .tiff, .tif, .gif, .webp, .scm, .mp3, .mp4, .flv, .avi, 
+                                            .webm, .mov, .html, .htm, .xml, .sketch, .txt, .rtf"
                                     onChange={handleFileChange} 
                                 />
                             </div>
                     </div>
-                    <Button style={{ marginTop: 10 }} onClick={handleSubmit}>
+                    <Button 
+                        disabled={sendingNote} 
+                        loading={false} 
+                        style={{ 
+                            marginTop: 10, 
+                            columnGap: 10,
+                            height: 50,
+                            width: 140,
+                        }} 
+                        onClick={handleSubmit}>
                         Send Note.
                     </Button>
                     </form>

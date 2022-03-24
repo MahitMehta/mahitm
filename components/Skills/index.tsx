@@ -52,6 +52,7 @@ const SkillCard : React.FC<ISkillCardProps> = ({ skill }) => {
                         className={classes.image} 
                         layout="fill" 
                         src={currentSkill?.src} 
+                        alt={skill?.label}
                     />
                 )}
             </div>

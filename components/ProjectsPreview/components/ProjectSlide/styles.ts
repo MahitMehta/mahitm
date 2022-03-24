@@ -1,6 +1,6 @@
 import { makeStyles } from 'tss-react/mui';
 
-export const useStyles = makeStyles()(({ palette }) => ({
+export const useStyles = makeStyles({ name: "projectSlide" })(({ palette }) => ({
     container: {
         paddingTop: 25,
         minHeight: 500,

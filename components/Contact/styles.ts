@@ -1,6 +1,6 @@
 import { makeStyles } from 'tss-react/mui';
 
-export const useStyles = makeStyles()(({ palette }) => ({
+export const useStyles = makeStyles({ name: "contact" })(({ palette }) => ({
     container: {
         display: "flex",
         padding: 25,
@@ -174,6 +174,7 @@ export const useStyles = makeStyles()(({ palette }) => ({
         color: "#fff",
         fontSize: "1rem",
         marginLeft: 10,
+        cursor: "pointer",
     },
     icon: {
         fontSize: 17.5,
@@ -192,6 +193,7 @@ export const useStyles = makeStyles()(({ palette }) => ({
         bottom: 0,
         top: 0,
         opacity: 0,
+        cursor: "pointer",
     },
     contentSections: {
         display: "flex",
