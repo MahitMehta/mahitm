@@ -1,6 +1,6 @@
 import React, { useRef, Suspense, useState, useCallback, useEffect, useMemo } from 'react';
 import { useProgress, useGLTF } from "@react-three/drei";
-import { Canvas, useLoader } from "@react-three/fiber"
+import { Canvas } from "@react-three/fiber"
 import { OrbitControls } from "@react-three/drei";
 import gsap from "gsap";
 import { useStyles } from './styles';
@@ -11,23 +11,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setModelLoadedPercent } from '../../redux/actions/bootstrap.actions';
 import { IRootReducer } from '../../redux/reducers';
 import { getTerminalAnimationComplete } from '../../redux/selectors/bootstrap.selectors';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import useDimensions from '../../hooks/useDimensions';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function Model({ url } : { url: string }) {
-    const { scene, nodes }:any = useLoader(
-        GLTFLoader,
-        url,
-        (loader:any) => {
-          const dracoLoader = new DRACOLoader();
-          dracoLoader.setDecoderConfig({ type: 'js' });
-          dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
-        loader.setDRACOLoader(dracoLoader);
-        }
-    );
+    const { scene, nodes }:any = useGLTF(url, true);
 
     useMemo(() => Object.values(nodes).forEach((obj:any) =>
         obj.isMesh && Object.assign(obj, { castShadow: true, receiveShadow:true  })), [nodes])

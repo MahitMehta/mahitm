@@ -146,11 +146,14 @@ export const useStyles = makeStyles({ name: "contact" })(({ palette }) => ({
          }
     },
     form: {
+        transition: "background 150ms ease",
+        position: "relative",
         display: 'flex',
         flexDirection: "column",
         width: "100%",
         padding: 25,
         alignItems: 'center',
+        borderRadius: 5,
         "@media (max-width: 900px)": {
             padding: "25px 0px",
         }
@@ -206,5 +209,5 @@ export const useStyles = makeStyles({ name: "contact" })(({ palette }) => ({
         "@media (max-width: 900px)": {
             flexDirection: "column-reverse",
         }
-    }
+    },
 }));

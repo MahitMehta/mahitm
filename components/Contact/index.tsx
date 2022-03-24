@@ -13,6 +13,13 @@ import axios from "axios";
 const Portrait = dynamic(() => import("../Portrait"), { ssr: false });
 
 const FORM_ID = "ccf9a9b8-558c-4c05-abb8-1206f9418c03";
+const ACCEPTED_FILE_TYPES = `
+    .pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx,
+    .key, .pages, .numbers, .psd, .ai, .eps, .epub, 
+    .mobi, .azw, .tar, .zip, .rar, .7z, .png, .jpg, .jpeg, 
+    .tiff, .tif, .gif, .webp, .scm, .mp3, .mp4, .flv, .avi, 
+    .webm, .mov, .html, .htm, .xml, .sketch, .txt, .rtf
+`
 
 interface IFormData {
     fullName?: string; 
@@ -92,6 +99,29 @@ const Contact = () => {
         }
     }, [ formData.files ]);
 
+    const [ dragging, setDragging ] = useState(false);
+
+    const handleDrag = (e:React.DragEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setDragging(true);
+    };
+
+    const handleDragLeave = (e:React.DragEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setDragging(false);
+    }
+
+    const handleDrop = (e:React.DragEvent<HTMLFormElement>) => {
+        console.log('hello');
+        e.preventDefault();
+        e.stopPropagation();
+
+        setDragging(false);
+
+        const files = Array.from(e?.dataTransfer?.files).filter((file) => !!file);
+        setFormData({ ...formData, files });
+    };
+
     return (
         <section id="contact" className={classes.container}>
             <div className={classes.messageContainer}>
@@ -109,20 +139,29 @@ const Contact = () => {
                             <Portrait />
                         </div>
                     </div>
-                    <form className={classes.form}>
+                    <form 
+                        onDrop={handleDrop}
+                        onDragOver={handleDrag}
+                        onDragLeave={handleDragLeave}
+                        className={classes.form}
+                        style={{ 
+                            background: dragging ? "rgba(0, 0, 0, 0.25)" : "transparent" 
+                        }}
+                        >
                         <div className={classes.formFields}>
                             <InputField 
                                 className={classes.input}
                                 id="client-full-name"
                                 label="Full Name"
-                                value={formData.fullName}
+                                value={formData.fullName || ""}
                                 placeholder="Elon Musk"
                                 onChange={updateFormData("fullName")}
                             />
                             <InputField 
                                 className={classes.input}
                                 label="Email"
-                                value={formData.email}
+                                type={"email"}
+                                value={formData.email || ""}
                                 id="client-email"
                                 placeholder="elon.musk@tesla.com"
                                 onChange={updateFormData("email")}
@@ -131,7 +170,7 @@ const Contact = () => {
                                 className={classes.input}
                                 label="Message"
                                 id="client-message"
-                                value={formData.message}
+                                value={formData.message || ""}
                                 style={{ minHeight: 100 }}
                                 placeholder="Message For Me..."
                                 onChange={updateFormData("message")}
@@ -146,15 +185,11 @@ const Contact = () => {
                                 </label>
                                 <input 
                                     className={classes.fileInput}
-                                    name="attach-files" 
-                                    id="attach-files"
+                                    name="contact-attach-files" 
+                                    id="contact-attach-files"
                                     multiple 
                                     type="file"
-                                    accept=".pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx,
-                                            .key, .pages, .numbers, .psd, .ai, .eps, .epub, 
-                                            .mobi, .azw, .tar, .zip, .rar, .7z, .png, .jpg, .jpeg, 
-                                            .tiff, .tif, .gif, .webp, .scm, .mp3, .mp4, .flv, .avi, 
-                                            .webm, .mov, .html, .htm, .xml, .sketch, .txt, .rtf"
+                                    accept={ACCEPTED_FILE_TYPES}
                                     onChange={handleFileChange} 
                                 />
                             </div>
