@@ -78,6 +78,8 @@ export const useStyles = makeStyles()(theme => ({
         color: "#fff",
     },
     contentSection: {
+        maxWidth: "100vw",
+        overflow: "hidden",
         pointerEvents: "none",
         transition: '1150ms ease',
         opacity: 0,
