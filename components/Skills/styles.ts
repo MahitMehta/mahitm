@@ -74,7 +74,7 @@ export const useStyles = makeStyles()(({ palette }) => ({
             transform: "rotateZ(10deg) scale(1.1)",
             zIndex: 1,
         },
-        "&:hover $image": {
+        "&:hover img": {
             filter: "grayscale(0%)",
             transform: "scale(1.1)",
         }
