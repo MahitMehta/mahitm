@@ -46,7 +46,8 @@ const SkillCard : React.FC<ISkillCardProps> = ({ skill }) => {
             <div className={classes.picture}>
                 { currentSkill?.src && (
                     <Image 
-                        quality={100}
+                        loading="eager"
+                        quality={75}
                         objectFit="contain" 
                         className={classes.image} 
                         layout="fill" 

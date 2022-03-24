@@ -13,6 +13,11 @@ const Cursor = () => {
 
     const { width } = useDimensions();
 
+    const isMobile = useMemo(() => {
+        return width < 750; 
+    }, [ width ]);
+
+
     const handleMouseMove = (e:MouseEvent) => {
         if (!cursorRef.current) return; 
         const { clientX, clientY } = e;
@@ -38,17 +43,26 @@ const Cursor = () => {
 
     useEffect(() => {
         const elements = document.querySelectorAll("a, button"); 
-        elements.forEach((ele) => {
-            ele.addEventListener("mouseover", handleMouseOver);
-            ele.addEventListener("mouseleave", handleMouseLeave)
-        });
+        
+        if (!isMobile) {
+            elements.forEach((ele) => {
+                ele.addEventListener("mouseover", handleMouseOver);
+                ele.addEventListener("mouseleave", handleMouseLeave)
+            });
+        } else {
+            elements.forEach((ele) => {
+                ele.removeEventListener("mouseover", handleMouseOver);
+                ele.removeEventListener("mouseleave", handleMouseLeave);
+            });
+        }
+
         return () => {
             elements.forEach((ele) => {
                 ele.removeEventListener("mouseover", handleMouseOver);
                 ele.removeEventListener("mouseleave", handleMouseLeave);
             });
         };
-    }, []);
+    }, [ isMobile ]);
 
     const requestRef = useRef<number | undefined>();
 
@@ -64,20 +78,21 @@ const Cursor = () => {
 
     useEffect(() => { requestRef.current = requestAnimationFrame(updateMousePosition) }, [ updateMousePosition ]);
 
-    const isMobile = useMemo(() => {
-        return width < 750; 
-    }, [ width ]);
-
+   
     useEffect(() => {
         document.body.style.cursor = isMobile ? "initial" : "none";
     }, [ isMobile ]);
 
     useEffect(() => {
-        window.addEventListener('mousemove', handleMouseMove);
+        if (!isMobile) {
+            window.addEventListener('mousemove', handleMouseMove);
+        } else {
+            window.removeEventListener("mousemove", handleMouseMove) 
+        }
         return () => { 
             window.removeEventListener("mousemove", handleMouseMove) 
         };
-    }, [ cursorRef ]);
+    }, [ cursorRef, isMobile ]);
 
     return (
         <div 

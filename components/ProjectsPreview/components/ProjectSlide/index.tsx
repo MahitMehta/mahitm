@@ -45,7 +45,7 @@ const ProjectSlide : React.FC<IProjectSlideProps> = ({ selected, index, setSlide
         })
     }, [ slideRef ]);
 
-    const { width } = useDimensions();
+    const { width } = useDimensions({ enableDebounce: true });
     const pictureClampedWidth = useSizeClamp({ minSize: 300, size: width * 0.55, maxSize: width * 0.55 });
 
     const isMobile = useMemo(() => {
