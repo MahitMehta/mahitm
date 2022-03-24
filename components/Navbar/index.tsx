@@ -11,7 +11,7 @@ interface INavItem extends React.HTMLProps<HTMLAnchorElement> {
 }
 
 const NavItem : React.FC<INavItem> = ({ label, route, href, ...props }) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
     const functionLeftRef = useRef<HTMLSpanElement | null>(null);
     const functionRightRef = useRef<HTMLSpanElement | null>(null);
 
@@ -59,7 +59,7 @@ const NavItem : React.FC<INavItem> = ({ label, route, href, ...props }) => {
 }
 
 const Navbar = () => {
-    const classes = useStyles();
+    const { classes } = useStyles();
 
     return (
         <nav className={classes.nav}>

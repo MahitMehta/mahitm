@@ -6,7 +6,6 @@ import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import gsap from "gsap";
 import { CharacterReveal, Reveal } from "react-text-reveal";
 import clsx from "clsx";
-import Image from "next/image";
 import NextImage from "../../../NextImage";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -20,7 +19,7 @@ interface IProjectSlideProps {
 }
 
 const ProjectSlide : React.FC<IProjectSlideProps> = ({ selected, index, setSlide, project }) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
 
     const setSlideWrapper = (index:number) => {
         setSlide(index);

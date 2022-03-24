@@ -1,6 +1,6 @@
-import { makeStyles } from "@mui/styles";
+import { makeStyles } from 'tss-react/mui';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles()((theme) => ({
     cursor: {
         transition: `background 200ms ease, box-shadow 250ms ease`,
         width: 20,

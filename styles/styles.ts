@@ -1,6 +1,6 @@
-import { makeStyles } from "@mui/styles";
+import { makeStyles } from 'tss-react/mui';
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles()(theme => ({
     container: {
         display: 'flex',
         overflowY: 'hidden',
@@ -25,10 +25,7 @@ export const useStyles = makeStyles(theme => ({
         }
     },
     text: {
-        fontSize: "clamp(4rem, 6.5vw, 6.5vw)",
-        // color: 'transparent',
-        fontFamily: 'Helvetica Neue !important',
-      
+        fontSize: "clamp(4rem, 6.5vw, 6.5vw)",      
         fontWeight: 500,
         color: "#fff",
         mixBlendMode: "multiply",

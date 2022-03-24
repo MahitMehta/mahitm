@@ -1,6 +1,6 @@
 import React, { useRef, Suspense, useState, useCallback, useEffect, useMemo } from 'react';
 import { useProgress, useGLTF } from "@react-three/drei";
-import { useFrame, Canvas, useLoader } from "@react-three/fiber"
+import { Canvas, useLoader } from "@react-three/fiber"
 import { OrbitControls } from "@react-three/drei";
 import gsap from "gsap";
 import { useStyles } from './styles';
@@ -83,7 +83,7 @@ const MeshWorld : React.FC<{ terminalAnimationComplete : boolean }> = ({ termina
 const World = () => {
     const viewRef = useRef<HTMLElement | null>(null);
     const { progress, } = useProgress();
-    const classes = useStyles();
+    const { classes } = useStyles();
     const dispatch = useDispatch();
     const state = useSelector((state:IRootReducer) => state);
     const terminalAnimationComplete = getTerminalAnimationComplete(state);

@@ -9,7 +9,7 @@ interface InputFieldProps<T extends ElementType = "input" | "textarea"> {
 }
 
 const InputField = <T extends ElementType = "input" | "textarea">({ label, id, as, className, ...props } : InputFieldProps<T> & ComponentPropsWithoutRef<T>) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
     const Component = as || "input";
 
     return (

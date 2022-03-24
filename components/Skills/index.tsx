@@ -22,7 +22,7 @@ interface ISkillCardProps {
 }
 
 const SkillCard : React.FC<ISkillCardProps> = ({ skill }) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
     const [ currentSkill, setCurrentSkill ] = useState<ISkill | undefined>(undefined);
     const skillCardRef = useRef<HTMLDivElement | null>(null)
 
@@ -149,7 +149,7 @@ const MAX_CARDS_MOBILE = 6;
 const MAX_CARDS_DESKTOP = 12; 
 
 const Skills = () => {
-    const classes = useStyles();
+    const { classes } = useStyles();
 
     const [ expanded, setExpanded ] = useState(false);
 

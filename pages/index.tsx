@@ -28,7 +28,7 @@ const World = dynamic(() => import("../components/World"), { ssr: false });
 gsap.registerPlugin(ScrollTrigger);
 
 const Home: NextPage = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const worldRef = useRef<HTMLDivElement | null>(null);
   const introRef = useRef<HTMLParagraphElement | null>(null);
   const state = useSelector((state:IRootReducer) => state);

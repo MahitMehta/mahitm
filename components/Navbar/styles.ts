@@ -1,6 +1,6 @@
-import { makeStyles, PaletteColorOptions } from "@mui/styles";
+import { makeStyles } from 'tss-react/mui';
 
-export const useStyles = makeStyles(({ palette }) => ({
+export const useStyles = makeStyles()(({ palette }) => ({
     nav: {
         width: "100vw",
         height: 60,

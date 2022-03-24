@@ -1,6 +1,6 @@
-import { makeStyles } from "@mui/styles";
+import { makeStyles } from 'tss-react/mui';
 
-export const useStyles = makeStyles(({ palette }) => ({
+export const useStyles = makeStyles()(({ palette }) => ({
     label:{
         fontSize: 15,
         color: "#fff",

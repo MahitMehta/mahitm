@@ -1,17 +1,17 @@
 import React, { useMemo, useState } from "react";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faEnvelope, faGlobe, faGlobeAmericas, faMobileAlt, faPaperclip } from "@fortawesome/free-solid-svg-icons";
+import { faPaperclip } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useStyles } from "./styles";
 import SocialButton from "../SocialButton";
-import { faGithub, faInstagram, faLinkedinIn, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
+import { faGithub, faInstagram, faLinkedinIn, faYoutube } from "@fortawesome/free-brands-svg-icons";
 import InputField from "../InputField";
-import Image from "next/image";
 import { useTheme } from "@mui/styles";
 import Button from "../Button";
 import { useMutation } from "@apollo/client";
 import { IContactFormArguments, sendContactFormMutation } from "./mutations/sendContactForm";
-import Portrait from "../Portrait";
+import dynamic from "next/dynamic";
+
+const Portrait = dynamic(() => import("../Portrait"), { ssr: false });
 
 interface IFormData {
     fullName?: string; 
@@ -21,7 +21,7 @@ interface IFormData {
 }
 
 const Contact = () => {
-    const classes = useStyles();
+    const { classes } = useStyles();
     const { palette } = useTheme();
 
     const [ formData, setFormData ] = useState<IFormData>({

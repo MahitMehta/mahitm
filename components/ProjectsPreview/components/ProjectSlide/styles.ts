@@ -1,6 +1,6 @@
-import { makeStyles } from "@mui/styles";
+import { makeStyles } from 'tss-react/mui';
 
-export const useStyles = makeStyles(({ palette }) => ({
+export const useStyles = makeStyles()(({ palette }) => ({
     container: {
         paddingTop: 25,
         minHeight: 500,
@@ -81,6 +81,4 @@ export const useStyles = makeStyles(({ palette }) => ({
     projectTitleContainer: {
         position: "relative"
     }
-}), {
-    classNamePrefix: "featured"
-});
+}));

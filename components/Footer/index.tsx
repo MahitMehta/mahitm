@@ -2,7 +2,7 @@ import React from "react";
 import { useStyles } from "./styles";
 
 const Footer = () => {
-    const classes = useStyles();
+    const { classes } = useStyles();
 
     return (
         <footer className={classes.footer}>

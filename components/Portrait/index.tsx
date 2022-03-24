@@ -27,7 +27,7 @@ class Particle {
     constructor(x:number, y:number, color:string, canvas:HTMLCanvasElement, graphic:HTMLImageElement) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-        this.x = x + this.canvas.width / 2 - graphic.width*2, // Center X
+        this.x = x + this.canvas.width / 2 - graphic.width * 2, // Center X
         this.y = y + this.canvas.height / 2 - graphic.height*2, // Center Y 
         this.size=2; 
         this.color = color; 

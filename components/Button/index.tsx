@@ -10,7 +10,7 @@ interface IButtonProps<T extends ElementType = "button" | "input"> extends Detai
 }
 
 const Button = <T extends ElementType = "button" | "input">({ title, children, as:elementAs, className, style, ...props }: IButtonProps<T> & ComponentPropsWithoutRef<T>) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
 
     const Component = elementAs || "button";
 

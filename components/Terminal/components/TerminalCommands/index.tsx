@@ -1,4 +1,4 @@
-import React, { ReactChild, useCallback, useEffect, useState } from 'react';
+import React, { ReactChild } from 'react';
 import { isComponentSameType } from '../../../../utils/findComponentByType';
 
 interface TerminalCommandsProps extends React.HTMLProps<HTMLDivElement>{

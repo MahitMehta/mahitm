@@ -4,7 +4,7 @@ import useDimensions from "../../hooks/useDimensions";
 import { useStyles } from "./styles";
 
 const Cursor = () => {
-    const classes = useStyles();
+    const { classes } = useStyles();
     const cursorRef = useRef<HTMLDivElement | null>(null);
     const [ coords, setCoords ] = useState({ x: 0, y: 0 });
 

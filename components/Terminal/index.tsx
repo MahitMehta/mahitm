@@ -9,7 +9,7 @@ import { getModelLoadedPercent } from '../../redux/selectors/bootstrap.selectors
 import { setTerminalAnimationComplete } from '../../redux/actions/bootstrap.actions';
 
 const Terminal = () => {
-    const classes = useStyles();
+    const { classes } = useStyles();
     const terminalRef = useRef<HTMLDivElement | null>(null);
     const [ bootstrapCommandComplete, setBootstrapCommandComplete ] = useState(false);
     const [ loadingCommandComplete, setLoadingCommandComplete] = useState(false);

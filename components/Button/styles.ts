@@ -1,6 +1,6 @@
-import { makeStyles } from "@mui/styles";
+import { makeStyles } from 'tss-react/mui';
 
-export const useStyles = makeStyles(({ palette }) => ({
+export const useStyles = makeStyles()(({ palette }) => ({
     container: {
         padding: 15,
         borderRadius: 5,
@@ -18,6 +18,4 @@ export const useStyles = makeStyles(({ palette }) => ({
                         0px 0px 15px 0px rgba(0, 0, 0, 0.35)`,
         }
     }
-}), {
-    classNamePrefix: "button"
-});
+}));

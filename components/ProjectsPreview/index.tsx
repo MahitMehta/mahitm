@@ -5,7 +5,6 @@ import React, { useEffect, useRef, useState } from "react";
 import ProjectSlide from "./components/ProjectSlide";
 import { useStyles } from "./styles";
 import gsap from "gsap";
-import { useRouter } from "next/router";
 import { useTheme } from "@mui/styles";
 import Chest from "../Chest";
 import { getCloudinaryURL } from "../../utils/getCloudinaryURL";
@@ -39,8 +38,7 @@ const projects = [
 ]
 
 const ProjectsPreview : React.FC<{}> = () => {
-    const classes = useStyles();
-    const router = useRouter();
+    const { classes } = useStyles();
 
     const [ dotSelected, setDotSelected ] = useState<number | undefined>(undefined);
     const dotsRef = useRef<HTMLDivElement | null>(null);

@@ -1,6 +1,6 @@
-import { makeStyles } from "@mui/styles";
+import { makeStyles } from 'tss-react/mui';
 
-export const useStyles = makeStyles(({ palette }) => ({
+export const useStyles = makeStyles()(({ palette }) => ({
     container: {
         display: "flex",
         padding: 25,
@@ -205,6 +205,4 @@ export const useStyles = makeStyles(({ palette }) => ({
             flexDirection: "column-reverse",
         }
     }
-}), {
-    classNamePrefix: "contact",
-});
+}));

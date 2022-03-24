@@ -7,13 +7,24 @@ import App from 'next/app';
 import ThemeProvider from "../providers/ThemeProvider";
 import { NextSeo } from 'next-seo';
 import ApolloClientProvider from '../providers/ApolloClientProvider';
+import createCache from '@emotion/cache';
+import { CacheProvider, EmotionCache } from "@emotion/react";
 
-export default class PortfolioApp extends App {
+let muiCache: EmotionCache | undefined = undefined;
+
+export const createMuiCache = () =>
+    muiCache = createCache({
+        "key": "mui",
+        "prepend": true
+    });
+     
+
+export default class PortfolioApp extends App<{}> {
   public render() {
     const { Component, pageProps } = this.props;
 
     return (
-      <>
+      <CacheProvider value={muiCache ?? createMuiCache()}>
         <Head>
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
@@ -52,15 +63,15 @@ export default class PortfolioApp extends App {
             }}
         />
         <React.StrictMode>
-          <ReduxProvider store={store}>
-            <ApolloClientProvider>
-              <ThemeProvider>
-                { typeof window !== "undefined" ? <Component {...pageProps} /> : <></>}
-              </ThemeProvider>
-            </ApolloClientProvider>
-          </ReduxProvider>
+            <ReduxProvider store={store}>
+              <ApolloClientProvider>
+                <ThemeProvider>
+                  <Component {...pageProps} /> 
+                </ThemeProvider>
+              </ApolloClientProvider>
+            </ReduxProvider>
         </React.StrictMode>
-      </>
+      </CacheProvider>
     )
   }
 }

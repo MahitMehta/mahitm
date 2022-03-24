@@ -14,7 +14,7 @@ interface SocialButtonProps {
 }
 
 const SocialButton : React.FC<SocialButtonProps> = ({ icon, link, style, className }) => {
-    const classes = useStyles();
+    const { classes } = useStyles();
 
     return (
         <Link href={link ? link : "/" } passHref>

@@ -1,6 +1,6 @@
-import { makeStyles } from "@mui/styles";
+import { makeStyles } from 'tss-react/mui';
 
-export const useStyles = makeStyles(({ palette }) => ({
+export const useStyles = makeStyles()(({ palette }) => ({
     container: {
         minHeight: "100vh",
         padding: 25,
@@ -90,6 +90,4 @@ export const useStyles = makeStyles(({ palette }) => ({
         opacity: 1,
         pointerEvents: "initial",
     },
-}), { 
-    classNamePrefix: "featured"
-});
+}));

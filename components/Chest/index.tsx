@@ -54,7 +54,7 @@ const Chest = () => {
    
     const viewRef = useRef<HTMLElement | null>(null);
     const { progress, } = useProgress();
-    const classes = useStyles();
+    const { classes } = useStyles();
 
     const { width } = useDimensions();
 
