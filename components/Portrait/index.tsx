@@ -24,9 +24,9 @@ class Particle {
     baseY:number; 
     density:number; 
 
-    constructor(x:number, y:number, color:string, canvas:HTMLCanvasElement, graphic:HTMLImageElement) {
+    constructor(x:number, y:number, color:string, canvas:HTMLCanvasElement, graphic:HTMLImageElement, ctx:CanvasRenderingContext2D) {
         this.canvas = canvas;
-        this.ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+        this.ctx = ctx;
         this.x = x + this.canvas.width / 2 - graphic.width * 2, // Center X
         this.y = y + this.canvas.height / 2 - graphic.height*2, // Center Y 
         this.size=2; 
@@ -102,7 +102,7 @@ const Portrait : React.FC<{}> = () => {
         return img; 
     }, []);
 
-    const init = useCallback(( data ) => {
+    const init = useCallback(( data, ctx ) => {
         const canvas = canvasRef.current; 
         if (!canvas) return; 
         particleArray.current = [];
@@ -118,17 +118,14 @@ const Portrait : React.FC<{}> = () => {
                     let bVal = data.data[(y * 4 * data.width) + (x * 4) + 2];
                         
                     let color= `rgb(${rVal}, ${gVal},${bVal})`;
-                    particleArray.current.push(new Particle(positionX * 4, positionY * 4, color, canvas, graphic));
+                    particleArray.current.push(new Particle(positionX * 4, positionY * 4, color, canvas, graphic, ctx));
                 }
             }
         }
     }, []);
 
-    const animate = useCallback(() => {
-        const canvas = canvasRef.current; 
-        const ctx = canvas?.getContext("2d"); 
-
-        requestAnimationFrame(animate);
+    const animate = useCallback((ctx, _) => {
+        requestAnimationFrame(animate.bind(undefined, ctx));
         if (isNull(ctx) || ctx === undefined || !cursor.current) return; 
 
         ctx.fillStyle='rgba(0,0,0,0.05)';
@@ -150,8 +147,8 @@ const Portrait : React.FC<{}> = () => {
         const data = ctx.getImageData(0,0, width,height);
         ctx.clearRect(0,0, canvas.width, canvas.height);
 
-        init(data);
-        animate();
+        init(data, ctx);
+        animate(ctx, undefined);
 
     }, [ graphic, canvasRef ]);
 
