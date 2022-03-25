@@ -15,7 +15,7 @@ import Image from "next/image";
 const Portrait = dynamic(() => import("../Portrait"), { ssr: false });
 
 const FORM_ID = "ccf9a9b8-558c-4c05-abb8-1206f9418c03";
-const ACCEPTED_FILE_TYPES = `.pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx, .key, .pages, .numbers, .psd, .ai, .eps, .epub, .mobi, .azw, .tar, .zip, .rar, .7z, .png, .jpg, .jpeg, .tiff, .tif, .gif, .webp, .scm, .mp3, .mp4, .flv, .avi, .webm, .mov, .html, .htm, .xml, .sketch, .txt, .rtf`;
+const ACCEPTED_FILE_TYPES = [ "pdf", "doc", "docx", "ppt", "pptx", "xls", "xlsx", "key", "pages", "numbers", "psd", "ai", "eps", "epub", "mobi", "azw", "tar", "zip", "rar", "7z", "png", "jpg", "jpeg", "tiff", "tif", "gif", "webp", "scm", "mp3", "mp4", "flv", "avi", "webm", "mov", "html", "htm", "xml", "sketch", "txt", "rtf"]
 
 interface IFormData {
     fullName?: string; 
@@ -32,7 +32,10 @@ const Contact = () => {
         files: [],
     });
 
+    const [ errorMessage, setErrorMessage ] = useState("");
+
     const updateFormData = (key:keyof IFormData) => (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setErrorMessage("");
         setFormData({ ...formData, [ key ]: e.target.value });
     };
 
@@ -44,7 +47,10 @@ const Contact = () => {
         e.stopPropagation();
         e.preventDefault();
         
-        if (!formData.fullName || !formData.message || !formData.email) return; 
+        if (!formData.fullName || !formData.message || !formData.email) {
+            setErrorMessage("Please fill out all of the Fields.");
+            return; 
+        }
 
         const body = new FormData();
 
@@ -116,7 +122,14 @@ const Contact = () => {
 
         setDragging(false);
 
-        const files = Array.from(e?.dataTransfer?.files).filter((file) => !!file);
+        const unfilteredFiles = Array.from(e?.dataTransfer?.files); 
+        const files = unfilteredFiles.filter((file) => {
+            const validType = !!file && ACCEPTED_FILE_TYPES.find((type) => file.type.endsWith(type));
+            const fileTypeSections = file.type.split("/"); 
+            const fileType = fileTypeSections[fileTypeSections.length - 1].toUpperCase();
+            if (!validType) setErrorMessage(`Invalid File Type: ${fileType}`);
+            return validType; 
+        });
         setFormData({ ...formData, files });
     };
 
@@ -221,11 +234,14 @@ const Contact = () => {
                                     id="contact-attach-files"
                                     multiple 
                                     type="file"
-                                    accept={ACCEPTED_FILE_TYPES}
+                                    accept={ACCEPTED_FILE_TYPES.map(type => `.${type}`).join(", ")}
                                     onChange={handleFileChange} 
                                 />
                             </div>
                     </div>
+                    { errorMessage && (
+                        <p className="my-4 text-red-500 text-sm">{ errorMessage }</p>
+                    )}
                     <Button 
                         disabled={sendingNote} 
                         loading={sendingNote} 
