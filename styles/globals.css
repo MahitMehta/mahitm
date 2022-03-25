@@ -1,6 +1,5 @@
-/* @tailwind base;
 @tailwind components;
-@tailwind utilities; */
+@tailwind utilities;
 
 *, 
 *::before,
@@ -12,7 +11,7 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, "roboto", BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: -apple-system, "roboto", BlinkMacSystemFont, "Readex Pro", 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -9,17 +9,13 @@ import { useTheme } from "@mui/styles";
 import Button from "../Button";
 import dynamic from "next/dynamic";
 import axios from "axios";
+import Modal from "../Modal";
+import Image from "next/image";
 
 const Portrait = dynamic(() => import("../Portrait"), { ssr: false });
 
 const FORM_ID = "ccf9a9b8-558c-4c05-abb8-1206f9418c03";
-const ACCEPTED_FILE_TYPES = `
-    .pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx,
-    .key, .pages, .numbers, .psd, .ai, .eps, .epub, 
-    .mobi, .azw, .tar, .zip, .rar, .7z, .png, .jpg, .jpeg, 
-    .tiff, .tif, .gif, .webp, .scm, .mp3, .mp4, .flv, .avi, 
-    .webm, .mov, .html, .htm, .xml, .sketch, .txt, .rtf
-`
+const ACCEPTED_FILE_TYPES = `.pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx, .key, .pages, .numbers, .psd, .ai, .eps, .epub, .mobi, .azw, .tar, .zip, .rar, .7z, .png, .jpg, .jpeg, .tiff, .tif, .gif, .webp, .scm, .mp3, .mp4, .flv, .avi, .webm, .mov, .html, .htm, .xml, .sketch, .txt, .rtf`;
 
 interface IFormData {
     fullName?: string; 
@@ -41,6 +37,8 @@ const Contact = () => {
     };
 
     const [ sendingNote, setSendingNote ] = useState(false);
+    const [ successModalOpen, setSuccessModalOpen ] = useState(false);
+    const [ errorModalOpen, setErrorModalOpen ] = useState(false);
 
     const handleSubmit = (e:any) => {
         e.stopPropagation();
@@ -67,10 +65,11 @@ const Contact = () => {
             headers: { 
                 "Content-Type": "multipart/form-data" 
             },
-        }).then((res) => {
-   
+        }).then(() => {
+            setFormData({ files: [] });
+            setSuccessModalOpen(true);
         }).catch(() => {
-            console.log("Failed to Send Message");
+            setErrorModalOpen(true);
         }).finally(() => {
             setSendingNote(false);
         });
@@ -123,6 +122,40 @@ const Contact = () => {
 
     return (
         <section id="contact" className={classes.container}>
+            <Modal title="Message Sent." open={successModalOpen} setOpen={setSuccessModalOpen}>
+                <div className="p-4 max-w-[350px] flex flex-col items-center">
+                    <Image 
+                        objectFit="contain"
+                        src="/svg/sent.svg"
+                        width={275}
+                        height={275}
+                    />
+                    <p style={{ color:"rgba(255, 255, 255, 0.5)"}} className="text-center my-4">
+                        I have recieved your form and I'll get back to you as soon as possible!
+                    </p>
+                </div>
+            </Modal>
+            <Modal title="Whoops. Message Failed." open={errorModalOpen} setOpen={setErrorModalOpen}>
+                <div className="p-4 max-w-[350px] flex flex-col items-center">
+                    <Image 
+                        objectFit="contain"
+                        src="/svg/error.svg"
+                        width={275}
+                        height={275}
+                    />
+                    <p style={{ color:"rgba(255, 255, 255, 0.5)"}} className="text-center my-4">
+                        Please try again in a few minutes or email me at&nbsp;
+                        <a 
+                            rel="noreferrer noopener"
+                            target={"_blank"}
+                            style={{ color:"rgba(255, 255, 255, 0.5)"}} 
+                            className="underline"
+                            href="mailto:contact@mahitm.com?subject=Message%20for%20Mahit">
+                                contact@mahitm.com
+                        </a>.
+                    </p>
+                </div>
+            </Modal>
             <div className={classes.messageContainer}>
                 <h1 className={classes.messagingHeader}>
                     Let&apos;s&nbsp;
