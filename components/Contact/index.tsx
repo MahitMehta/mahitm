@@ -144,7 +144,7 @@ const Contact = () => {
                         height={275}
                     />
                     <p style={{ color:"rgba(255, 255, 255, 0.5)"}} className="text-center my-4">
-                        I have recieved your form and I'll get back to you as soon as possible!
+                        I have recieved your form and I&apos;ll get back to you as soon as possible!
                     </p>
                 </div>
             </Modal>
