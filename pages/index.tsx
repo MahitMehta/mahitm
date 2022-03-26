@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import clsx from 'clsx';
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
@@ -21,6 +21,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/router';
 import { useTheme } from '@mui/styles';
+import { getCloudinaryURL } from '../utils/getCloudinaryURL';
 
 const Cursor = dynamic(() => import("../components/Cursor"), { ssr: false });
 const World = dynamic(() => import("../components/Desk"), { ssr: false });
@@ -79,10 +80,18 @@ const Home: NextPage = () => {
     });
   };
 
+  const selfPortraitURL = useMemo(() => getCloudinaryURL("self_portrait_v3.png", { 
+    resize: {
+        type: 'scale',
+        width: 100,
+    }
+    }), []);
+
   return (
     <>
         <Head>
             <title>About | Mahit&apos;s Portfolio</title>
+            <link rel="preload" href={selfPortraitURL} crossOrigin="anonymous" as="image" type="image/avif" />
         </Head>
         <Cursor />
         <div className={classes.container}>

@@ -1,5 +1,6 @@
 import { isNull } from "lodash";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import useDimensions from "../../hooks/useDimensions";
 import { getCloudinaryURL } from "../../utils/getCloudinaryURL";
 
 const PARTICLE_SPEED = 100; 
@@ -103,6 +104,7 @@ const Portrait : React.FC<{}> = () => {
     }, []);
 
     const init = useCallback(( data, ctx ) => {
+        console.log("init particles", data, graphic);
         const canvas = canvasRef.current; 
         if (!canvas) return; 
         particleArray.current = [];
@@ -196,17 +198,23 @@ const Portrait : React.FC<{}> = () => {
 
     useEffect(() => { requestRef.current = requestAnimationFrame(updateMousePosition) }, [ updateMousePosition ]);
 
-    useEffect(() => {
+    const ctx = useMemo(() => {
         if (!canvasRef.current) return; 
-
         const ctx = canvasRef.current?.getContext("2d");
+        return ctx; 
+    }, [ canvasRef.current ]);
+
+    const { width, height } = useDimensions({ enableDebounce: true });
+
+    useEffect(() => {
+        if (!canvasRef.current || !ctx) return; 
 
         graphic.onload = () => {
             ctx?.drawImage(graphic, 0, 0);
             drawGraphic(ctx);
         };
 
-    }, [ canvasRef, graphic ]);
+    }, [ canvasRef, graphic, width, height, ctx ]);
 
     return (
         <canvas  height={500} width={350} ref={canvasRef}></canvas>
