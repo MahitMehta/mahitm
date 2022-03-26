@@ -207,17 +207,12 @@ const Portrait : React.FC<{}> = () => {
     const { width, height } = useDimensions({ enableDebounce: true });
 
     useEffect(() => {
-        console.log(canvasRef.current, ctx);
         if (!canvasRef.current || !ctx) return; 
-
-        console.log("passed validation");
         if (graphic.complete) {
-            console.log("complete");
             ctx?.drawImage(graphic, 0, 0);
             drawGraphic(ctx);
         } else {
             graphic.onload = () => {
-                console.log("loaded");
                 ctx?.drawImage(graphic, 0, 0);
                 drawGraphic(ctx);
             };
