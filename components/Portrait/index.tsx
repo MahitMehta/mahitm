@@ -27,12 +27,12 @@ class Particle {
     constructor(x:number, y:number, color:string, canvas:HTMLCanvasElement, graphic:HTMLImageElement, ctx:CanvasRenderingContext2D) {
         this.canvas = canvas;
         this.ctx = ctx;
-        this.x = x + this.canvas.width / 2 - graphic.width * 2, // Center X
-        this.y = y + this.canvas.height / 2 - graphic.height*2, // Center Y 
+        this.x = x + this.canvas.width / 2 - graphic.width * (2 / 1.25), // Center X
+        this.y = y + this.canvas.height / 2 - graphic.height * (2 / 1.25), // Center Y 
         this.size=2; 
         this.color = color; 
-        this.baseX = x + this.canvas.width / 2 - graphic.width*2, // original x
-        this.baseY = y + this.canvas.height / 2 - graphic.height*2, // original y 
+        this.baseX = x + this.canvas.width / 2 - graphic.width * (2 / 1.25), // original x
+        this.baseY = y + this.canvas.height / 2 - graphic.height * (2 / 1.25), // original y 
         this.density = 	(Math.random() * PARTICLE_SPEED)+2;
     }
     public draw() : void {
@@ -89,10 +89,10 @@ const Portrait : React.FC<{}> = () => {
     const cursor = useRef<ICursor>({ x: 0, y: 0, onCanvas: false });
 
     const graphic = useMemo(() : HTMLImageElement => {
-        const src = getCloudinaryURL("self_portrait.png", { 
+        const src = getCloudinaryURL("self_portrait_v3.png", { 
             resize: {
                 type: 'scale',
-                width: 100,
+                width: 125,
             }
         });
         const img = new Image();
@@ -118,7 +118,7 @@ const Portrait : React.FC<{}> = () => {
                     let bVal = data.data[(y * 4 * data.width) + (x * 4) + 2];
                         
                     let color= `rgb(${rVal}, ${gVal},${bVal})`;
-                    particleArray.current.push(new Particle(positionX * 4, positionY * 4, color, canvas, graphic, ctx));
+                    particleArray.current.push(new Particle(positionX * (4 / 1.25), positionY * (4 / 1.25), color, canvas, graphic, ctx));
                 }
             }
         }
@@ -128,7 +128,7 @@ const Portrait : React.FC<{}> = () => {
         requestAnimationFrame(animate.bind(undefined, ctx));
         if (isNull(ctx) || ctx === undefined || !cursor.current) return; 
 
-        ctx.fillStyle='rgba(0,0,0,0.05)';
+        ctx.fillStyle='rgba(0,0,0, 0.25)';
         ctx.fillRect(0,0,innerWidth,innerHeight);
 
         for(let i=0; i < particleArray.current.length; i++){
