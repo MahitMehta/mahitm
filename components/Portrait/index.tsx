@@ -105,7 +105,6 @@ const Portrait : React.FC<{}> = () => {
     }, []);
 
     const init = useCallback(( data, ctx ) => {
-        console.log("init particles", data, graphic);
         const canvas = canvasRef.current; 
         if (!canvas) return; 
         particleArray.current = [];
@@ -141,7 +140,6 @@ const Portrait : React.FC<{}> = () => {
     }, []);
 
     const drawGraphic = useCallback((ctx:CanvasRenderingContext2D | null) => {
-        console.log("drawing", canvasRef.current);
         const canvas = canvasRef.current; 
         if (isNull(ctx) || !canvas) return; 
 
@@ -212,10 +210,18 @@ const Portrait : React.FC<{}> = () => {
         console.log(canvasRef.current, ctx);
         if (!canvasRef.current || !ctx) return; 
 
-        graphic.onload = () => {
+        console.log("passed validation");
+        if (graphic.complete) {
+            console.log("complete");
             ctx?.drawImage(graphic, 0, 0);
             drawGraphic(ctx);
-        };
+        } else {
+            graphic.onload = () => {
+                console.log("loaded");
+                ctx?.drawImage(graphic, 0, 0);
+                drawGraphic(ctx);
+            };
+        }
 
     }, [ canvasRef.current, graphic, width, height, ctx ]);
 
