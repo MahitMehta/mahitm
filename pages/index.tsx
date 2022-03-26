@@ -84,7 +84,8 @@ const Home: NextPage = () => {
     resize: {
         type: 'scale',
         width: 100,
-    }
+    },
+    format: "png"
     }), []);
 
   return (

@@ -94,7 +94,8 @@ const Portrait : React.FC<{}> = () => {
             resize: {
                 type: 'scale',
                 width: 100,
-            }
+            },
+            format: "png"
         });
         const img = new Image();
         img.crossOrigin = "Anonymous";
@@ -124,7 +125,7 @@ const Portrait : React.FC<{}> = () => {
                 }
             }
         }
-    }, []);
+    }, [ canvasRef.current ]);
 
     const animate = useCallback((ctx, _) => {
         requestAnimationFrame(animate.bind(undefined, ctx));
@@ -140,6 +141,7 @@ const Portrait : React.FC<{}> = () => {
     }, []);
 
     const drawGraphic = useCallback((ctx:CanvasRenderingContext2D | null) => {
+        console.log("drawing", canvasRef.current);
         const canvas = canvasRef.current; 
         if (isNull(ctx) || !canvas) return; 
 
