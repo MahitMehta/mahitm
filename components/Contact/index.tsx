@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { faPaperclip } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faPaperclip } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useStyles } from "./styles";
 import SocialButton from "../SocialButton";
@@ -264,8 +264,8 @@ const Contact = () => {
                     />
                     <SocialButton 
                         className={classes.socialButton}
-                        link="https://www.instagram.com/mahit_mehta/"
-                        icon={faInstagram}
+                        link="mailto:contact@mahitm.com"
+                        icon={faEnvelope}
                     />
                     <SocialButton 
                         className={classes.socialButton}

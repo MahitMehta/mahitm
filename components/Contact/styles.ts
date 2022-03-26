@@ -202,6 +202,7 @@ export const useStyles = makeStyles({ name: "contact" })(({ palette }) => ({
         display: "flex",
         justifyContent: "center",
         width: "100%",
+        maxWidth: 1450,
         alignItems: 'center',
         "& > *": {
             //width: "min-content",

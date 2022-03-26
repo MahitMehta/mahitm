@@ -7,6 +7,8 @@ import gsap from "gsap";
 import { CharacterReveal, Reveal } from "react-text-reveal";
 import clsx from "clsx";
 import NextImage from "../../../NextImage";
+import Button from "../../../Button";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -100,8 +102,18 @@ const ProjectSlide : React.FC<IProjectSlideProps> = ({ selected, index, setSlide
                             wordOffsetDelay={200}
                         >
                             { project.caption }
+                            { !!project.link && (
+                                 <Button style={{ marginTop: 20 }}>
+                                    <Link href={project.link} passHref>
+                                        <a target={"_blank"} rel="noopener noreferrer">
+                                            Visit Project.
+                                        </a>
+                                    </Link>
+                                </Button>
+                            )}
                         </Reveal>
                    </p>
+                  
                 </header>
                 <div className={clsx(classes.pictureContainer, selected && classes.featuredPictureSelected)}>
                     <NextImage   

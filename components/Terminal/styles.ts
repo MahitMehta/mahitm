@@ -18,6 +18,17 @@ export const useStyles = makeStyles({ name: "terminal" })(() => ({
         border: "1px solid #333333",
         borderRadius: 5,
         overflow: 'hidden',
+        animation: "zoomTerminal 500ms ease",
+        "@keyframes zoomTerminal": {
+            from: {
+                opacity: 0,
+                transform: "scale(0.5)",
+            },
+            to: {
+                opacity: 1,
+                transform: "scale(1)"
+            }
+        },
         "@media (max-width: 900px)": {
             width: "95vw",
             height: "60vw",

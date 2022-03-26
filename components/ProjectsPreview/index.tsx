@@ -19,19 +19,22 @@ const projects = [
         id: "genesus",
         url: getCloudinaryURL("genesus-showcase.png"),
         title: "Genesus",
-        caption: "Founded Genesus which provides 270+ Students with Fast & Easy Access to Grades."
+        caption: "Founded Genesus which provides 375+ Students with Fast & Easy Access to Grades.",
+        link: "https://gradebook.mahitm.com",
     },
     {
         id: "haul",
         url: getCloudinaryURL("haul-showcase.png"),
         title: "Haul",
         caption: "Worked as a Full Stack JavaScript Developer building an Electronic Logging Device Integration.",
+        link: "https://www.haulwith.us",
     },
     {
         id: "staywise",
         url: getCloudinaryURL("staywise-showcase.png"),
         title: "Stay Wise+Rentals",
-        caption: "Built Marketing Page & Admin Portal to Display Properties of Stay Wise Rentals."
+        caption: "Built Marketing Page & Admin Portal to Display Properties of Stay Wise Rentals.",
+        link: "https://www.staywiserent.com",
     },
 
    

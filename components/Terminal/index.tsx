@@ -36,20 +36,6 @@ const Terminal = () => {
     }, [ loadingCommandComplete, modelLoadedPercentage, terminalRef ]);
 
     useEffect(disappear, [ disappear ]);
-    
-    useEffect(() => {
-        if (!terminalRef.current) return; 
-
-        const animation = gsap
-            .timeline({ repeat: 0 })
-            .fromTo(terminalRef.current, {
-                opacity: 1,
-                scale: 0.5,
-            }, { opacity: 1, scale: 1 })
-        return () => {
-            animation.kill();
-        };
-    }, [ terminalRef ]);
 
     return (
         <div style={bootstrapCommandComplete ? { zIndex: -1 } : {}} className={classes.container}>
