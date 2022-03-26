@@ -209,6 +209,7 @@ const Portrait : React.FC<{}> = () => {
     const { width, height } = useDimensions({ enableDebounce: true });
 
     useEffect(() => {
+        console.log(canvasRef.current, ctx);
         if (!canvasRef.current || !ctx) return; 
 
         graphic.onload = () => {
@@ -216,7 +217,7 @@ const Portrait : React.FC<{}> = () => {
             drawGraphic(ctx);
         };
 
-    }, [ canvasRef, graphic, width, height, ctx ]);
+    }, [ canvasRef.current, graphic, width, height, ctx ]);
 
     return (
         <canvas  height={500} width={350} ref={canvasRef}></canvas>
