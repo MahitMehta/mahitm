@@ -80,66 +80,66 @@ const Home: NextPage = () => {
     });
   };
 
-  const selfPortraitURL = useMemo(() => getCloudinaryURL("self_portrait_v3.png", { 
-    resize: {
-        type: 'scale',
-        width: 100,
-    },
-    format: "png"
+    const selfPortraitURL = useMemo(() => getCloudinaryURL("self_portrait_v3.png", { 
+        resize: {
+            type: 'scale',
+            width: 100,
+        },
+        format: "png"
     }), []);
 
-  return (
-    <>
-        <Head>
-            <title>About | Mahit&apos;s Portfolio</title>
-            <link rel="preload" href={selfPortraitURL} crossOrigin="anonymous" as="image" type="image/avif" />
-        </Head>
-        <Cursor />
-        <div className={classes.container}>
-            <div className={classes.bg}></div>
-            <Terminal />
-            <main className={clsx(classes.contentSection, terminalAnimationComplete && classes.contentSectionDisplay)}>
-                <div ref={worldRef} className={classes.world}>
-                    <World />
-                </div>
-                <div className={classes.content} style={{ zIndex: 1, pointerEvents: 'none' }}>
-                    <header className={classes.header}>
-                        <p className={classes.greeting}>👋 Hello, I&apos;m Mahit.</p>
-                        <h1 className={classes.text}>Developer</h1>
-                        <h1 className={classes.text}>& Designer</h1>
-                        <h1 className={classes.headerCaption}>
-                            Upcoming Web Architect.
-                        </h1>
-                        <Button onClick={handleContact} style={{ 
-                            marginTop: 25,
-                            backgroundColor: "rgba(0, 0, 0, 0.5)",
-                        }}>
-                            <FontAwesomeIcon icon={faPhoneAlt}/>
-                            <span style={{ marginLeft: 10 }}>Contact</span>
-                        </Button>
-                    </header>
-                    <div className={classes.footer}>
-                        <span ref={pointerRef} >
-                            <Image 
-                                width={30} 
-                                height={30}
-                                src="/svg/scroll-down.svg"
-                                alt='mouse-icon'
-                            />
-                        </span>
+    return (
+        <>
+            <Head>
+                <title>About | Mahit&apos;s Portfolio</title>
+                <link rel="preload" href={selfPortraitURL} crossOrigin="anonymous" as="image" type="image/avif" />
+            </Head>
+            <Cursor />
+            <div className={classes.container}>
+                <div className={classes.bg}></div>
+                <Terminal />
+                <main className={clsx(classes.contentSection, terminalAnimationComplete && classes.contentSectionDisplay)}>
+                    <div ref={worldRef} className={classes.world}>
+                        <World />
                     </div>
-                </div> 
-        
-                <span ref={introRef}></span>
-                <ProjectsPreview />
-                <Skills />
-                <Contact/>
-                <Footer />
-            </main>
-            <Navbar />
-        </div>
-    </>
-  )
+                    <div className={classes.content} style={{ zIndex: 1, pointerEvents: 'none' }}>
+                        <header className={classes.header}>
+                            <p className={classes.greeting}>👋 Hello, I&apos;m Mahit.</p>
+                            <h1 className={classes.text}>Developer</h1>
+                            <h1 className={classes.text}>& Designer</h1>
+                            <h1 className={classes.headerCaption}>
+                                Upcoming Web Architect.
+                            </h1>
+                            <Button onClick={handleContact} style={{ 
+                                marginTop: 25,
+                                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                            }}>
+                                <FontAwesomeIcon icon={faPhoneAlt}/>
+                                <span style={{ marginLeft: 10 }}>Contact</span>
+                            </Button>
+                        </header>
+                        <div className={classes.footer}>
+                            <span ref={pointerRef} >
+                                <Image 
+                                    width={30} 
+                                    height={30}
+                                    src="/svg/scroll-down.svg"
+                                    alt='mouse-icon'
+                                />
+                            </span>
+                        </div>
+                    </div> 
+            
+                    <span ref={introRef}></span>
+                    <ProjectsPreview />
+                    <Skills />
+                    <Contact/>
+                    <Footer />
+                </main>
+                <Navbar />
+            </div>
+        </>
+    )
 }
 
 export default Home

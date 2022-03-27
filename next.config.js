@@ -9,7 +9,7 @@
         'res.cloudinary.com'
       ],
     },
-  }
+} 
   
   module.exports = nextConfig
   
