@@ -89,6 +89,9 @@ const Portrait : React.FC<{}> = () => {
     const assistantCoords = useRef({ x: 0, y: 0 });
     const cursor = useRef<ICursor>({ x: 0, y: 0, onCanvas: false });
 
+    const portraitRequestAnimationFrameId = useRef<number>(0);
+    const cursorRequestAnimationFrameId = useRef<number>(0);
+
     const graphic = useMemo(() : HTMLImageElement => {
         const src = getCloudinaryURL("self_portrait_v3.png", { 
             resize: {
@@ -127,7 +130,8 @@ const Portrait : React.FC<{}> = () => {
     }, [ canvasRef.current ]);
 
     const animate = useCallback((ctx, _) => {
-        requestAnimationFrame(animate.bind(undefined, ctx));
+        const requestId = requestAnimationFrame(animate.bind(undefined, ctx));
+        portraitRequestAnimationFrameId.current = requestId;
 
         if (isNull(ctx) || ctx === undefined || !cursor.current) return; 
 
@@ -137,9 +141,11 @@ const Portrait : React.FC<{}> = () => {
         for(let i=0; i < particleArray.current.length; i++){
             particleArray.current[i].update(cursor.current);
         }
-    }, []);
+    }, [ portraitRequestAnimationFrameId ]);
 
     const drawGraphic = useCallback((ctx:CanvasRenderingContext2D | null) => {
+        if (!!portraitRequestAnimationFrameId.current) window.cancelAnimationFrame(portraitRequestAnimationFrameId.current);
+
         const canvas = canvasRef.current; 
         if (isNull(ctx) || !canvas) return; 
 
@@ -186,26 +192,22 @@ const Portrait : React.FC<{}> = () => {
         }
     }, [ canvasRef ]);
 
-    const requestRef = useRef<number | undefined>();
-
     const updateMousePosition = useCallback(() => {
         mouseCoords.x += (assistantCoords.current.x - mouseCoords.x) / 8;
         mouseCoords.y += (assistantCoords.current.y - mouseCoords.y) / 8;
 
         cursor.current = { ...cursor.current, x: mouseCoords.x, y: mouseCoords.y };
         requestAnimationFrame(updateMousePosition);
-    }, [ requestRef ]); // eslint-disable-line
+    }, [ cursorRequestAnimationFrameId ]); // eslint-disable-line
 
-    useEffect(() => { requestRef.current = requestAnimationFrame(updateMousePosition) }, [ updateMousePosition ]);
-
-    const ctx = useMemo(() => {
-        if (!canvasRef.current) return; 
-        const ctx = canvasRef.current?.getContext("2d");
-        return ctx; 
-    }, [ canvasRef.current ]);
+    useEffect(() => { 
+        if (!!cursorRequestAnimationFrameId.current) window.cancelAnimationFrame(cursorRequestAnimationFrameId.current);
+        cursorRequestAnimationFrameId.current = requestAnimationFrame(updateMousePosition) 
+    }, [ updateMousePosition ]);
 
     useEffect(() => {
-        if (!canvasRef.current || !ctx) return; 
+        if (!canvasRef.current) return;
+        const ctx = canvasRef.current?.getContext("2d");
         if (graphic.complete) {
             ctx?.drawImage(graphic, 0, 0);
             drawGraphic(ctx);
@@ -216,7 +218,7 @@ const Portrait : React.FC<{}> = () => {
             };
         }
 
-    }, [ canvasRef.current, graphic, ctx ]);
+    }, [ canvasRef.current, graphic ]);
 
     return (
         <canvas  height={500} width={350} ref={canvasRef}></canvas>
