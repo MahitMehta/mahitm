@@ -175,7 +175,7 @@ const Contact = () => {
                     <span style={{ color: palette.secondary.main }}>Connect.</span>
                 </h1>
                 <span className={classes.headerDivider}></span>
-                <p className={classes.headerCaption}>Leave me a note and let&apos;s callabortate.</p>
+                <p className={classes.headerCaption}>Leave me a note and let&apos;s collaborate.</p>
                 <div className={classes.contentSections}>
                 <div style={{ width: "min-content", height: "100%" }}>
                 </div>

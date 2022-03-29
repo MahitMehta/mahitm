@@ -50,6 +50,7 @@ const MeshDesk : React.FC<{ terminalAnimationComplete : boolean }> = ({ terminal
     return (
         <Suspense fallback={null}>
             <animated.mesh 
+                
                 rotation={[0, -100 * (Math.PI / 180), 0]} 
                 scale={scale} ref= {mesh} 
                 position={[0, -5, 0]}
