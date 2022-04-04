@@ -22,6 +22,7 @@ import { faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/router';
 import { useTheme } from '@mui/styles';
 import { getCloudinaryURL } from '../utils/getCloudinaryURL';
+import Link from 'next/link';
 
 const Cursor = dynamic(() => import("../components/Cursor"), { ssr: false });
 const World = dynamic(() => import("../components/Desk"), { ssr: false });
@@ -110,13 +111,29 @@ const Home: NextPage = () => {
                             <h1 className={classes.headerCaption}>
                                 Upcoming Web Architect.
                             </h1>
-                            <Button onClick={handleContact} style={{ 
-                                marginTop: 25,
-                                backgroundColor: "rgba(0, 0, 0, 0.5)",
-                            }}>
-                                <FontAwesomeIcon icon={faPhoneAlt}/>
-                                <span style={{ marginLeft: 10 }}>Contact</span>
-                            </Button>
+                            <div className='flex items-center space-x-2 mt-7'>
+                                <Button onClick={handleContact} style={{ 
+                                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                                }}>
+                                    <FontAwesomeIcon icon={faPhoneAlt}/>
+                                    <span style={{ marginLeft: 10 }}>Contact</span>
+                                </Button>
+                                <Link href={"https://www.buymeacoffee.com/mahit"} passHref>
+                                    <a target={"_blank"} rel="noopener noreferrer">
+                                        <Button className="w-44 h-12 !p-[2px] relative">
+                                            <div className='relative w-full h-full'>
+                                                <Image  
+                                                    quality={100}
+                                                    className='rounded-sm'
+                                                    objectFit='cover'
+                                                    layout={"fill"}
+                                                    src="/assets/bmc-button.png"
+                                                />
+                                            </div>
+                                        </Button>
+                                    </a>
+                                </Link>
+                            </div>
                         </header>
                         <div className={classes.footer}>
                             <span ref={pointerRef} >
