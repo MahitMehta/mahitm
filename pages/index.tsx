@@ -20,7 +20,6 @@ import Button from '../components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/router';
-import { useTheme } from '@mui/styles';
 import { getCloudinaryURL } from '../utils/getCloudinaryURL';
 import Link from 'next/link';
 
@@ -120,8 +119,9 @@ const Home: NextPage = () => {
                                 </Button>
                                 <Link href={"https://www.buymeacoffee.com/mahit"} passHref>
                                     <a target={"_blank"} rel="noopener noreferrer">
-                                        <Button className="w-44 h-12 !p-[2px] relative">
-                                            <div className='relative w-full h-full'>
+                                        <Button className="w-44 h-12 !p-[4px] relative">
+                                            <div 
+                                                className='relative w-full h-full'>
                                                 <Image  
                                                     quality={100}
                                                     className='rounded-sm'
@@ -146,7 +146,6 @@ const Home: NextPage = () => {
                             </span>
                         </div>
                     </div> 
-            
                     <span ref={introRef}></span>
                     <ProjectsPreview />
                     <Skills />
