@@ -79,9 +79,7 @@ const Navbar = () => {
                     <NavItem 
                         route="resume" 
                         label="resume" 
-                        target='_blank'
-                        rel="noreferrer noopener"
-                        href='https://res.cloudinary.com/mahitm-cdn/image/upload/mahitm/resume.pdf'
+                        href='/resume'
                     />
                 </ul>
                 <SocialButton 
