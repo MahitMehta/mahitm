@@ -44,7 +44,7 @@ const Home: NextPage = () => {
   }, [ terminalAnimationComplete ]);
 
   const handleScrollDown = useCallback(() => {
-      gsap.timeline({
+      const timeline = gsap.timeline({
           repeat: 0,
           scrollTrigger: {
               trigger: introRef.current,
@@ -54,6 +54,10 @@ const Home: NextPage = () => {
       .fromTo(worldRef.current, {
           y: 0, opacity: 1
       }, { y: -150, opacity: 0 });
+
+      return () => {
+        timeline.kill();
+      }
   }, [ worldRef, introRef ]);
 
   useEffect(handleScrollDown, [ handleScrollDown ]);

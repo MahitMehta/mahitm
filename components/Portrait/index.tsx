@@ -1,6 +1,5 @@
 import { isNull } from "lodash";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import useDimensions from "../../hooks/useDimensions";
 import { getCloudinaryURL } from "../../utils/getCloudinaryURL";
 
 const PARTICLE_SPEED = 100; 
@@ -203,6 +202,10 @@ const Portrait : React.FC<{}> = () => {
     useEffect(() => { 
         if (!!cursorRequestAnimationFrameId.current) window.cancelAnimationFrame(cursorRequestAnimationFrameId.current);
         cursorRequestAnimationFrameId.current = requestAnimationFrame(updateMousePosition) 
+
+        return () => {
+            window.cancelAnimationFrame(cursorRequestAnimationFrameId.current);
+        }
     }, [ updateMousePosition ]);
 
     useEffect(() => {
@@ -218,6 +221,9 @@ const Portrait : React.FC<{}> = () => {
             };
         }
 
+        return () => {
+            window.cancelAnimationFrame(portraitRequestAnimationFrameId.current);
+        };
     }, [ canvasRef.current, graphic ]);
 
     return (
