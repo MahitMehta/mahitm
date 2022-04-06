@@ -37,6 +37,10 @@ const Home: NextPage = () => {
 
   useEffect(() => {
       document.body.style.overflowY = terminalAnimationComplete ? "auto" : "hidden";
+
+      return () => {
+        document.body.style.overflowY = "auto";
+      };
   }, [ terminalAnimationComplete ]);
 
   const handleScrollDown = useCallback(() => {

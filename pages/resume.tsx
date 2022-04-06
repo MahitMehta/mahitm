@@ -1,9 +1,11 @@
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import Image from "next/image";
 import React from "react";
-import Cursor from "../components/Cursor";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+
+const Cursor = dynamic(() => import("../components/Cursor"), { ssr: false });
 
 const Resume = () => {
     return (

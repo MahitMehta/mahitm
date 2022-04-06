@@ -65,7 +65,7 @@ const Chest = () => {
     const controlRef = useRef<null | any>(null);
 
     useEffect(() => {
-        gsap.timeline({
+        const timeline = gsap.timeline({
             repeat: 0,
             scrollTrigger: {
                 start: "center 70%",
@@ -89,7 +89,10 @@ const Chest = () => {
                     setZoom(false);
                 }
             }
-        })
+        });
+        return () => {
+            timeline.kill();
+        }
     }, [ viewRef, controlRef ]);
 
     return (

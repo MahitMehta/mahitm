@@ -51,7 +51,7 @@ const ProjectsPreview : React.FC<{}> = () => {
     useEffect(() => {   
         if (!dotsRef.current) return; 
         
-        gsap.timeline({
+        const timeline = gsap.timeline({
             repeat: 0,
             scrollTrigger: {
                 trigger: dotsRef.current,
@@ -62,13 +62,17 @@ const ProjectsPreview : React.FC<{}> = () => {
                     setShowDots(false);
                 }
             }
-        })
+        });
+
+        return () => {
+            timeline.kill();
+        }
     }, [ dotsRef ]);
 
     useEffect(() => {
         if (!projectsPreviewEndRef.current) return;
 
-        gsap.timeline({
+        const timeline = gsap.timeline({
             repeat: 0,
             scrollTrigger: {
                 trigger: projectsPreviewEndRef.current,
@@ -80,7 +84,11 @@ const ProjectsPreview : React.FC<{}> = () => {
                     setShowDots(true);
                 }
             }
-        })
+        });
+
+        return () => {
+            timeline.kill();
+        }
     }, [ projectsPreviewEndRef ]);
 
     const { palette } = useTheme();

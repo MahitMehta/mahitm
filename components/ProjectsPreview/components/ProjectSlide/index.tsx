@@ -31,7 +31,7 @@ const ProjectSlide : React.FC<IProjectSlideProps> = ({ selected, index, setSlide
     useEffect(() => {   
         if (!slideRef.current) return; 
         
-        gsap.timeline({
+        const timeline = gsap.timeline({
             repeat: 0,
             scrollTrigger: {
                 trigger: slideRef.current,
@@ -45,6 +45,10 @@ const ProjectSlide : React.FC<IProjectSlideProps> = ({ selected, index, setSlide
                 },
             }
         })
+
+        return () => {
+            timeline.kill();
+        }
     }, [ slideRef ]);
 
     const { width } = useDimensions({ enableDebounce: true });
