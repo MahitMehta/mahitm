@@ -119,13 +119,14 @@ const Home: NextPage = () => {
                                 </Button>
                                 <Link href={"https://www.buymeacoffee.com/mahit"} passHref>
                                     <a target={"_blank"} rel="noopener noreferrer">
-                                        <Button className="w-44 h-12 !p-[4px] relative">
+                                        <Button className="w-44 h-12 !p-[1px] relative !rounded-lg">
                                             <div 
                                                 className='relative w-full h-full'>
                                                 <Image  
                                                     quality={100}
-                                                    className='rounded-sm'
+                                                    className='rounded-md'
                                                     objectFit='cover'
+                                                    draggable={false}
                                                     layout={"fill"}
                                                     src="/assets/bmc-button.png"
                                                 />

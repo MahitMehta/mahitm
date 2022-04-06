@@ -73,10 +73,18 @@ const Cursor = () => {
         coords.y += (coordY.current - coords.y) / 8;
 
         cursorRef.current.style.transform = `translate(${coords.x}px, ${coords.y}px)`; 
-        requestAnimationFrame(updateMousePosition);
+        requestRef.current = window.requestAnimationFrame(updateMousePosition);
     }, [ requestRef ]); // eslint-disable-line
 
-    useEffect(() => { requestRef.current = requestAnimationFrame(updateMousePosition) }, [ updateMousePosition ]);
+    useEffect(() => { 
+        requestRef.current = window.requestAnimationFrame(updateMousePosition) 
+
+        return () => {
+            if (!!requestRef.current) {
+                window.cancelAnimationFrame(requestRef.current);
+            }
+        }
+    }, [ updateMousePosition, requestRef ]);
 
    
     useEffect(() => {

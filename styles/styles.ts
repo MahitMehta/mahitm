@@ -81,10 +81,10 @@ export const useStyles = makeStyles()(theme => ({
         maxWidth: "100vw",
         overflow: "hidden",
         pointerEvents: "none",
-        transition: '1150ms ease',
         opacity: 0,
     },
     contentSectionDisplay: {
+        transition: '1150ms ease',
         pointerEvents: "initial",
         opacity: 1,
     }

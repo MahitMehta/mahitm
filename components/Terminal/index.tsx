@@ -17,9 +17,13 @@ const Terminal = () => {
     const dispatch = useDispatch();
     const modelLoadedPercentage = getModelLoadedPercent(state);
 
+    useEffect(() => {
+        dispatch(setTerminalAnimationComplete(false));
+    }, []);
+
     const disappear = useCallback(() => {
         if (!loadingCommandComplete || modelLoadedPercentage != 100) return; 
-        
+
         gsap.timeline({
             repeat: 0,
         }).to(
