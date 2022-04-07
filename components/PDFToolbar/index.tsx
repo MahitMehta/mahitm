@@ -30,17 +30,19 @@ const PDFToolbar = () => {
         let blobURL:string; 
 
         if (/iPad|iPhone|iPod/i.test(userAgent) && !(window as any)?.MSStream) {
-            const reader = new FileReader();
+            window.open(RESUME_URL_ORIGINAL);
+            return;
+            // const reader = new FileReader();
         
-            reader.readAsDataURL(blob); 
-            const dataURL:string | null = await new Promise((resolve, _reject) => {
+            // reader.readAsDataURL(blob); 
+            // const dataURL:string | null = await new Promise((resolve, _reject) => {
                 
-                reader.onload = (e) => {
-                    !!reader.result ? resolve(reader.result.toString()) : resolve(null);
-                }
-            });
+            //     reader.onload = (e) => {
+            //         !!reader.result ? resolve(reader.result.toString()) : resolve(null);
+            //     }
+            // });
 
-            blobURL = dataURL ?? URL.createObjectURL(blob);
+            // blobURL = dataURL ?? URL.createObjectURL(blob);
         } else {
             blobURL = URL.createObjectURL(blob);
         }
