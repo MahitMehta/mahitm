@@ -13,25 +13,46 @@ const PDFToolbar = () => {
 
         printJS({ printable: RESUME_URL_ORIGINAL, type: "pdf"});
     }
+ 
+
 
     const handleDownload = async (e:React.MouseEvent<HTMLLIElement>) => {
         e.preventDefault();
         e.stopPropagation();
     
+        const userAgent = navigator.userAgent || navigator.vendor || (window as any)?.opera; 
+
         const file = await fetch(RESUME_URL_ORIGINAL);
         const data = await file.arrayBuffer();
      
         const blob = new Blob([ data ], { type: "application/pdf" });
 
-        const blobUrl = URL.createObjectURL(blob);
+        let blobURL:string; 
+
+        if (/iPad|iPhone|iPod/i.test(userAgent) && !(window as any)?.MSStream) {
+            const reader = new FileReader();
+        
+            reader.readAsDataURL(blob); 
+            const dataURL:string | null = await new Promise((resolve, _reject) => {
+                
+                reader.onload = (e) => {
+                    !!reader.result ? resolve(reader.result.toString()) : resolve(null);
+                }
+            });
+
+            blobURL = dataURL ?? URL.createObjectURL(blob);
+        } else {
+            blobURL = URL.createObjectURL(blob);
+        }
+
         const resumeLink = document.createElement('a');
-        resumeLink.href = blobUrl;
+        resumeLink.href = blobURL;
         resumeLink.download = "resume.pdf";
 
         resumeLink.dispatchEvent(new MouseEvent('click', { 
             bubbles: true, 
             cancelable: true, 
-            view: window 
+            view: window,
         }));
     };
     
