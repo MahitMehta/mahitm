@@ -4,10 +4,12 @@ import Image from "next/image";
 import React, { useMemo } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import PDFToolbar from "../components/PDFToolbar";
+//import PDFToolbar from "../components/PDFToolbar";
 import { getCloudinaryURL } from "../utils/getCloudinaryURL";
 
 const Cursor = dynamic(() => import("../components/Cursor"), { ssr: false });
+const PDFToolbar = dynamic(() => import("../components/PDFToolbar"), { ssr: true });
+
 
 const Resume = () => {
     const resumeURL = useMemo(() => getCloudinaryURL("resume.webp"), []);

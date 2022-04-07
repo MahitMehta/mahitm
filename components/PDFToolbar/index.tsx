@@ -16,14 +16,14 @@ const PDFToolbar = () => {
     }
 
     return (
-        <ul className="flex">
-            <Link href={"/api/resume"} passHref>
-               <a download>
-                    <li title="Download" style={{ listStyle: "none" }}>
+        <ul className="flex">   
+            <li title="Download" style={{ listStyle: "none" }}>
+                <Link href={"/api/resume"} passHref>
+                    <a download>
                         <SocialButton icon={faFileDownload}/>
-                    </li>
-               </a>
-            </Link>
+                    </a>
+                </Link>
+                </li>
             <li title="Print" style={{ listStyle: "none" }}  onClick={handlePrint}>
                 <SocialButton icon={faPrint}/>
             </li>
