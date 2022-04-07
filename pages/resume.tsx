@@ -1,13 +1,16 @@
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import Image from "next/image";
-import React from "react";
+import React, { useMemo } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import PDFToolbar from "../components/PDFToolbar";
+import { getCloudinaryURL } from "../utils/getCloudinaryURL";
 
 const Cursor = dynamic(() => import("../components/Cursor"), { ssr: false });
 
 const Resume = () => {
+    const resumeURL = useMemo(() => getCloudinaryURL("resume.webp"), []);
     return (
         <>
             <Head>
@@ -15,19 +18,29 @@ const Resume = () => {
             </Head>
             <Navbar />
             <Cursor />
-            <main className="pt-[65px] px-4 min-h-screen flex justify-center items-center">
-            <embed
-                src="https://res.cloudinary.com/mahitm-cdn/image/upload/mahitm/resume.pdf#toolbar=1"
-                className="md:w-[500px] rounded-md md:h-[700px] w-screen h-[500px]" />
-                {/* <div className="relative md:w-screen rounded-md md:h-[1000px] w-screen h-[500px]" >
-                    <Image 
-                        draggable={false}
-                        quality={100}
-                        layout="fill"
-                        objectFit="contain"
-                        src="https://res.cloudinary.com/mahitm-cdn/image/upload/mahitm/resume.png"
-                    />
-                </div> */}
+            <main className="px-4 min-h-screen flex justify-center flex-col items-center">
+                <div className="mt-[100px] h-full w-full flex flex-col items-center">
+                    <div className="min-h-[100px] flex justify-center items-center">
+                        <PDFToolbar />
+                    </div>
+                    <div 
+                        style={{ 
+                            transformStyle: "preserve-3d",
+                            transform: "perspective(1000px)"
+                        }}
+                        className="relative md:min-h-screen h-[500px] min-w-full" >
+                        <span 
+                            className="relative block w-full h-full">
+                            <Image 
+                                draggable={false}
+                                quality={100}
+                                layout="fill"
+                                objectFit="contain"
+                                src={resumeURL}
+                            />
+                        </span>
+                    </div>
+                </div>
             </main>
            
             <Footer />
