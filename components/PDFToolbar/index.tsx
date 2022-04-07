@@ -14,25 +14,36 @@ const PDFToolbar = () => {
         printJS({ printable: RESUME_URL_ORIGINAL, type: "pdf"});
     }
 
-    const handleDownload = (e:React.MouseEvent<HTMLLIElement>) => {
+    const handleDownload = async (e:React.MouseEvent<HTMLLIElement>) => {
         e.preventDefault();
         e.stopPropagation();
+    
+        const file = await fetch(RESUME_URL_ORIGINAL);
+        const data = await file.arrayBuffer();
+     
+        const blob = new Blob([ data ], { type: "application/pdf" });
 
+        const blobUrl = URL.createObjectURL(blob);
         const resumeLink = document.createElement('a');
-        resumeLink.href = RESUME_URL_ORIGINAL;
-        resumeLink.download = 'resume.pdf';
-        resumeLink.dispatchEvent(new MouseEvent('click'));
+        resumeLink.href = blobUrl;
+        resumeLink.download = "resume.pdf";
+
+        resumeLink.dispatchEvent(new MouseEvent('click', { 
+            bubbles: true, 
+            cancelable: true, 
+            view: window 
+        }));
     };
     
     return (
         <ul className="flex">
-            <li style={{ listStyle: "none" }} onClick={handleDownload}>
+            <li title="Download" style={{ listStyle: "none" }} onClick={handleDownload}>
                 <SocialButton icon={faFileDownload}/>
             </li>
-            <li style={{ listStyle: "none" }}  onClick={handlePrint}>
+            <li title="Print" style={{ listStyle: "none" }}  onClick={handlePrint}>
                 <SocialButton icon={faPrint}/>
             </li>
-            <li style={{ listStyle: "none" }}>
+            <li title="Open" style={{ listStyle: "none" }}>
                 <SocialButton link={RESUME_URL_ORIGINAL} icon={faExpand}/>
             </li>
         </ul>

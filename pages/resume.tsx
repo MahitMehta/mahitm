@@ -33,7 +33,6 @@ const Resume = () => {
                             className="relative block w-full h-full">
                             <Image 
                                 draggable={false}
-                                quality={100}
                                 layout="fill"
                                 objectFit="contain"
                                 src={resumeURL}
