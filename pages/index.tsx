@@ -36,7 +36,6 @@ interface IStaticProps {
 }
 
 const Home: NextPage<IStaticProps> = ({ projects }) => {
-  console.log(projects);
   const { classes } = useStyles();
   const worldRef = useRef<HTMLDivElement | null>(null);
   const introRef = useRef<HTMLParagraphElement | null>(null);
