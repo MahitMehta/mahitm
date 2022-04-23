@@ -2,7 +2,7 @@ import { makeStyles } from 'tss-react/mui';
 
 export const useStyles = makeStyles({ name: "cursor" })((theme) => ({
     cursor: {
-        transition: `background 200ms ease, box-shadow 250ms ease`,
+        transition: `background 200ms ease, box-shadow 250ms ease, opacity 150ms ease`,
         width: 20,
         height: 20,
         position: "fixed",

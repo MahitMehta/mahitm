@@ -1,12 +1,18 @@
 import clsx from "clsx";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import useDimensions from "../../hooks/useDimensions";
+import { IRootReducer } from "../../redux/reducers";
+import { getTerminalAnimationComplete } from "../../redux/selectors/bootstrap.selectors";
 import { useStyles } from "./styles";
 
 const Cursor = () => {
     const { classes } = useStyles();
     const cursorRef = useRef<HTMLDivElement | null>(null);
     const [ coords, setCoords ] = useState({ x: 0, y: 0 });
+
+    const state = useSelector((state:IRootReducer) => state);
+    const terminalAnimationComplete = getTerminalAnimationComplete(state);
 
     const coordX = useRef(0);
     const coordY = useRef(0);
@@ -88,8 +94,8 @@ const Cursor = () => {
 
    
     useEffect(() => {
-        document.body.style.cursor = isMobile ? "initial" : "none";
-    }, [ isMobile ]);
+        document.body.style.cursor = isMobile || (window.location.pathname === "/" && !terminalAnimationComplete) ? "initial" : "none";
+    }, [ isMobile, terminalAnimationComplete ]);
 
     useEffect(() => {
         if (!isMobile) {
@@ -106,6 +112,7 @@ const Cursor = () => {
         <div 
             style={{ 
                 display: isMobile ? "none" : "initial",
+                opacity: terminalAnimationComplete || window.location.pathname !== "/" ? 1 : 0
             }}
             ref={cursorRef} className={clsx(classes.cursor, mouseActive && classes.active)}>    
         </div>
