@@ -22,13 +22,21 @@ import { faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/router';
 import { getCloudinaryURL } from '../utils/getCloudinaryURL';
 import Link from 'next/link';
+import { GraphQLClient, gql } from "graphql-request";
+import config from '../config';
+import { IProject } from '../components/ProjectsPreview/interfaces/project';
 
 const Cursor = dynamic(() => import("../components/Cursor"), { ssr: false });
 const World = dynamic(() => import("../components/Desk"), { ssr: false });
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Home: NextPage = () => {
+interface IStaticProps {
+    projects: IProject[],
+}
+
+const Home: NextPage<IStaticProps> = ({ projects }) => {
+  console.log(projects);
   const { classes } = useStyles();
   const worldRef = useRef<HTMLDivElement | null>(null);
   const introRef = useRef<HTMLParagraphElement | null>(null);
@@ -156,7 +164,7 @@ const Home: NextPage = () => {
                         </div>
                     </div> 
                     <span ref={introRef}></span>
-                    <ProjectsPreview />
+                    <ProjectsPreview projects={projects} />
                     <Skills />
                     <Contact/>
                     <Footer />
@@ -165,6 +173,33 @@ const Home: NextPage = () => {
             </div>
         </>
     )
+}
+
+const graphQLClient = new GraphQLClient(config.api.graphCMS);
+
+export async function getStaticProps() {
+    const query = gql`
+        query GetProjects {
+            projects {
+                title,
+                projectLink,
+                description,
+                imageId,
+                projectId
+            }
+        }
+    `;
+
+    const response = await graphQLClient.request(query);
+    const projects:IProject[] = response?.projects || [];
+
+    return {
+        props: { 
+          projects,
+        },
+        // - At most once every 5 minutes
+        revalidate: 60 * 5, // In seconds
+    }
 }
 
 export default Home

@@ -8,39 +8,44 @@ import gsap from "gsap";
 import { useTheme } from "@mui/styles";
 import Chest from "../Chest";
 import { getCloudinaryURL } from "../../utils/getCloudinaryURL";
+import { IProject } from "./interfaces/project";
 
 
 const SSR = typeof window === 'undefined'
 
 gsap.registerPlugin(ScrollTrigger);
 
-const projects = [
-    {
-        id: "genesus",
-        url: getCloudinaryURL("genesus-showcase.png"),
-        title: "Genesus",
-        caption: "Founded Genesus which provides 375+ Students with Fast & Easy Access to Grades.",
-        link: "https://gradebook.mahitm.com",
-    },
-    {
-        id: "haul",
-        url: getCloudinaryURL("haul-showcase.png"),
-        title: "Haul",
-        caption: "Worked as a Full Stack JavaScript Developer building an Electronic Logging Device Integration.",
-        link: "https://www.haulwith.us",
-    },
-    {
-        id: "staywise",
-        url: getCloudinaryURL("staywise-showcase.png"),
-        title: "Stay Wise+Rentals",
-        caption: "Built Marketing Page & Admin Portal to Display Properties of Stay Wise Rentals.",
-        link: "https://www.staywiserent.com",
-    },
+// const projects = [
+//     {
+//         id: "genesus",
+//         url: getCloudinaryURL("genesus-showcase.png"),
+//         title: "Genesus",
+//         caption: "Founded Genesus which provides 375+ Students with Fast & Easy Access to Grades.",
+//         link: "https://gradebook.mahitm.com",
+//     },
+//     {
+//         id: "haul",
+//         url: getCloudinaryURL("haul-showcase.png"),
+//         title: "Haul",
+//         caption: "Worked as a Full Stack JavaScript Developer building an Electronic Logging Device Integration.",
+//         link: "https://www.haulwith.us",
+//     },
+//     {
+//         id: "staywise",
+//         url: getCloudinaryURL("staywise-showcase.png"),
+//         title: "Stay Wise+Rentals",
+//         caption: "Built Marketing Page & Admin Portal to Display Properties of Stay Wise Rentals.",
+//         link: "https://www.staywiserent.com",
+//     },
 
    
-]
+// ]
 
-const ProjectsPreview : React.FC<{}> = () => {
+type IProjectsPreviewProps = {
+    projects: IProject[]
+}
+
+const ProjectsPreview : React.FC<IProjectsPreviewProps> = ({ projects }) => {
     const { classes } = useStyles();
 
     const [ dotSelected, setDotSelected ] = useState<number | undefined>(undefined);
@@ -130,7 +135,7 @@ const ProjectsPreview : React.FC<{}> = () => {
              <div className={clsx(classes.dotsContainer, showDots && classes.showDots)}>
                 {
                     projects.map((project, index) => (
-                        <Link key={index} href={`/#${project.id}`}>
+                        <Link key={index} href={`/#${project.projectId}`}>
                             <div
                                 key={index} 
                                 onClick={() => { 

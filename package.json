@@ -39,6 +39,7 @@
     "dat.gui": "^0.7.7",
     "drei": "^2.2.21",
     "graphql": "^16.3.0",
+    "graphql-request": "^4.2.0",
     "graphql-upload": "^13.0.0",
     "gsap": "^3.8.0",
     "lodash": "^4.17.21",

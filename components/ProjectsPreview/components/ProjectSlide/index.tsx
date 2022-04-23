@@ -9,6 +9,8 @@ import clsx from "clsx";
 import NextImage from "../../../NextImage";
 import Button from "../../../Button";
 import Link from "next/link";
+import { IProject } from "../../interfaces/project";
+import { getCloudinaryURL } from "../../../../utils/getCloudinaryURL";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,7 +18,7 @@ gsap.registerPlugin(ScrollTrigger);
 interface IProjectSlideProps {
     index: number; 
     selected: boolean; 
-    project: any; 
+    project: IProject; 
     setSlide: (e:number | undefined) => void; 
 }
 
@@ -58,8 +60,12 @@ const ProjectSlide : React.FC<IProjectSlideProps> = ({ selected, index, setSlide
         return width < 900; 
     }, [ width ]);
 
+    const projectImageURL = useMemo(() => {
+        return getCloudinaryURL(project.imageId);
+    }, [ project.imageId ]);
+
     return (
-        <div id={project?.id} className={classes.container}>
+        <div id={project?.projectId} className={classes.container}>
             <span ref={slideRef}></span>
             <div className={classes.projectTitleContainer}>
                 <header 
@@ -105,10 +111,10 @@ const ProjectSlide : React.FC<IProjectSlideProps> = ({ selected, index, setSlide
                             perspectiveZ={0}
                             wordOffsetDelay={200}
                         >
-                            { project.caption }
-                            { !!project.link && (
+                            { project.description }
+                            { !!project.projectLink && (
                                  <Button style={{ marginTop: 20 }}>
-                                    <Link href={project.link} passHref>
+                                    <Link href={project.projectLink} passHref>
                                         <a target={"_blank"} rel="noopener noreferrer">
                                             Visit Project.
                                         </a>
@@ -127,7 +133,7 @@ const ProjectSlide : React.FC<IProjectSlideProps> = ({ selected, index, setSlide
                         draggable={false}
                         objectFit="contain"
                         width={pictureClampedWidth || 0}
-                        src={project.url} 
+                        src={projectImageURL} 
                         alt="Stay Wise Rentals" 
                     />
                 </div>
