@@ -98,7 +98,7 @@ const Home: NextPage<IStaticProps> = ({ projects }) => {
     const selfPortraitURL = useMemo(() => getCloudinaryURL("portrait_v4.png", { 
         resize: {
             type: 'scale',
-            width: 100,
+            width: 95,
         },
         format: "png"
     }), []);
