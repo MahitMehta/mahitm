@@ -92,10 +92,10 @@ const Portrait : React.FC<{}> = () => {
     const cursorRequestAnimationFrameId = useRef<number>(0);
 
     const graphic = useMemo(() : HTMLImageElement => {
-        const src = getCloudinaryURL("self_portrait_v3.png", { 
+        const src = getCloudinaryURL("portrait_v4.png", { 
             resize: {
                 type: 'scale',
-                width: 100,
+                width: 95,
             },
             format: "png"
         });
@@ -128,9 +128,15 @@ const Portrait : React.FC<{}> = () => {
         }
     }, [ canvasRef.current ]);
 
+    const animationAllowed = useMemo(() => {
+        return !!!navigator.userAgent.match(/(webOS|iPhone|iPad|iPod|Blackberry|Android|CrOS)/)?.length;
+    }, [ navigator.userAgent ]);
+
     const animate = useCallback((ctx, _) => {
-        const requestId = requestAnimationFrame(animate.bind(undefined, ctx));
-        portraitRequestAnimationFrameId.current = requestId;
+        if (animationAllowed) {
+            const requestId = requestAnimationFrame(animate.bind(undefined, ctx));
+            portraitRequestAnimationFrameId.current = requestId;
+        }
 
         if (isNull(ctx) || ctx === undefined || !cursor.current) return; 
 
@@ -140,7 +146,7 @@ const Portrait : React.FC<{}> = () => {
         for(let i=0; i < particleArray.current.length; i++){
             particleArray.current[i].update(cursor.current);
         }
-    }, [ portraitRequestAnimationFrameId ]);
+    }, [ portraitRequestAnimationFrameId, animationAllowed ]);
 
     const drawGraphic = useCallback((ctx:CanvasRenderingContext2D | null) => {
         if (!!portraitRequestAnimationFrameId.current) window.cancelAnimationFrame(portraitRequestAnimationFrameId.current);
@@ -157,7 +163,7 @@ const Portrait : React.FC<{}> = () => {
         init(data, ctx);
         animate(ctx, undefined);
 
-    }, [ graphic, canvasRef ]);
+    }, [ graphic, canvasRef, animationAllowed ]);
 
     const handleMouseMove = (e:MouseEvent) => {
         if (!canvasRef.current) return; 
@@ -224,7 +230,7 @@ const Portrait : React.FC<{}> = () => {
         return () => {
             window.cancelAnimationFrame(portraitRequestAnimationFrameId.current);
         };
-    }, [ canvasRef.current, graphic ]);
+    }, [ canvasRef.current, graphic, animationAllowed ]);
 
     return (
         <canvas  height={500} width={350} ref={canvasRef}></canvas>
