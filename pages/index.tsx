@@ -119,7 +119,7 @@ const Home: NextPage<IStaticProps> = ({ projects }) => {
                     </div>
                     <div className={classes.content} style={{ zIndex: 1, pointerEvents: 'none' }}>
                         <header className={classes.header}>
-                            <p className={classes.greeting}>👋 Hello, I&apos;m Mahit.</p>
+                            <p className={classes.greeting}>👋 Hello, I&apos;m Mahit Mehta.</p>
                             <h1 className={classes.text}>Developer</h1>
                             <h1 className={classes.text}>& Designer</h1>
                             <h1 className={classes.headerCaption}>

@@ -38,13 +38,13 @@ export default class PortfolioApp extends App<{}> {
             additionalMetaTags={[
               {
                 name: "keywords",
-                content: "mahit, mehta, portfolio"
+                content: "mahit mehta,mahit,mehta,portfolio"
               }
             ]}
             description="Explore Mahit Mehta's 2022 Portfolio."
             openGraph={{
               url: "https://www.mahitm.com/",
-              title: "Mahit's Portfolio",
+              title: "Mahit Mehta's Portfolio",
               description: "Explore Mahit Mehta's 2022 Portfolio",
               images: [
                 {
@@ -55,7 +55,7 @@ export default class PortfolioApp extends App<{}> {
                   type: 'image/jpeg',
                 }
               ],
-              site_name: "Mahit's Portfolio",
+              site_name: "Mahit Mehta's Portfolio",
             }}
             twitter={{
               site: 'https://www.mahitm.com/',
