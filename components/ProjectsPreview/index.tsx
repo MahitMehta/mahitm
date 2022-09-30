@@ -1,45 +1,18 @@
 import { Link } from "@mui/material";
 import clsx from "clsx";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import ProjectSlide from "./components/ProjectSlide";
 import { useStyles } from "./styles";
 import gsap from "gsap";
 import { useTheme } from "@mui/styles";
 import Chest from "../Chest";
-import { getCloudinaryURL } from "../../utils/getCloudinaryURL";
 import { IProject } from "./interfaces/project";
-
+import { useDebounce } from "use-debounce";
 
 const SSR = typeof window === 'undefined'
 
 gsap.registerPlugin(ScrollTrigger);
-
-// const projects = [
-//     {
-//         id: "genesus",
-//         url: getCloudinaryURL("genesus-showcase.png"),
-//         title: "Genesus",
-//         caption: "Founded Genesus which provides 375+ Students with Fast & Easy Access to Grades.",
-//         link: "https://gradebook.mahitm.com",
-//     },
-//     {
-//         id: "haul",
-//         url: getCloudinaryURL("haul-showcase.png"),
-//         title: "Haul",
-//         caption: "Worked as a Full Stack JavaScript Developer building an Electronic Logging Device Integration.",
-//         link: "https://www.haulwith.us",
-//     },
-//     {
-//         id: "staywise",
-//         url: getCloudinaryURL("staywise-showcase.png"),
-//         title: "Stay Wise+Rentals",
-//         caption: "Built Marketing Page & Admin Portal to Display Properties of Stay Wise Rentals.",
-//         link: "https://www.staywiserent.com",
-//     },
-
-   
-// ]
 
 type IProjectsPreviewProps = {
     projects: IProject[]
@@ -53,12 +26,34 @@ const ProjectsPreview : React.FC<IProjectsPreviewProps> = ({ projects }) => {
     const projectsPreviewEndRef = useRef<HTMLSpanElement | null>(null);
     const [ showDots, setShowDots ] = useState(false);
 
+    const [ viewportWidth, setViewportWidth ] = useState<number | null>(null);
+    const [ resizedWidth ] = useDebounce(viewportWidth, 500);
+
+    const handleResize = useCallback(() => {
+        setViewportWidth(window.innerWidth);
+    }, []);
+
+    useEffect(() => {
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, [ handleResize ]);
+
+    const handleResetScrollTrigger = useCallback(() => {
+        ScrollTrigger.refresh();
+    }, []);
+
+    useEffect(() => {
+        if (resizedWidth === null) return; 
+        handleResetScrollTrigger();
+    }, [ resizedWidth, handleResetScrollTrigger ]);
+
     useEffect(() => {   
         if (!dotsRef.current) return; 
         
         const timeline = gsap.timeline({
             repeat: 0,
             scrollTrigger: {
+                invalidateOnRefresh: true,
                 trigger: dotsRef.current,
                 onEnter: () => {
                     setShowDots(true);

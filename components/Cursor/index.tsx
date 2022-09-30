@@ -9,7 +9,9 @@ import { useStyles } from "./styles";
 const Cursor = () => {
     const { classes } = useStyles();
     const cursorRef = useRef<HTMLDivElement | null>(null);
-    const [ coords, setCoords ] = useState({ x: 0, y: 0 });
+    const cursorInnerRef = useRef<HTMLDivElement | null>(null);
+
+    const coords = useRef({ x: 0, y: 0 });
 
     const state = useSelector((state:IRootReducer) => state);
     const terminalAnimationComplete = getTerminalAnimationComplete(state);
@@ -25,13 +27,20 @@ const Cursor = () => {
 
 
     const handleMouseMove = (e:MouseEvent) => {
-        if (!cursorRef.current) return; 
+        if (!cursorRef.current || !cursorInnerRef.current) return; 
+
         const { clientX, clientY } = e;
+
         const { width, height } = cursorRef?.current?.getBoundingClientRect(); 
+        const { width:innerWidth, height:innerHeight } = cursorInnerRef?.current?.getBoundingClientRect(); 
+
         const cursorX = clientX - (width / 2); 
         const cursorY = clientY - (height / 2);
 
-        setCoords({ x: cursorX, y: cursorY });
+        const cursorInnerX = clientX - (innerWidth / 2); 
+        const cursorInnerY = clientY - (innerHeight / 2);
+
+        cursorInnerRef.current.style.transform = `translate(${cursorInnerX}px, ${cursorInnerY}px)`; 
 
         coordX.current = cursorX;
         coordY.current = cursorY;
@@ -75,12 +84,12 @@ const Cursor = () => {
     const updateMousePosition = useCallback(() => {
         if (!cursorRef.current) return; 
 
-        coords.x += (coordX.current - coords.x) / 8;
-        coords.y += (coordY.current - coords.y) / 8;
+        coords.current.x += (coordX.current - coords.current.x) / 4;
+        coords.current.y += (coordY.current - coords.current.y) / 4;
 
-        cursorRef.current.style.transform = `translate(${coords.x}px, ${coords.y}px)`; 
+        cursorRef.current.style.transform = `translate(${coords.current.x}px, ${coords.current.y}px)`; 
         requestRef.current = window.requestAnimationFrame(updateMousePosition);
-    }, [ requestRef ]); // eslint-disable-line
+    }, [ requestRef, coords ]); // eslint-disable-line
 
     useEffect(() => { 
         requestRef.current = window.requestAnimationFrame(updateMousePosition) 
@@ -109,12 +118,19 @@ const Cursor = () => {
     }, [ cursorRef, isMobile ]);
 
     return (
-        <div 
-            style={{ 
+        <div
+            style={{
                 display: isMobile ? "none" : "initial",
                 opacity: terminalAnimationComplete || window.location.pathname !== "/" ? 1 : 0
             }}
-            ref={cursorRef} className={clsx(classes.cursor, mouseActive && classes.active)}>    
+        >
+            <div 
+                ref={cursorRef} className={clsx(classes.cursor, mouseActive && classes.active)}>    
+            </div>
+            <div 
+                ref={cursorInnerRef} 
+                className={clsx(classes.cursorInner, mouseActive && classes.activeInner)} 
+            />
         </div>
     )
 }

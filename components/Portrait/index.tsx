@@ -92,10 +92,10 @@ const Portrait : React.FC<{}> = () => {
     const cursorRequestAnimationFrameId = useRef<number>(0);
 
     const graphic = useMemo(() : HTMLImageElement => {
-        const src = getCloudinaryURL("portrait_v4.png", { 
+        const src = getCloudinaryURL("portrait_v6.png", { 
             resize: {
                 type: 'scale',
-                width: 95,
+                width: 100,
             },
             format: "png"
         });
@@ -115,7 +115,7 @@ const Portrait : React.FC<{}> = () => {
             for (let x = 0; x < data.width; x++) {
                 if (data.data[(y * 4 * data.width) + (x * 4) + 3] > 128) {
                     let positionX=x;
-                    let positionY=y;
+                    let positionY=y + 7;
     
                     let rVal = data.data[(y * 4 * data.width) + (x * 4)];
                     let gVal = data.data[(y * 4 * data.width) + (x * 4) + 1];

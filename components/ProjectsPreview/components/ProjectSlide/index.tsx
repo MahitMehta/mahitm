@@ -29,6 +29,13 @@ const ProjectSlide : React.FC<IProjectSlideProps> = ({ selected, index, setSlide
         setSlide(index);
     }
 
+    const { width } = useDimensions({ enableDebounce: true });
+    const pictureClampedWidth = useSizeClamp({ minSize: 300, size: width * 0.55, maxSize: width * 0.55 });
+
+    const isMobile = useMemo(() => {
+        return width < 900; 
+    }, [ width ]);
+
     const slideRef = useRef<HTMLSpanElement | null>(null);
     useEffect(() => {   
         if (!slideRef.current) return; 
@@ -37,6 +44,7 @@ const ProjectSlide : React.FC<IProjectSlideProps> = ({ selected, index, setSlide
             repeat: 0,
             scrollTrigger: {
                 trigger: slideRef.current,
+                invalidateOnRefresh: true,
                 onEnter: () => {
                     setSlideWrapper(index);
                 },
@@ -52,13 +60,6 @@ const ProjectSlide : React.FC<IProjectSlideProps> = ({ selected, index, setSlide
             timeline.kill();
         }
     }, [ slideRef ]);
-
-    const { width } = useDimensions({ enableDebounce: true });
-    const pictureClampedWidth = useSizeClamp({ minSize: 300, size: width * 0.55, maxSize: width * 0.55 });
-
-    const isMobile = useMemo(() => {
-        return width < 900; 
-    }, [ width ]);
 
     const projectImageURL = useMemo(() => {
         return getCloudinaryURL(project.imageId);
