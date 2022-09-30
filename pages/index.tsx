@@ -95,10 +95,10 @@ const Home: NextPage<IStaticProps> = ({ projects }) => {
     });
   };
 
-    const selfPortraitURL = useMemo(() => getCloudinaryURL("portrait_v4.png", { 
+    const selfPortraitURL = useMemo(() => getCloudinaryURL("portrait_v6.png", { 
         resize: {
             type: 'scale',
-            width: 95,
+            width: 100,
         },
         format: "png"
     }), []);
