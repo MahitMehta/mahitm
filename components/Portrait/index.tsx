@@ -5,12 +5,14 @@ import { getCloudinaryURL } from "../../utils/getCloudinaryURL";
 const PARTICLE_SPEED = 100; 
 const PARTICLE_COMEBACK_SPEED = 10; 
 const PARTICLE_MAX_DISTANCE = 10000;
-const MOUSE_RADIUS =35;
+const MOUSE_RADIUS = 35;
+const CANVAS_RESET = 1500; // arbitrary value; should find a better value dynamically
 
 interface ICursor {
     x: number; 
     y: number;
     onCanvas: boolean;  
+    shouldRender: boolean;
 }
 
 class Particle {
@@ -36,13 +38,16 @@ class Particle {
         this.density = 	(Math.random() * PARTICLE_SPEED)+2;
     }
     public draw() : void {
+        this.ctx.lineWidth = this.size * 2;
+        this.ctx.lineCap = 'round';
         this.ctx.beginPath();
-        this.ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
-        this.ctx.closePath();
-        this.ctx.fill();
+        this.ctx.moveTo(this.x, this.y);
+        this.ctx.lineTo(this.x, this.y);
+        this.ctx.stroke();
+
     }
     public update(cursor:ICursor) : void {
-        this.ctx.fillStyle=this.color;
+        this.ctx.strokeStyle = this.color;
 
         let dx= cursor.x-this.x;
         let dy= cursor.y-this.y;
@@ -86,7 +91,7 @@ const Portrait : React.FC<{}> = () => {
 
     const [ mouseCoords, setMouseCoords ] = useState({ x: 0, y: 0 }); 
     const assistantCoords = useRef({ x: 0, y: 0 });
-    const cursor = useRef<ICursor>({ x: 0, y: 0, onCanvas: false });
+    const cursor = useRef<ICursor>({ x: 0, y: 0, onCanvas: false, shouldRender: false });
 
     const portraitRequestAnimationFrameId = useRef<number>(0);
     const cursorRequestAnimationFrameId = useRef<number>(0);
@@ -121,7 +126,9 @@ const Portrait : React.FC<{}> = () => {
                     let gVal = data.data[(y * 4 * data.width) + (x * 4) + 1];
                     let bVal = data.data[(y * 4 * data.width) + (x * 4) + 2];
                         
-                    let color= `rgb(${rVal}, ${gVal},${bVal})`;
+                    if (rVal <= 4 && gVal <= 4 && bVal <= 4) continue;
+
+                    let color= `rgb(${rVal},${gVal},${bVal})`;
                     particleArray.current.push(new Particle(positionX * (4 / 1), positionY * (4 / 1), color, canvas, graphic, ctx));
                 }
             }
@@ -132,20 +139,32 @@ const Portrait : React.FC<{}> = () => {
         return !!!navigator.userAgent.match(/(webOS|iPhone|iPad|iPod|Blackberry|Android|CrOS)/)?.length;
     }, [ navigator.userAgent ]);
 
-    const animate = useCallback((ctx, _) => {
+    const drawPixels = useCallback(() => {
+        for(let i=0; i < particleArray.current.length; i++){
+            particleArray.current[i].update(cursor.current);
+        }
+    }, []);
+
+    const animate = useCallback((ctx, frameId) => {
         if (animationAllowed) {
-            const requestId = requestAnimationFrame(animate.bind(undefined, ctx));
+            const requestId = requestAnimationFrame(animate.bind(undefined, ctx, ));
             portraitRequestAnimationFrameId.current = requestId;
         }
 
         if (isNull(ctx) || ctx === undefined || !cursor.current) return; 
-
-        ctx.fillStyle='rgba(0,0,0, 0.25)';
-        ctx.fillRect(0,0,innerWidth,innerHeight);
-
-        for(let i=0; i < particleArray.current.length; i++){
-            particleArray.current[i].update(cursor.current);
+  
+        if (!frameId) {
+            drawPixels();
+            drawPixels();
         }
+
+        if (!cursor.current.shouldRender) return; 
+        else {
+            ctx.fillStyle='rgba(0,0,0,0.25)';
+            ctx.fillRect(0,0,innerWidth,innerHeight);
+        }
+
+        drawPixels();
     }, [ portraitRequestAnimationFrameId, animationAllowed ]);
 
     const drawGraphic = useCallback((ctx:CanvasRenderingContext2D | null) => {
@@ -172,7 +191,7 @@ const Portrait : React.FC<{}> = () => {
         const updatedCoords = { x: clientX - left, y: clientY - top };  
         setMouseCoords(updatedCoords);
         assistantCoords.current = updatedCoords;
-        cursor.current = { ...cursor.current, onCanvas: true };
+        cursor.current = { ...cursor.current, onCanvas: true, shouldRender: true };
     };  
 
     useEffect(() => {
@@ -184,8 +203,19 @@ const Portrait : React.FC<{}> = () => {
         }
     }, [ canvasRef ]);
 
+    const renderTO = useRef<number>(-1);
+
     const handleMouseLeave = () => {
         cursor.current = { ...cursor.current, onCanvas: false };
+
+        if (renderTO.current !== -1) {
+            clearTimeout(renderTO.current);
+        }
+
+        renderTO.current = setTimeout(() => {
+            if (cursor.current.onCanvas) return;
+            cursor.current = { ...cursor.current, shouldRender: false };
+        }, CANVAS_RESET) as unknown as number; 
     }
 
     useEffect(() => {
@@ -216,6 +246,7 @@ const Portrait : React.FC<{}> = () => {
 
     useEffect(() => {
         if (!canvasRef.current) return;
+
         const ctx = canvasRef.current?.getContext("2d");
         if (graphic.complete) {
             ctx?.drawImage(graphic, 0, 0);
@@ -230,10 +261,10 @@ const Portrait : React.FC<{}> = () => {
         return () => {
             window.cancelAnimationFrame(portraitRequestAnimationFrameId.current);
         };
-    }, [ canvasRef.current, graphic, animationAllowed ]);
+    }, [ canvasRef, graphic, animationAllowed ]);
 
     return (
-        <canvas  height={500} width={350} ref={canvasRef}></canvas>
+        <canvas height={500} width={350} ref={canvasRef}></canvas>
     )
 }
 
