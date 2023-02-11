@@ -38,16 +38,21 @@ class Particle {
         this.density = 	(Math.random() * PARTICLE_SPEED)+2;
     }
     public draw() : void {
-        this.ctx.lineWidth = this.size * 2;
-        this.ctx.lineCap = 'round';
-        this.ctx.beginPath();
-        this.ctx.moveTo(this.x, this.y);
-        this.ctx.lineTo(this.x, this.y);
-        this.ctx.stroke();
+        // this.ctx.lineWidth = this.size * 2;
+        // this.ctx.lineCap = 'round';
+        // this.ctx.beginPath();
+        // this.ctx.moveTo(this.x, this.y);
+        // this.ctx.lineTo(this.x, this.y);
+        // this.ctx.stroke();
 
+        this.ctx.beginPath();
+        this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+        this.ctx.closePath();
+        this.ctx.fill();
     }
     public update(cursor:ICursor) : void {
-        this.ctx.strokeStyle = this.color;
+        // this.ctx.strokeStyle = this.color;
+        this.ctx.fillStyle = this.color;
 
         let dx= cursor.x-this.x;
         let dy= cursor.y-this.y;
