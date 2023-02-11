@@ -136,7 +136,7 @@ const Portrait : React.FC<{}> = () => {
     }, [ canvasRef.current ]);
 
     const animationAllowed = useMemo(() => {
-        return !!!navigator.userAgent.match(/(webOS|iPhone|iPad|iPod|Blackberry|Android)/)?.length;
+        return !!!navigator.userAgent.match(/(webOS|iPhone|iPad|iPod|Blackberry|Android|CrOS)/)?.length;
     }, [ navigator.userAgent ]);
 
     const drawPixels = useCallback(() => {
@@ -213,7 +213,17 @@ const Portrait : React.FC<{}> = () => {
         }
 
         renderTO.current = setTimeout(() => {
+            const particle = particleArray.current.find(({ baseX, baseY, x, y }) => {
+                return baseX != Math.round(x) || baseY != Math.round(y); 
+            });
+
+            if (particle) {
+                handleMouseLeave(); 
+                return;
+            }
+
             if (cursor.current.onCanvas) return;
+
             cursor.current = { ...cursor.current, shouldRender: false };
         }, CANVAS_RESET) as unknown as number; 
     }
