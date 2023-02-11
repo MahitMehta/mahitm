@@ -81,8 +81,16 @@ const Cursor = () => {
 
     const requestRef = useRef<number | undefined>();
 
+    //const previousTime = useRef<number | undefined>();
+
     const updateMousePosition = useCallback(() => {
         if (!cursorRef.current) return; 
+
+       /* if (previousTime.current) {
+            console.log(performance.now() - previousTime.current);
+        }
+
+        previousTime.current = performance.now();*/
 
         coords.current.x += (coordX.current - coords.current.x) / 4;
         coords.current.y += (coordY.current - coords.current.y) / 4;

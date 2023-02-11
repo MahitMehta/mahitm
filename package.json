@@ -43,7 +43,7 @@
     "graphql-upload": "^13.0.0",
     "gsap": "^3.8.0",
     "lodash": "^4.17.21",
-    "next": "^12.1.0",
+    "next": "^12.2.0",
     "next-seo": "^5.1.0",
     "next-sitemap": "^2.5.10",
     "node-fetch": "^3.2.3",
