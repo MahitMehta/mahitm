@@ -145,14 +145,19 @@ const Portrait : React.FC<{}> = () => {
         }
     }, []);
 
+    const paintId = useRef(0);
+
     const animate = useCallback((ctx, frameId) => {
         if (animationAllowed) {
-            const requestId = requestAnimationFrame(animate.bind(undefined, ctx, ));
+            const requestId = requestAnimationFrame(animate.bind(undefined, ctx));
             portraitRequestAnimationFrameId.current = requestId;
         }
 
         if (isNull(ctx) || ctx === undefined || !cursor.current) return; 
-  
+        
+        paintId.current++;
+        if (paintId.current % 2 !== 0 && paintId.current != 1) return;  
+
         if (!frameId) {
             drawPixels();
             drawPixels();
@@ -165,7 +170,8 @@ const Portrait : React.FC<{}> = () => {
         }
 
         drawPixels();
-    }, [ portraitRequestAnimationFrameId, animationAllowed ]);
+
+    }, [ portraitRequestAnimationFrameId, animationAllowed, paintId ]);
 
     const drawGraphic = useCallback((ctx:CanvasRenderingContext2D | null) => {
         if (!!portraitRequestAnimationFrameId.current) window.cancelAnimationFrame(portraitRequestAnimationFrameId.current);
