@@ -103,7 +103,7 @@ const ProjectsPreview : React.FC<IProjectsPreviewProps> = ({ projects }) => {
                 { !SSR && <Chest /> }
                 <div className={classes.headerContainer}>
                     <h1 className={classes.header}>
-                        2022
+                        2023
                         <br /><span style={{ color: palette.secondary.main }}>Featured.</span>
                     </h1>
                     <span className={classes.divider}></span>
