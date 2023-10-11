@@ -29,7 +29,7 @@ export default class PortfolioApp extends App<{}> {
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
           <meta name="theme-color" content="#0B0B0B" />
-          <meta name="description" content="Explore Mahit Mehta's 2022 Portfolio." />
+          <meta name="description" content="Explore Mahit Mehta's 2023 Portfolio." />
           <title>Mahit Mehta&apos;s Portfolio</title>
         </Head>
         <NextSeo
@@ -41,11 +41,11 @@ export default class PortfolioApp extends App<{}> {
                 content: "mahit mehta,mahit,mehta,portfolio"
               }
             ]}
-            description="Explore Mahit Mehta's 2022 Portfolio."
+            description="Explore Mahit Mehta's 2023 Portfolio."
             openGraph={{
               url: "https://www.mahitm.com/",
               title: "Mahit Mehta's Portfolio",
-              description: "Explore Mahit Mehta's 2022 Portfolio",
+              description: "Explore Mahit Mehta's 2023 Portfolio",
               images: [
                 {
                   url: "./logo.png",
