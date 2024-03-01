@@ -10,7 +10,7 @@ const Footer = () => {
                 <picture>
                     <img className={classes.logo} src={"./svg/logo.svg"} alt="Logo"/>
                 </picture>
-                <p className={classes.copyright}>©2023 Mahit Mehta. All Rights Reserved.</p>
+                <p className={classes.copyright}>©2024 Mahit Mehta. All Rights Reserved.</p>
             </div>
         </footer>
     )

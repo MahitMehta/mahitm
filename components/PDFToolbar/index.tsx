@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import SocialButton from "../SocialButton";
 
-const RESUME_URL_ORIGINAL = "https://res.cloudinary.com/mahitm-cdn/image/upload/mahitm/resume.pdf";
+const RESUME_URL_ORIGINAL = "https://res.cloudinary.com/mahitm-cdn/image/upload/mahitm/resume-2024-v1.pdf";
 
 const PDFToolbar = () => {
     const handlePrint = (e:React.MouseEvent<HTMLLIElement>) => {

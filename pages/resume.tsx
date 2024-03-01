@@ -12,7 +12,7 @@ const PDFToolbar = dynamic(() => import("../components/PDFToolbar"), { ssr: true
 
 
 const Resume = () => {
-    const resumeURL = useMemo(() => getCloudinaryURL("resume.webp"), []);
+    const resumeURL = useMemo(() => getCloudinaryURL("resume-2024-v1.webp"), []);
 
     return (
         <>

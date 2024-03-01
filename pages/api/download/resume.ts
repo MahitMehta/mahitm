@@ -5,7 +5,7 @@ import { promisify } from 'util';
 
 const pipeline = promisify(stream.pipeline);
 
-const RESUME_URL_ORIGINAL = "https://res.cloudinary.com/mahitm-cdn/image/upload/mahitm/resume.pdf"; 
+const RESUME_URL_ORIGINAL = "https://res.cloudinary.com/mahitm-cdn/image/upload/mahitm/resume-2024-v1.pdf"; 
 
 export default async function handler(
   req: NextApiRequest,
