@@ -5,7 +5,7 @@ import { promisify } from 'util';
 
 const pipeline = promisify(stream.pipeline);
 
-const RESUME_URL_ORIGINAL = "https://res.cloudinary.com/mahitm-cdn/image/upload/mahitm/resume-2024-v1.pdf"; 
+const RESUME_URL_ORIGINAL = "https://res.cloudinary.com/mahitm-cdn/image/upload/mahitm/resume-2024-v2.pdf"; 
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,7 +19,7 @@ export default async function handler(
   }
 
   res.setHeader('Content-Type', 'application/pdf');
-  res.setHeader('Content-Disposition', 'attachment; filename=resume.pdf');
+  res.setHeader('Content-Disposition', 'attachment; filename=Mahit_Mehta.pdf');
 
   return await pipeline(response.body as any, res);
 }

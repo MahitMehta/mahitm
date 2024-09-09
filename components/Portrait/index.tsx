@@ -102,7 +102,7 @@ const Portrait : React.FC<{}> = () => {
     const cursorRequestAnimationFrameId = useRef<number>(0);
 
     const graphic = useMemo(() : HTMLImageElement => {
-        const src = getCloudinaryURL("portrait_v6.png", { 
+        const src = getCloudinaryURL("portrait_v7.png", { 
             resize: {
                 type: 'scale',
                 width: 100,
