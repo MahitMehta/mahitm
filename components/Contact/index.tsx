@@ -1,9 +1,10 @@
-import React, { useMemo, useState } from "react";
+import type React from "react";
+import { useMemo, useState } from "react";
 import { faEnvelope, faPaperclip } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useStyles } from "./styles";
 import SocialButton from "../SocialButton";
-import { faGithub, faInstagram, faLinkedinIn, faYoutube } from "@fortawesome/free-brands-svg-icons";
+import { faGithub, faLinkedinIn, faYoutube } from "@fortawesome/free-brands-svg-icons";
 import InputField from "../InputField";
 import { useTheme } from "@mui/styles";
 import Button from "../Button";
@@ -86,7 +87,7 @@ const Contact = () => {
         if (!newFiles) return; 
         const newFileArray = [];
         for (let i = 0; i < newFiles.length; i++) {
-            let file = newFiles.item(i); 
+            const file = newFiles.item(i); 
             if (file && file instanceof File) {
                 newFileArray.push(file);
             }
@@ -97,11 +98,12 @@ const Contact = () => {
     const inputLabel = useMemo(() => {
         if (formData.files.length > 1) {
             return formData.files.map(file => file.name).join(", ")
-        } else if (formData.files.length === 1) {
+        } 
+        if (formData.files.length === 1) {
             return  formData.files.map(file => file.name).join("");
-        } else {
-            return "attach"; 
-        }
+        } 
+    
+        return "attach"; 
     }, [ formData.files ]);
 
     const [ dragging, setDragging ] = useState(false);
@@ -174,16 +176,16 @@ const Contact = () => {
                     Let&apos;s&nbsp;
                     <span style={{ color: palette.secondary.main }}>Connect.</span>
                 </h1>
-                <span className={classes.headerDivider}></span>
+                <span className={classes.headerDivider} />
                 <p className={classes.headerCaption}>Leave me a note and let&apos;s collaborate.</p>
                 <div className={classes.contentSections}>
                 <div style={{ width: "min-content", height: "100%" }}>
                 </div>
-                    <div className={classes.profilePictureContainer}>
+                    {/* <div className={classes.profilePictureContainer}>
                         <div className={classes.profilePictureWrapper}>
                             <Portrait />
                         </div>
-                    </div>
+                    </div> */}
                     <form 
                         onDrop={handleDrop}
                         onDragOver={handleDrag}
